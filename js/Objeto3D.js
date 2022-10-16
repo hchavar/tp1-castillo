@@ -1,10 +1,10 @@
 class Objeto3D {
   object = null;
-  vertexBuffer = null;
-  indexBuffer = null;
+  buffers = null;
   pos = vec3.create();
   rot = vec3.create();
-  scale = vec3.create();
+  //scale = vec3.create();
+  scale = 1.0;
   localMatrix = mat4.create();
   children = [];
 
@@ -33,6 +33,18 @@ class Objeto3D {
     mat4.translate(this.localMatrix, this.localMatrix, this.pos);
   }
 
+  setScale(scale) {
+    this.scale = scale;
+  }
+
+  updateScale() {
+    let scaleVec3 = vec3.fromValues(1, 1, 1);
+    if (this.scale > 1.0) {
+      vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scale);
+    }
+    mat4.scale(this.localMatrix, scaleVec3);
+  }
+
   setRotation(rotation) {
     this.rot = rotation;
   }
@@ -43,6 +55,18 @@ class Objeto3D {
 
   updateRotationRespectWorld(worldMatrix) {
     mat4.rotate( this.localMatrix, worldMatrix, this.rot[0], this.rot[1] );
+  }
+
+  setGeometry(indexBuffer, vertexBuffer) {
+    this.indexBuffer = indexBuffer;
+    this.vertexBuffer = vertexBuffer;
+  }
+
+  updateLocalMatrix() {
+    this.updateScale();
+    this.updateRotation();
+    this.updatePosition();
+
   }
 
 }
