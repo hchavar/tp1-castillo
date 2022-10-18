@@ -1,3 +1,7 @@
+var modo = "edges"; // wireframe, smooth, edges
+
+var MAX_CURVE_POINTS = 20;
+
 class Objeto3D {
     buffers = null;
     pos = vec3.create();
@@ -73,8 +77,8 @@ class Objeto3D {
     setMatrixUniforms() {
 
         gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.localMatrix);
-        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, matrizVista);
-        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, matrizProyeccion);
+        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
+        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
     
         let normalMatrix = mat3.create();
         mat3.fromMat4(normalMatrix, this.localMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));

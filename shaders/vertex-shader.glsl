@@ -1,14 +1,13 @@
     precision highp float;
 
     attribute vec3 aPosition;
-    attribute vec3 aNormal;  
-    attribute vec3 aColor;   
-    attribute vec2 aUv;      
+    attribute vec3 aNormal;
+    attribute vec3 aColor;
+    attribute vec2 aUv;
 
+    uniform mat4 projMatrix;
     uniform mat4 modelMatrix;
     uniform mat4 viewMatrix;
-    uniform mat4 projMatrix;
-
     uniform mat4 normalMatrix;
 
     varying vec3 vNormal;
