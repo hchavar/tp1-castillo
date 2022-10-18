@@ -11,6 +11,10 @@ class Objeto3D {
         this.buffers = buffers;
         if (children) this.children = children;
     }
+    
+    isEmpty() {
+        return true;
+    }
 
     draw(_transform = mat4.create()) {
         // el objeto raiz recibe la matriz cero
@@ -19,9 +23,8 @@ class Objeto3D {
 
         mat4.multiply(transform, transform, this.localMatrix);
 
-        //if (this.object) setTransform(this.object, transform);
-
-        if (this.buffers) {
+        if (!this.isEmpty()) {
+            this.generateSurface();
             this.setMatrixUniforms();
             this.drawFromBuffers();
         }
@@ -59,11 +62,6 @@ class Objeto3D {
 
     updateRotationRespectWorld(worldMatrix) {
         mat4.rotate( this.localMatrix, worldMatrix, this.rot[0], this.rot[1] );
-    }
-
-    setGeometry(indexBuffer, vertexBuffer) {
-        this.indexBuffer = indexBuffer;
-        this.vertexBuffer = vertexBuffer;
     }
 
     updateLocalMatrix() {
@@ -116,6 +114,110 @@ class Objeto3D {
             gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         }
      
+    }
+
+    generateSurface(rows, cols) {
+    
+        let positions = [];
+        let normals = [];
+        let colors = [];
+        let uvList = [];
+    
+        for (var i = 0; i <= rows; i++) {
+            for (var j = 0; j <= cols; j++) {
+    
+                var u = j/cols;
+                var v = i/rows;
+    
+                var pos = this.getPosicion(u, v);
+    
+                positions.push(pos[0]);
+                positions.push(pos[1]);
+                positions.push(pos[2]);
+    
+                var nrm = this.getNormal(u, v);
+    
+                normals.push(nrm[0]);
+                normals.push(nrm[1]);
+                normals.push(nrm[2]);
+    
+                var uvs = this.getCoordenadasTextura(u, v);
+    
+                uvList.push(uvs[0]);
+                uvList.push(uvs[1]);
+    
+                var col = this.getColor(u, v);
+    
+                colors.push(col[0]);
+                colors.push(col[1]);
+                colors.push(col[2]);
+    
+            }
+        }
+    
+        // create index buffer
+        let indexes = [];
+    
+        for (i = 0; i < rows; i++) {
+            let firstThisRow = i*(cols + 1);
+            let firstNextRow = (i + 1)*(cols + 1);
+            let nextRow = -1;
+            
+            if (i > 0)
+                indexes.push(firstThisRow);
+            
+            for (j = 0; j <= cols; j++) {
+                indexes.push(j + firstThisRow);
+                nextRow = j + firstNextRow;
+                indexes.push(nextRow);
+    
+            }
+    
+            if (i < (rows - 1))
+                indexes.push(nextRow);
+    
+        }
+        
+        // Init buffers
+    
+        let positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+        positionBuffer.itemSize = 3;
+        positionBuffer.numItems = positions.length / 3;
+    
+        let normalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, normalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normals), gl.STATIC_DRAW);
+        normalBuffer.itemSize = 3;
+        normalBuffer.numItems = normals.length / 3;
+    
+        let uvBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, uvBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(uvList), gl.STATIC_DRAW);
+        uvBuffer.itemSize = 2;
+        uvBuffer.numItems = uvList.length / 2;
+    
+        let colorBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+        colorBuffer.itemSize = 3;
+        colorBuffer.numItems = colors.length / 3;
+    
+    
+        let indexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexes), gl.STATIC_DRAW);
+        indexBuffer.itemSize = 1;
+        indexBuffer.numItems = indexes.length;
+    
+        this.buffers = {
+            positionBuffer,
+            normalBuffer,
+            colorBuffer,
+            uvBuffer,
+            indexBuffer
+        }
     }
 
 }
