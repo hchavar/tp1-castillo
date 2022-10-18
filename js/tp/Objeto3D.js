@@ -7,11 +7,10 @@ class Objeto3D {
     localMatrix = mat4.create();
     children = [];
 
-    constructor(children, buffers) {
-        this.buffers = buffers;
+    constructor(children) {
         if (children) this.children = children;
     }
-    
+
     isEmpty() {
         return true;
     }
@@ -24,7 +23,7 @@ class Objeto3D {
         mat4.multiply(transform, transform, this.localMatrix);
 
         if (!this.isEmpty()) {
-            this.generateSurface();
+            this.generateSurface(MAX_CURVE_POINTS, MAX_CURVE_POINTS);
             this.setMatrixUniforms();
             this.drawFromBuffers();
         }
@@ -129,7 +128,7 @@ class Objeto3D {
                 var u = j/cols;
                 var v = i/rows;
     
-                var pos = this.getPosicion(u, v);
+                var pos = this.getPosition(u, v);
     
                 positions.push(pos[0]);
                 positions.push(pos[1]);
@@ -141,7 +140,7 @@ class Objeto3D {
                 normals.push(nrm[1]);
                 normals.push(nrm[2]);
     
-                var uvs = this.getCoordenadasTextura(u, v);
+                var uvs = this.getTextureCoordinates(u, v);
     
                 uvList.push(uvs[0]);
                 uvList.push(uvs[1]);
@@ -220,4 +219,19 @@ class Objeto3D {
         }
     }
 
+    getPosition(u, v) {
+        return [0, 0, 0];
+    }
+
+    getNormal(u, v) {
+        return [0, 1, 0];
+    }
+
+    getTextureCoordinates(u, v) {
+        return [u, v];
+    }
+
+    getColor() {
+        return [1, 1, 1];
+    }
 }
