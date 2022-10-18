@@ -1,5 +1,4 @@
 class Objeto3D {
-    object = null;
     buffers = null;
     pos = vec3.create();
     rot = vec3.create();
@@ -8,8 +7,7 @@ class Objeto3D {
     localMatrix = mat4.create();
     children = [];
 
-    constructor(object, children, buffers) {
-        this.object = object;
+    constructor(children, buffers) {
         this.buffers = buffers;
         if (children) this.children = children;
     }
