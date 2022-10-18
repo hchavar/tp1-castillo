@@ -1,7 +1,9 @@
     precision highp float;
 
-    attribute vec3 aVertexPosition;
-    attribute vec3 aVertexNormal;
+    attribute vec3 aPosition;
+    attribute vec3 aNormal;  
+    attribute vec3 aColor;   
+    attribute vec2 aUv;      
 
     uniform mat4 modelMatrix;
     uniform mat4 viewMatrix;
@@ -13,9 +15,9 @@
     varying vec3 vPosWorld;
 
     void main(void) {
-        gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(aVertexPosition, 1.0);
+        gl_Position = projMatrix * viewMatrix * modelMatrix * vec4(aPosition, 1.0);
 
-        vPosWorld = (modelMatrix * vec4(aVertexPosition, 1.0)).xyz;    //la posicion en coordenadas de mundo
-        vNormal = (normalMatrix * vec4(aVertexNormal, 1.0)).xyz;       //la normal en coordenadas de mundo
+        vPosWorld = (modelMatrix * vec4(aPosition, 1.0)).xyz;    //la posicion en coordenadas de mundo
+        vNormal = (normalMatrix * vec4(aNormal, 1.0)).xyz;       //la normal en coordenadas de mundo
 
     }

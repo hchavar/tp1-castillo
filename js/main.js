@@ -46,6 +46,22 @@ function initWebGL() {
 
 }
 
+function webGLStart() {
+    var canvas = document.getElementById("myCanvas");
+    initGL(canvas);
+    initShaders();
+
+    crearGeometrias();
+
+    gl.clearColor(66.2, 0.2, 0.2, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST);
+
+    $(window).on("resize", onResize);
+    initMenu();
+    tick();
+}
+
 
 function setupWebGL() {
     gl.enable(gl.DEPTH_TEST);
@@ -65,46 +81,6 @@ function setupWebGL() {
     mat4.identity(viewMatrix);
     mat4.translate(viewMatrix,viewMatrix, [0.0, 0.0, -5.0]);
 }
-
-
-function initShaders() {
-    //get shader source
-    var fs_source = document.getElementById('shader-fs').innerHTML,
-        vs_source = document.getElementById('shader-vs').innerHTML;
-
-    //compile shaders
-    vertexShader = makeShader(vs_source, gl.VERTEX_SHADER);
-    fragmentShader = makeShader(fs_source, gl.FRAGMENT_SHADER);
-
-    //create program
-    glProgram = gl.createProgram();
-
-    //attach and link shaders to the program
-    gl.attachShader(glProgram, vertexShader);
-    gl.attachShader(glProgram, fragmentShader);
-    gl.linkProgram(glProgram);
-
-    if (!gl.getProgramParameter(glProgram, gl.LINK_STATUS)) {
-        alert("Unable to initialize the shader program.");
-    }
-
-    //use program
-    gl.useProgram(glProgram);
-}
-
-
-function makeShader(src, type) {
-    //compile the vertex shader
-    var shader = gl.createShader(type);
-    gl.shaderSource(shader, src);
-    gl.compileShader(shader);
-
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.log("Error compiling shader: " + gl.getShaderInfoLog(shader));
-    }
-    return shader;
-}
-
 
 function getPos(alfa,beta) {
 
@@ -219,16 +195,22 @@ function setupVertexShaderMatrix() {
     gl.uniformMatrix4fv(normalMatrixUniform, false, normalMatrix);
 }
 
+function loadShadersAndStartWebGL() {
+
+    loadShaders(webGLStart);
+
+}
+
 
 function drawScene() {
     setupVertexShaderMatrix();
 
-    vertexPositionAttribute = gl.getAttribLocation(glProgram, "aVertexPosition");
+    vertexPositionAttribute = gl.getAttribLocation(glProgram, "aPosition");
     gl.enableVertexAttribArray(vertexPositionAttribute);
     gl.bindBuffer(gl.ARRAY_BUFFER, trianglesVerticeBuffer);
     gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
 
-    vertexNormalAttribute = gl.getAttribLocation(glProgram, "aVertexNormal");
+    vertexNormalAttribute = gl.getAttribLocation(glProgram, "aNormal");
     gl.enableVertexAttribArray(vertexNormalAttribute);
     gl.bindBuffer(gl.ARRAY_BUFFER, trianglesNormalBuffer);
     gl.vertexAttribPointer(vertexNormalAttribute, 3, gl.FLOAT, false, 0, 0);
@@ -258,4 +240,7 @@ function tick() {
     animate();
 }
 
-window.onload = initWebGL;
+
+$(document).ready(function() {
+    loadShadersAndStartWebGL();
+})
