@@ -1,9 +1,7 @@
 class Plane extends Objeto3D {
     
-    constructor(height, width) {
-        super();
-        this.height = height;
-        this.width = width;
+    constructor(width, height) {
+        super(width, height);
     }
 
     isEmpty() {
@@ -12,7 +10,7 @@ class Plane extends Objeto3D {
     
     getPosition(u, v) {
 
-        var x = (u - 0.5) * this.height;
+        var x = (u - 0.5) * this.width;
         var z = (v - 0.5) * this.height;
         return [x, 0, z];
     }
