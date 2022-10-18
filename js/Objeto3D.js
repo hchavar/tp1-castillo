@@ -8,8 +8,9 @@ class Objeto3D {
     localMatrix = mat4.create();
     children = [];
 
-    constructor(object, children) {
+    constructor(object, children, buffers) {
         this.object = object;
+        this.buffers = buffers;
         if (children) this.children = children;
     }
 
@@ -20,7 +21,12 @@ class Objeto3D {
 
         mat4.multiply(transform, transform, this.localMatrix);
 
-        if (this.object) setTransform(this.object, transform);
+        //if (this.object) setTransform(this.object, transform);
+
+        if (this.buffers) {
+            this.setMatrixUniforms();
+            this.drawFromBuffers();
+        }
 
         this.children.forEach((child) => child.draw(transform));
     }
@@ -40,7 +46,7 @@ class Objeto3D {
     updateScale() {
         let scaleVec3 = vec3.fromValues(1, 1, 1);
         if (this.scale > 1.0) {
-        vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scale);
+            vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scale);
         }
         mat4.scale(this.localMatrix, scaleVec3);
     }
@@ -67,6 +73,51 @@ class Objeto3D {
         this.updateRotation();
         this.updatePosition();
 
+    }
+
+    setMatrixUniforms() {
+
+        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.localMatrix);
+        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, matrizVista);
+        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, matrizProyeccion);
+    
+        let normalMatrix = mat3.create();
+        mat3.fromMat4(normalMatrix, this.localMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));
+    
+        mat3.invert(normalMatrix, normalMatrix);
+        mat3.transpose(normalMatrix, normalMatrix);
+    
+        gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
+    }
+
+    drawFromBuffers() {
+    
+        // Se configuran los buffers que alimentaron el pipeline
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.positionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.normalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.colorBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+           
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
+    
+    
+        if (modo != "wireframe"){
+            gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));                    
+            gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        }
+        
+        if (modo != "smooth") {
+            gl.uniform1i(shaderProgram.useLightingUniform,false);
+            gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        }
+     
     }
 
 }
