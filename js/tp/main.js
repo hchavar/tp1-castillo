@@ -247,8 +247,10 @@ function drawScene() {
     // gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, trianglesIndexBuffer);
     // gl.drawElements( gl.TRIANGLE_STRIP, trianglesIndexBuffer.number_vertex_point, gl.UNSIGNED_SHORT, 0);
 
-    demo.animate();
-    demo.draw();
+    // demo.animate();
+    // demo.draw();
+    let plane = new Plane(20, 20);
+    plane.draw();
 }
 
 
