@@ -6,13 +6,20 @@ class Objeto3D {
     buffers = null;
     pos = vec3.create();
     rot = vec3.create();
-    //scale = vec3.create();
     scale = 1.0;
     localMatrix = mat4.create();
     children = [];
 
-    constructor(children) {
-        if (children) this.children = children;
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+        if (!this.isEmpty()) {
+            this.generateSurface(this.width, this.height);
+        }
+    }
+
+    getName() {
+        return "Objeto3D";
     }
 
     isEmpty() {
@@ -27,7 +34,7 @@ class Objeto3D {
         mat4.multiply(transform, transform, this.localMatrix);
 
         if (!this.isEmpty()) {
-            this.generateSurface(MAX_CURVE_POINTS, MAX_CURVE_POINTS);
+            
             this.setMatrixUniforms();
             this.drawFromBuffers();
         }
