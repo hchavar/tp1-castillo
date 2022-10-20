@@ -1,18 +1,38 @@
+var modo = "edges"; // wireframe, smooth, edges
+
+var MAX_CURVE_POINTS = 20;
+
 class Objeto3D {
     buffers = null;
     pos = vec3.create();
     rot = vec3.create();
-    //scale = vec3.create();
     scale = 1.0;
     localMatrix = mat4.create();
     children = [];
 
-    constructor(children) {
-        if (children) this.children = children;
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+        if (!this.isEmpty()) {
+            this.init();
+            this.generateSurface(this.width, this.height);
+        }
+    }
+
+    getName() {
+        return "Objeto3D";
+    }
+
+    init() {
+        // inicialiciar objeto
     }
 
     isEmpty() {
         return true;
+    }
+
+    animate() {
+        // animar objeto
     }
 
     draw(_transform = mat4.create()) {
@@ -23,7 +43,7 @@ class Objeto3D {
         mat4.multiply(transform, transform, this.localMatrix);
 
         if (!this.isEmpty()) {
-            this.generateSurface(MAX_CURVE_POINTS, MAX_CURVE_POINTS);
+            
             this.setMatrixUniforms();
             this.drawFromBuffers();
         }
@@ -32,6 +52,8 @@ class Objeto3D {
     }
 
     setPosition(position) {
+        // reseteo la matriz
+        this.localMatrix = mat4.create();
         this.pos = position;
     }
 
@@ -48,10 +70,12 @@ class Objeto3D {
         if (this.scale > 1.0) {
             vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scale);
         }
-        mat4.scale(this.localMatrix, scaleVec3);
+        mat4.scale(this.localMatrix, this.localMatrix, scaleVec3);
     }
 
     setRotation(rotation) {
+        // reseteo la matriz
+        this.localMatrix = mat4.create();
         this.rot = rotation;
     }
 
@@ -73,8 +97,8 @@ class Objeto3D {
     setMatrixUniforms() {
 
         gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.localMatrix);
-        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, matrizVista);
-        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, matrizProyeccion);
+        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
+        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
     
         let normalMatrix = mat3.create();
         mat3.fromMat4(normalMatrix, this.localMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));
@@ -122,30 +146,30 @@ class Objeto3D {
         let colors = [];
         let uvList = [];
     
-        for (var i = 0; i <= rows; i++) {
-            for (var j = 0; j <= cols; j++) {
+        for (let i = 0; i <= rows; i++) {
+            for (let j = 0; j <= cols; j++) {
     
-                var u = j/cols;
-                var v = i/rows;
+                let u = j/cols;
+                let v = i/rows;
     
-                var pos = this.getPosition(u, v);
+                let pos = this.getPosition(u, v);
     
                 positions.push(pos[0]);
                 positions.push(pos[1]);
                 positions.push(pos[2]);
     
-                var nrm = this.getNormal(u, v);
+                let nrm = this.getNormal(u, v);
     
                 normals.push(nrm[0]);
                 normals.push(nrm[1]);
                 normals.push(nrm[2]);
     
-                var uvs = this.getTextureCoordinates(u, v);
+                let uvs = this.getTextureCoordinates(u, v);
     
                 uvList.push(uvs[0]);
                 uvList.push(uvs[1]);
     
-                var col = this.getColor(u, v);
+                let col = this.getColor(u, v);
     
                 colors.push(col[0]);
                 colors.push(col[1]);
@@ -157,7 +181,7 @@ class Objeto3D {
         // create index buffer
         let indexes = [];
     
-        for (i = 0; i < rows; i++) {
+        for (let i = 0; i < rows; i++) {
             let firstThisRow = i*(cols + 1);
             let firstNextRow = (i + 1)*(cols + 1);
             let nextRow = -1;
@@ -165,7 +189,7 @@ class Objeto3D {
             if (i > 0)
                 indexes.push(firstThisRow);
             
-            for (j = 0; j <= cols; j++) {
+            for (let j = 0; j <= cols; j++) {
                 indexes.push(j + firstThisRow);
                 nextRow = j + firstNextRow;
                 indexes.push(nextRow);
