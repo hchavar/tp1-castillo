@@ -75,9 +75,9 @@ class Demo extends Objeto3D {
 
     animate() {
 
-        this.rotateAngle = time * Math.PI / 3600;
+        this.rotateAngle = time * Math.PI / 60;
         this.setRotation([this.rotateAngle, [0, 0, 1]]);
-        this.updateRotation();
+        //this.updateRotation();
     
     }
 }

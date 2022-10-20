@@ -31,6 +31,10 @@ class Objeto3D {
         return true;
     }
 
+    animate() {
+        // animar objeto
+    }
+
     draw(_transform = mat4.create()) {
         // el objeto raiz recibe la matriz cero
         // pero los hijos not deben modificar la matriz que reciben por eso se clona
