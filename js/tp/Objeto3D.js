@@ -66,7 +66,7 @@ class Objeto3D {
         if (this.scale > 1.0) {
             vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scale);
         }
-        mat4.scale(this.localMatrix, scaleVec3);
+        mat4.scale(this.localMatrix, this.localMatrix, scaleVec3);
     }
 
     setRotation(rotation) {
