@@ -51,8 +51,8 @@ function getShader(gl,code,type) {
 
 function initShaders() {
 
-    var fragmentShader= getShader(gl, vertexShaderSource, "vertex");
-    var vertexShader= getShader(gl, fragmentShaderSource, "fragment");
+    var fragmentShader= getShader(gl, vertexShaderSource,"vertex");
+    var vertexShader= getShader(gl, fragmentShaderSource,"fragment");
 
     shaderProgram = gl.createProgram();
     gl.attachShader(shaderProgram, vertexShader);
@@ -81,7 +81,7 @@ function initShaders() {
     shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "modelMatrix");
     shaderProgram.vMatrixUniform = gl.getUniformLocation(shaderProgram, "viewMatrix");
     shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "normalMatrix");
-    
+    shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
     shaderProgram.useLightingUniform = gl.getUniformLocation(shaderProgram, "uUseLighting");
     shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
     shaderProgram.frameUniform = gl.getUniformLocation(shaderProgram, "time");
