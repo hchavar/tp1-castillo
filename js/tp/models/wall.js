@@ -1,17 +1,18 @@
 class Wall extends TranslationSurface {
     
-    constructor(filas, columnas) {
-        super(filas, columnas);
-        
+    constructor(filas, columnas, menu) {
+        super(filas, columnas, menu);
+        this.menu.addWall(this);
     }
 
     update() {
-        updateSurface();
+        this.updateSurface();
     }
 
     init() {
         
-        let c = 3.00;
+        let c = this.menu.wallScale;
+
         this.pc = [ 
             [[-0.95, 0.00, 0.00], [-1.03, 0.36*c, 0.00], [ 0.00, 0.86*c, 0.00], [-0.50, c, 0.00]],
             [[-0.50, c, 0.00], [-0.59, c + 0.07, 0.00], [-0.50, c + 0.28, 0.00], [-0.43, c + 0.34, 0.00]],

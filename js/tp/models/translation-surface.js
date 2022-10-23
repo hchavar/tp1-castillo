@@ -1,11 +1,11 @@
 class TranslationSurface extends Objeto3D {
-    
-    constructor(rows, cols) {        
-        super(rows, cols);
+
+    constructor(rows, cols, menu) {
+        super(rows, cols, menu);
     }
 
     init() {
-        this.curve = getConcatenatedBezierCurve(this.pc);        
+        this.curve = getConcatenatedBezierCurve(this.pc);
     }
 
 
@@ -21,10 +21,9 @@ class TranslationSurface extends Objeto3D {
     getNormal(u,v){
         return this.getPosition(u, v);
     }
-    
+
     getTextureCoordinates(u,v){
         return [u,v];
     }
 
-    
 }

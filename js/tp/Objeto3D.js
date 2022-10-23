@@ -1,5 +1,3 @@
-var modo = "edges"; // wireframe, smooth, edges
-
 var MAX_CURVE_POINTS = 20;
 
 class Objeto3D {
@@ -10,9 +8,10 @@ class Objeto3D {
     localMatrix = mat4.create();
     children = [];
 
-    constructor(width, height) {
+    constructor(width, height, menu) {
         this.width = width;
         this.height = height;
+        this.menu = menu;
         if (!this.isEmpty()) {
             this.updateSurface();
         }
@@ -131,12 +130,12 @@ class Objeto3D {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
     
     
-        if (modo != "wireframe"){
+        if (menu.modo != "wireframe"){
             gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));                    
             gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         }
         
-        if (modo != "smooth") {
+        if (menu.modo != "smooth") {
             gl.uniform1i(shaderProgram.useLightingUniform,false);
             gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         }

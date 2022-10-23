@@ -7,9 +7,11 @@ var vec3 = glMatrix.vec3;
 var projMatrix = mat4.create();
 var viewMatrix = mat4.create();
 var matrizModelado = mat4.create();
+var menu;
 
 function initScene() {
-    createConfiguration();
+    menu = new Menu();
+    createConfiguration(menu);
 }
 
 function drawScene() {
@@ -32,7 +34,7 @@ function drawScene() {
 
     // Camera location
     mat4.lookAt(viewMatrix,
-        vec3.fromValues(0, alturaCamara, distanciaCamara),
+        vec3.fromValues(0, menu.alturaCamara, menu.distanciaCamara),
         vec3.fromValues(0, 0, 0),
         vec3.fromValues(0, 1, 0)
     );
