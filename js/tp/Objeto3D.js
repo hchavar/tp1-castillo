@@ -5,7 +5,7 @@ var MAX_CURVE_POINTS = 20;
 class Objeto3D {
     buffers = null;
     pos = vec3.create();
-    rot = vec3.create();
+    rot = [0, vec3.create()];
     scale = 1.0;
     localMatrix = mat4.create();
     children = [];
