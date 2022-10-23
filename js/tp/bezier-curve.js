@@ -84,7 +84,7 @@ function getBezierCurve(ctrlPoints) {
     var tangents = [];
     var normals = [];
 
-    for (let u = 0; u < 1.00; u = u + delta) {
+    for (let u = 0; u <= 1.01; u = u + delta) {
         points.push(getPointAt(u, ctrlPoints));
         tangents.push(getDerivativePointAt(u, ctrlPoints));
         normals.push(getNormalAt(u, ctrlPoints))
