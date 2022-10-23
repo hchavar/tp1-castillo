@@ -67,7 +67,7 @@ function getNormalAt(u, ctrlPoints) {
 
     let tangent = getDerivativePointAt(u, ctrlPoints);
     let normal = [];
-	vec3.cross(normal, tangent, [0, 0, 1])
+    vec3.cross(normal, tangent, [0, 0, 1])
 
     return normal;
 }
@@ -76,8 +76,8 @@ function getBezierCurve(ctrlPoints) {
     
     if (ctrlPoints.length != 4) {
         console.error("Cubic Bezier requires 4 control points");
-		return null;
-	}
+        return null;
+    }
     
     var delta = 1.0/MAX_CURVE_POINTS;
     var points = [];
@@ -90,4 +90,23 @@ function getBezierCurve(ctrlPoints) {
         normals.push(getNormalAt(u, ctrlPoints))
     }
     return {points, tangents, normals};
+}
+
+function getConcatenatedBezierCurve(controlPointsArray) {
+    
+    let concatenatedCurve = {
+        points : [], 
+        tangents: [],
+        normals: []
+    };
+
+    
+    controlPointsArray.forEach(controlPoints => { 
+        let bezierCurve = getBezierCurve(controlPoints);
+        concatenatedCurve.points = concatenatedCurve.points.concat(bezierCurve.points);
+        concatenatedCurve.tangents = concatenatedCurve.tangents.concat(bezierCurve.tangents);
+        concatenatedCurve.normals = concatenatedCurve.normals.concat(bezierCurve.normals);
+    });
+
+    return concatenatedCurve;
 }
