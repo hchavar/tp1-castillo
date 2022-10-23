@@ -35,7 +35,7 @@ class Menu {
 
     notifyWalls() {
         this.walls.forEach( w => {
-            w.update();
+            w.updateSurface();
         })
     }
 

@@ -5,10 +5,6 @@ class Wall extends TranslationSurface {
         this.menu.addWall(this);
     }
 
-    update() {
-        this.updateSurface();
-    }
-
     init() {
         
         let c = this.menu.wallScale;
