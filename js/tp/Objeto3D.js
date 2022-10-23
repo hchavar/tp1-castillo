@@ -14,9 +14,13 @@ class Objeto3D {
         this.width = width;
         this.height = height;
         if (!this.isEmpty()) {
-            this.init();
-            this.generateSurface(this.width, this.height);
+            this.updateSurface();
         }
+    }
+
+    updateSurface() {
+        this.init();
+        this.generateSurface(this.width, this.height);
     }
 
     getName() {
