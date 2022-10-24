@@ -56,7 +56,7 @@ class Objeto3D {
 
     setPosition(position) {
         // reseteo la matriz
-        this.localMatrix = mat4.create();
+        //this.localMatrix = mat4.create();
         this.pos = position;
     }
 
@@ -78,7 +78,7 @@ class Objeto3D {
 
     setRotation(rotation) {
         // reseteo la matriz
-        this.localMatrix = mat4.create();
+        //this.localMatrix = mat4.create();
         this.rot = rotation;
     }
 
