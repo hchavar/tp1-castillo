@@ -13,9 +13,20 @@ class Menu {
         return this._wallScale;
     }
 
+    set castleFloors(floors) {
+        this._castleFloors = floors;
+        this.notifyCastleParts();
+    }
+
+    get castleFloors() {
+        return this._castleFloors;
+    }
+
     constructor() {
         this.gui = new dat.GUI();
         this.walls = [];
+        this.castleParts = [];
+        this._castleFloors = 3;
         this._wallScale = 3.0;
 
         this.gui.add(this, "distanciaCamara",0.2,10).step(0.1);
@@ -24,8 +35,9 @@ class Menu {
         
         this.gui.add(this, "modo",["wireframe","smooth","edges"]);
         
-        var f3 = this.gui.addFolder('Parametros Especiales ');
-        f3.add(this,'wallScale', 2, 7).name("EscalaMuro");
+        var f3 = this.gui.addFolder('Parametros');
+        f3.add(this,'wallScale', 2, 5).name("Altura Muralla");
+        f3.add(this,'castleFloors', 1, 4).name("Pisos Castillo").step(1.0);
         f3.open();
     }
 
@@ -39,5 +51,14 @@ class Menu {
         })
     }
 
+    addCastlePart(castlePart) {
+        this.castleParts.push(castlePart);
+    }
+
+    notifyCastleParts() {
+        this.castleParts.forEach( w => {
+            w.updateSurface();
+        })
+    }
 
 }
