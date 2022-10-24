@@ -1,25 +1,12 @@
-class RevolutionSurface extends Objeto3D {
+class RevolutionSurface extends BezierSurface {
     
-    constructor(rows, cols) {
+    constructor(rows, cols, menu) {
         
-        super(rows, cols);
+        super(rows, cols, menu);
         
     }
-
-    init() {
-        // todo lo que se necesite para contruir la curva ANTES de construirla debe estar aca
-        let pc = [[0.0,0.0,0.0], [0.6,1.6,0.0], [1.8,0.4,0.0], [2.0,2.0,0.0]];
-        this.curve = getBezierCurve(pc);
-    }
-
 
     getPosition(u,v) {
-        
-        if (u == 1) {
-            return [0, 2, 0];    
-        } else if (u == 0) {
-            return [0, 0, 0];
-        }
         
         let pos = Math.round(u * (this.curve.points.length - 1));
       
@@ -40,14 +27,6 @@ class RevolutionSurface extends Objeto3D {
     
     getTextureCoordinates(u,v) {
         return [u,v];
-    }
-
-    isEmpty() {
-        return false;
-    }
-
-    getColor() {
-        return [0.2, 0.3, 0.8];
     }
 
     animate() {

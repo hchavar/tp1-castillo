@@ -1,13 +1,8 @@
-class TranslationSurface extends Objeto3D {
+class TranslationSurface extends BezierSurface {
 
     constructor(rows, cols, menu) {
         super(rows, cols, menu);
     }
-
-    init() {
-        this.curve = getConcatenatedBezierCurve(this.pc);
-    }
-
 
     getPosition(u,v){
         let pc = this.curve.points[Math.round(u * (this.curve.points.length - 1))];
