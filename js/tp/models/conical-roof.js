@@ -6,7 +6,7 @@ class ConicalRoof extends RevolutionSurface {
     }
 
     init() {
-
+        this.color = [0.3, 0.3, 0.9];
         let h = 2.0;
         let r = 1;
         let x0 = 0.0;
@@ -26,10 +26,6 @@ class ConicalRoof extends RevolutionSurface {
 
     isEmpty(){
         return false;
-    }
-
-    getColor() {
-        return [0.3, 0.3, 0.9];
     }
 
 }

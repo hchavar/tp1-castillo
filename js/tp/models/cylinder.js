@@ -10,6 +10,10 @@ class Cylinder extends Objeto3D {
         return false;
     }
 
+    init() {
+        this.color = [0.7, 0.6, 0.1];
+    }
+
     getName() {
         return "Cylinder";
     }
@@ -42,10 +46,6 @@ class Cylinder extends Objeto3D {
 
     getTextureCoordinates(u, v) {
         return [u, v];
-    }
-
-    getColor() {
-        return [0.7, 0.6, 0.1];
     }
 
     animate() {

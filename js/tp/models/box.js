@@ -9,6 +9,7 @@ class Box extends Objeto3D {
         this.xScale = 1.0;
         this.yScale = 1.0;
         this.zScale = 1.0;
+        this.color = [0.2, 0.6, 0.9];
     }
 
     isEmpty() {
@@ -59,10 +60,6 @@ class Box extends Objeto3D {
 
     getTextureCoordinates(u, v) {
         return [u, v];
-    }
-
-    getColor() {
-        return [0.2, 0.6, 0.9];
     }
 
     animate() {

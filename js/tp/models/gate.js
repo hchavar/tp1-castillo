@@ -6,6 +6,7 @@ class Gate extends Box {
     }
 
     init() {
+        this.color = [0.8, 0.3, 0.4];
         this.xScale = 1.0;
         this.yScale = 2.0;
         this.zScale = 0.1;

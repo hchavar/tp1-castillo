@@ -5,6 +5,7 @@ var p, srh, c, d, m, t, cr, col, box, gate;
 function createConfiguration(menu){
     
     p = new Plane(25, 25);
+    //p.color = [1, 1, 0]; no funciona, el constructor lo necesita
     // srh = new RevolutionSurface(20,20);
     // c = new Cylinder(10, 10);
     // d = new Demo(128, 256);

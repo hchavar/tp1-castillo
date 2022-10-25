@@ -19,6 +19,10 @@ class Objeto3D {
         }
     }
 
+    addChild(child) {
+        this.children.push(child);
+    }
+
     updateSurface() {
         this.init();
         this.generateSurface(this.width, this.height);
@@ -177,7 +181,7 @@ class Objeto3D {
                 uvList.push(uvs[0]);
                 uvList.push(uvs[1]);
     
-                let col = this.getColor(u, v);
+                let col = this.color;
     
                 colors.push(col[0]);
                 colors.push(col[1]);
@@ -263,7 +267,11 @@ class Objeto3D {
         return [u, v];
     }
 
-    getColor() {
-        return [1, 1, 1];
+    get color() {
+        return this._color;
+    }
+
+    set color(value) {
+        this._color = value;
     }
 }

@@ -7,6 +7,8 @@ class Tower extends RevolutionSurface {
     }
 
     init() {
+        this.color = [0.3, 0.3, 0.3];
+
         // external radius
         let er = -0.50;
         // cop height
@@ -29,10 +31,6 @@ class Tower extends RevolutionSurface {
 
     isEmpty(){
         return false;
-    }
-
-    getColor() {
-        return [0.3, 0.3, 0.3];
     }
 
 }

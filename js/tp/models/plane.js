@@ -7,6 +7,10 @@ class Plane extends Objeto3D {
     isEmpty() {
         return false;
     }
+
+    init() {
+        this.color = [1, 1, 0];
+    }
     
     getPosition(u, v) {
 
@@ -23,7 +27,4 @@ class Plane extends Objeto3D {
         return [u, v];
     }
 
-    getColor() {
-        return [1, 1, 0];
-    }
 }

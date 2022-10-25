@@ -7,7 +7,7 @@ class Column extends RevolutionSurface {
     }
 
     init() {
-        
+        this.color = [0.99, 0.85, 0.35];
         // cop height
         let ch = 0.50;
         let sh = 0.90;
@@ -36,10 +36,6 @@ class Column extends RevolutionSurface {
 
     isEmpty(){
         return false;
-    }
-
-    getColor() {
-        return [0.99, 0.85, 0.35];
     }
 
 }

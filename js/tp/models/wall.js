@@ -6,7 +6,7 @@ class Wall extends TranslationSurface {
     }
 
     init() {
-        
+        this.color = [0.3, 0.3, 0.3];
         let c = this.menu.wallScale;
 
         this.pc = [ 
@@ -27,9 +27,5 @@ class Wall extends TranslationSurface {
 
     isEmpty(){
         return false;
-    }
-
-    getColor() {
-        return [0.3, 0.3, 0.3];
     }
 }

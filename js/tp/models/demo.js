@@ -10,6 +10,10 @@ class Demo extends Objeto3D {
         return false;
     }
 
+    init() {
+        this.color = [1, 0.2, 0.8];
+    }
+
     getName() {
         return "Demo";
     }
@@ -67,10 +71,6 @@ class Demo extends Objeto3D {
 
     getTextureCoordinates(u, v) {
         return [u, v];
-    }
-
-    getColor() {
-        return [1, 0.2, 0.8];
     }
 
     animate() {
