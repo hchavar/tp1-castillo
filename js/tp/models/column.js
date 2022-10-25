@@ -8,11 +8,6 @@ class Column extends RevolutionSurface {
         this.menu.addCastlePart(this);
 
         this.roof = new ConicalRoof(20, 20);
-        // cr.setScale(0.75);
-        // //cr.updateScale();
-        // cr.setPosition([0, (copHeight + sHeight + this.menu.castleFloors*0.78)/0.75, 0]);
-        // //cr.updatePosition();
-        // cr.updateLocalMatrix();
         this.updateRoofPosition();
 
         this.addChild(this.roof);
@@ -21,9 +16,7 @@ class Column extends RevolutionSurface {
 
     updateRoofPosition() {
         this.roof.setScale(0.75);
-        //this.roof.updateScale();
         this.roof.setPosition([0, (copHeight + sHeight + this.menu.castleFloors*0.78)/0.75, 0]);
-        //this.roof.updatePosition();
         this.roof.updateLocalMatrix();
     }
 
