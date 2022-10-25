@@ -9,17 +9,14 @@ class Gate extends Box {
         this.xScale = 1.0;
         this.yScale = 2.0;
         this.zScale = 0.1;
-        //this.setPosition([0.0, 1.0, 0,0]);
-        //this.updatePosition();
+        this.setPosition([0.0, 1.0, 0,0]);
+        this.updatePosition();
     }
 
     update() {
-        this.localMatrix = mat4.create();
+        
         let ang = this.menu.angleGateOpen;
-        //let ang2 = Math.PI/3;
-        //this.setPosition([0.0, 0.5, 0,0]);
-        //this.setRotation([ang, [1.0, 0.0, 0.0]]);
-        //this.setPosition([0.0, 0.0, 0.01]);
+        
         this.setRotation([ang, [1, 0, 0]]);
         this.setPosition([0.0, 1, 0.0]);
         this.updateLocalMatrix();

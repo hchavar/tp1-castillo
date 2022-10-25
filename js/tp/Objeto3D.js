@@ -95,6 +95,7 @@ class Objeto3D {
     }
 
     updateLocalMatrix() {
+        this.localMatrix = mat4.create();
         this.updateScale();
         this.updateRotation();
         this.updatePosition();

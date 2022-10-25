@@ -17,13 +17,6 @@ function createConfiguration(menu){
     box.updatePosition();
     gate = new Gate(menu);
     
-    // gate.setRotation([Math.PI/2, [0, 1, 0]]);
-    // gate.updateRotation();
-    gate.setPosition([0.0, 1.0, 0]);
-    gate.updatePosition();
-    // gate.setRotation([Math.PI/3, [1, 0, 0]]);
-    // gate.updateRotation();
-
 }
 
 function drawConfiguration() {
@@ -58,21 +51,8 @@ function drawConfiguration() {
     // box.updateLocalMatrix();
     box.animate();
 
-    // gate.setRotation([Math.PI/3600, [1, 0, 0]]);
-    // gate.updateRotation();
     
-    //box.draw();
-    //gate.update();
-    // gate.animate();
     gate.draw();
 
-    //let gate2 = new Gate(menu);
-    
-    // gate2.setRotation([time, [1, 0, 0]]);
-    // //gate2.updateRotation();
-    // gate2.setPosition([0.0, 1, 0.0]);
-    // gate2.updateLocalMatrix();
-
-    // gate2.draw();
 
 }
