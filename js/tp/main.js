@@ -56,7 +56,7 @@ function loadShadersAndStartWebGL() {
 function tick() {
 
     requestAnimationFrame(tick);
-    time += 1/60;
+    time += 0.1*1/60;
     drawScene();
 }
 
