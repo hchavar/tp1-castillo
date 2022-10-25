@@ -1,8 +1,8 @@
 class Box extends Objeto3D {
     
     
-    constructor(width, height) {
-        super(width, height);
+    constructor(width, height, menu) {
+        super(width, height, menu);
     }
     
     init() {
@@ -69,7 +69,8 @@ class Box extends Objeto3D {
 
         this.rotateAngle = Math.PI/360;
         //box.setPosition([-0.01, 0, 0]);
-        this.setRotation([this.rotateAngle, [0, 1, 0]]);
+        this.setPosition([0.00, 0.004, 0.004]);
+        this.setRotation([this.rotateAngle, [1, 0, 0]]);
         this.updateLocalMatrix();
     
     }

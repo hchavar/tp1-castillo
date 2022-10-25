@@ -1,9 +1,11 @@
 var MAX_CURVE_POINTS = 20;
+const defaultPosition = vec3.create();
+const defaultRotation = [0, vec3.create()];
 
 class Objeto3D {
     buffers = null;
-    pos = vec3.create();
-    rot = [0, vec3.create()];
+    pos = defaultPosition;
+    rot = defaultRotation;
     scale = 1.0;
     localMatrix = mat4.create();
     children = [];
@@ -62,6 +64,7 @@ class Objeto3D {
 
     updatePosition() {
         mat4.translate(this.localMatrix, this.localMatrix, this.pos);
+        this.pos = defaultPosition;
     }
 
     setScale(scale) {
@@ -84,6 +87,7 @@ class Objeto3D {
 
     updateRotation() {
         mat4.rotate( this.localMatrix, this.localMatrix, this.rot[0], this.rot[1] );
+        this.rot = defaultRotation;
     }
 
     updateRotationRespectWorld(worldMatrix) {

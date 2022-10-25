@@ -1,5 +1,5 @@
 
-var p, srh, c, d, m, t, cr, col, box;
+var p, srh, c, d, m, t, cr, col, box, gate;
 
 
 function createConfiguration(menu){
@@ -13,8 +13,17 @@ function createConfiguration(menu){
     cr = new ConicalRoof(30, 30);
     col = new Column(30, 30, menu);
     box = new Box(8, 16);
-    box.setPosition([0.004, 0.0, 0.004]);
+    box.setPosition([0.00, 1.8, 0.00]);
     box.updatePosition();
+    gate = new Gate(menu);
+    
+    // gate.setRotation([Math.PI/2, [0, 1, 0]]);
+    // gate.updateRotation();
+    gate.setPosition([0.0, 1.0, 0]);
+    gate.updatePosition();
+    // gate.setRotation([Math.PI/3, [1, 0, 0]]);
+    // gate.updateRotation();
+
 }
 
 function drawConfiguration() {
@@ -48,7 +57,22 @@ function drawConfiguration() {
     //box.updateRotation();
     // box.updateLocalMatrix();
     box.animate();
+
+    // gate.setRotation([Math.PI/3600, [1, 0, 0]]);
+    // gate.updateRotation();
     
-    box.draw();
+    //box.draw();
+    //gate.update();
+    // gate.animate();
+    gate.draw();
+
+    //let gate2 = new Gate(menu);
+    
+    // gate2.setRotation([time, [1, 0, 0]]);
+    // //gate2.updateRotation();
+    // gate2.setPosition([0.0, 1, 0.0]);
+    // gate2.updateLocalMatrix();
+
+    // gate2.draw();
 
 }
