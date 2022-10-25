@@ -53,7 +53,7 @@ class Objeto3D {
 
         if (!this.isEmpty()) {
             
-            this.setMatrixUniforms();
+            this.setMatrixUniforms(transform);
             this.drawFromBuffers();
         }
 
@@ -68,7 +68,7 @@ class Objeto3D {
 
     updatePosition() {
         mat4.translate(this.localMatrix, this.localMatrix, this.pos);
-        this.pos = defaultPosition;
+        //this.pos = defaultPosition;
     }
 
     setScale(scale) {
@@ -77,7 +77,7 @@ class Objeto3D {
 
     updateScale() {
         let scaleVec3 = vec3.fromValues(1, 1, 1);
-        if (this.scale > 1.0) {
+        if (this.scale != 1.0) {
             vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scale);
         }
         mat4.scale(this.localMatrix, this.localMatrix, scaleVec3);
@@ -91,7 +91,7 @@ class Objeto3D {
 
     updateRotation() {
         mat4.rotate( this.localMatrix, this.localMatrix, this.rot[0], this.rot[1] );
-        this.rot = defaultRotation;
+        //this.rot = defaultRotation;
     }
 
     updateRotationRespectWorld(worldMatrix) {
@@ -106,14 +106,14 @@ class Objeto3D {
 
     }
 
-    setMatrixUniforms() {
+    setMatrixUniforms(modelMatrix) {
 
-        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.localMatrix);
+        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
         gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
     
         let normalMatrix = mat3.create();
-        mat3.fromMat4(normalMatrix, this.localMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));
+        mat3.fromMat4(normalMatrix, modelMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));
     
         mat3.invert(normalMatrix, normalMatrix);
         mat3.transpose(normalMatrix, normalMatrix);
