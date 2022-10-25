@@ -1,7 +1,7 @@
 class Menu {
 
-    distanciaCamara = 2.9;
-    alturaCamara = 0.0;
+    distanciaCamara = 7.8;
+    alturaCamara = 6.3;
     modo = "edges";
 
     set wallScale(newScale) {
@@ -69,7 +69,7 @@ class Menu {
 
     notifyCastleParts() {
         this.castleParts.forEach( w => {
-            w.updateSurface();
+            w.update();
         })
     }
 

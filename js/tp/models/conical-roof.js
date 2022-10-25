@@ -1,7 +1,7 @@
 class ConicalRoof extends RevolutionSurface {
-    constructor(rows, cols, menu) {
+    constructor(rows, cols) {
         
-        super(rows, cols, menu);
+        super(rows, cols);
         
     }
 
