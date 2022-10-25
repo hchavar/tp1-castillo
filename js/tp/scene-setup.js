@@ -12,8 +12,8 @@ function createConfiguration(menu){
     t = new Tower(50, 50, menu);
     cr = new ConicalRoof(30, 30);
     col = new Column(30, 30, menu);
-    box = new Box(8, 8);
-    box.setPosition([0, 1.3, 0]);
+    box = new Box(8, 16);
+    box.setPosition([0.004, 0.0, 0.004]);
     box.updatePosition();
 }
 

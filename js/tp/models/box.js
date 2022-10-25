@@ -50,9 +50,7 @@ class Box extends Objeto3D {
             y = (v - 1/this.width)/(0.5 - 1/this.width) * 0.5;
         }
 
-
-
-        return [x*this.xScale, y*this.yScale, z*this.zScale];
+        return [(x-0.5)*this.xScale, (y-0.5)*this.yScale, (z-0.5)*this.zScale];
     }
 
     getNormal(u, v) {
@@ -69,9 +67,10 @@ class Box extends Objeto3D {
 
     animate() {
 
-        this.rotateAngle = time*Math.PI/36;
+        this.rotateAngle = Math.PI/360;
+        //box.setPosition([-0.01, 0, 0]);
         this.setRotation([this.rotateAngle, [0, 1, 0]]);
-        this.updateRotation();
+        this.updateLocalMatrix();
     
     }
 }
