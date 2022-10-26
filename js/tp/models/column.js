@@ -37,7 +37,7 @@ class Column extends RevolutionSurface {
     
     updateBezierControlPoints() {
         // cop height
-        let ch = 0.50;
+        let ch = 0.60;
         let sh = 0.90;
         //internal radius
         let ir = 0.30;
