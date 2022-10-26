@@ -15,6 +15,9 @@ class Objeto3D {
         this.height = height;
         this.menu = menu;
         this.empty = true;
+    }
+
+    build() {
         this.init();
         if (!this.empty) {
             this.updateSurface();
@@ -96,11 +99,15 @@ class Objeto3D {
     }
 
     updateLocalMatrix() {
-        this.localMatrix = mat4.create();
+        //this.renewLocalMatrix();
         this.updateScale();
         this.updateRotation();
         this.updatePosition();
 
+    }
+
+    renewLocalMatrix() {
+        this.localMatrix = mat4.create();
     }
 
     setMatrixUniforms(modelMatrix) {
