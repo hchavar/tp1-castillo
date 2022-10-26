@@ -5,7 +5,20 @@ class BezierSurface extends Objeto3D {
     }
 
     init() {
-        this.curve = getConcatenatedBezierCurve(this.pc);
+        this.update();
+    }
+    
+    update() {
+        this.updateBezierControlPoints();
+        this.updateBezierCurve();
     }
 
+    updateBezierControlPoints() {
+        // always override this function
+        this.pc = [];
+    }
+
+    updateBezierCurve() {
+        this.curve = getConcatenatedBezierCurve(this.pc);
+    }
 }

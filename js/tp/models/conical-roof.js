@@ -7,6 +7,14 @@ class ConicalRoof extends RevolutionSurface {
 
     init() {
         this.color = [0.3, 0.3, 0.9];
+        this.updateBezierControlPoints();
+
+        super.init();
+        this.empty = false;
+    }
+
+
+    updateBezierControlPoints() {
         let h = 2.0;
         let r = 1;
         let x0 = 0.0;
@@ -17,12 +25,8 @@ class ConicalRoof extends RevolutionSurface {
 
         this.pc = [
             [origin, origin, origin, origin],
-            [[0.85*r, y0, z0], [0.20*r, 0.40*h, z0], [ 0.10*r, 0.86*h, z0], head],
+            [[0.85 * r, y0, z0], [0.20 * r, 0.40 * h, z0], [0.10 * r, 0.86 * h, z0], head],
             [head, head, head, head]
         ];
-
-        super.init();
-        this.empty = false;
     }
-
 }
