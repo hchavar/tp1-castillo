@@ -7,9 +7,11 @@ class Floor extends Box {
     init() {
         this.empty = false;
         this.color = [0.99, 0.85, 0.35];
-        this.xScale = 4.9;
-        this.yScale = 1.0;
-        this.zScale = 4.9;
+        this.scale = {
+            x: 4.9,
+            y: 1.0,
+            z: 4.9
+        };
 
     }
 }

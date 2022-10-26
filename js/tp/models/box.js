@@ -1,3 +1,15 @@
+const defaultCenter = {
+    x: 0.5,
+    y: 0.5,
+    z: 0.5    
+}
+
+const defaultScale = {
+    x: 1.0,
+    y: 1.0,
+    z: 1.0    
+}
+
 const xCenter = 0.5,
     yCenter = 0.5,
     zCenter = 0.5,
@@ -10,13 +22,11 @@ class Box extends Objeto3D {
     constructor(width, height, menu) {
         super(width, height, menu);
     }
-
+    
     init() {
-        this.empty = false;
-        this.xScale = xSize;
-        this.yScale = ySize;
-        this.zScale = zSize;
+        this.scale = defaultScale;
         this.color = [0.2, 0.6, 0.9];
+        this.empty = false;
     }
 
     getName() {
@@ -29,13 +39,13 @@ class Box extends Objeto3D {
 
         //colapso los extremos para formar la tapa
         if (v >= 1.0) {
-            x = xCenter;
+            x = defaultCenter.x;
             y = v;
-            z = zCenter;
+            z = defaultCenter.z;
         } else if (v <= 0.0) {
-            x = xCenter;
+            x = defaultCenter.x;
             y = 0.0;
-            z = zCenter;
+            z = defaultCenter.z;
         } else {
 
             if (u < 0.25) {
@@ -54,7 +64,7 @@ class Box extends Objeto3D {
             y = (v - 1 / this.width) / (0.5 - 1 / this.width) * 0.5;
         }
 
-        return [(x - xCenter) * this.xScale, (y - yCenter) * this.yScale, (z - zCenter) * this.zScale];
+        return [(x - defaultCenter.x) * this.scale.x, (y - defaultCenter.y) * this.scale.y, (z - defaultCenter.z) * this.scale.z];
     }
 
     getNormal(u, v) {
