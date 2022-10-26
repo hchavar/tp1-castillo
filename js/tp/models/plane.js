@@ -5,7 +5,7 @@ class Plane extends Objeto3D {
     }
 
     init() {
-        this.color = [1, 1, 0];
+        this.color = [0.1, 0.1, 0.1];
         this.empty = false;
     }
     
