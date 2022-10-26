@@ -13,7 +13,7 @@ const entranceConfig = {
             }
         },
         {
-            position: [-(HEIGHT - THICKNESS)/2, HEIGHT / 2, 0],
+            position: [-(HEIGHT - THICKNESS) / 2, HEIGHT / 2, 0],
             scale: {
                 x: THICKNESS,
                 y: HEIGHT,
@@ -21,7 +21,7 @@ const entranceConfig = {
             }
         },
         {
-            position: [(HEIGHT- THICKNESS)/2, HEIGHT / 2, 0],
+            position: [(HEIGHT - THICKNESS) / 2, HEIGHT / 2, 0],
             scale: {
                 x: THICKNESS,
                 y: HEIGHT,
@@ -30,9 +30,8 @@ const entranceConfig = {
         }
     ],
     gate: {
-        //position: [(HEIGHT- THICKNESS)/2, HEIGHT / 2, 0],
         scale: {
-            x: (HEIGHT - THICKNESS),
+            x: (HEIGHT - 2 * THICKNESS),
             y: (HEIGHT - THICKNESS),
             z: THICKNESS
         }
