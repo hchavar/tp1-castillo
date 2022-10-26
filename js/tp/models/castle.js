@@ -47,6 +47,7 @@ class Castle extends Objeto3D {
 
         for (const floorConfig of castleConfig.floors) {
             let floor = new Floor(menu);
+            floor.build();
     
             floor.setPosition(floorConfig.position);
             floor.number = floorConfig.number;
@@ -58,6 +59,7 @@ class Castle extends Objeto3D {
         
         for (const columnConfig of castleConfig.columns) {
             let column = new Column(30, 30, menu);
+            column.build();
             column.setPosition(columnConfig.position);
             column.updateLocalMatrix();
             this.addChild(column);
