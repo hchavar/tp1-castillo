@@ -22,10 +22,6 @@ class Wall extends TranslationSurface {
         ];
 
         super.init();
-        
-    }
-
-    isEmpty(){
-        return false;
+        this.empty = false;
     }
 }

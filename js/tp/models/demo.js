@@ -5,13 +5,10 @@ class Demo extends Objeto3D {
     constructor(width, height) {
         super(width, height);
     }
-
-    isEmpty() {
-        return false;
-    }
-
+    
     init() {
         this.color = [1, 0.2, 0.8];
+        this.empty = false;
     }
 
     getName() {

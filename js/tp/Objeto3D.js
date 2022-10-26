@@ -14,7 +14,9 @@ class Objeto3D {
         this.width = width;
         this.height = height;
         this.menu = menu;
-        if (!this.isEmpty()) {
+        this.empty = true;
+        this.init();
+        if (!this.empty) {
             this.updateSurface();
         }
     }
@@ -24,7 +26,6 @@ class Objeto3D {
     }
 
     updateSurface() {
-        this.init();
         this.generateSurface(this.width, this.height);
     }
 
@@ -34,10 +35,6 @@ class Objeto3D {
 
     init() {
         // inicialiciar objeto
-    }
-
-    isEmpty() {
-        return true;
     }
 
     animate() {
@@ -51,7 +48,7 @@ class Objeto3D {
 
         mat4.multiply(transform, transform, this.localMatrix);
 
-        if (!this.isEmpty()) {
+        if (!this.empty) {
             
             this.setMatrixUniforms(transform);
             this.drawFromBuffers();
@@ -273,5 +270,13 @@ class Objeto3D {
 
     set color(value) {
         this._color = value;
+    }
+
+    get empty() {
+        return this._empty;
+    }
+
+    set empty(value) {
+        this._empty = value;
     }
 }

@@ -6,14 +6,11 @@ class Box extends Objeto3D {
     }
     
     init() {
+        this.empty = false;
         this.xScale = 1.0;
         this.yScale = 1.0;
         this.zScale = 1.0;
         this.color = [0.2, 0.6, 0.9];
-    }
-
-    isEmpty() {
-        return false;
     }
 
     getName() {

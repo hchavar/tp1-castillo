@@ -6,12 +6,9 @@ class Cylinder extends Objeto3D {
         super(width, height);
     }
 
-    isEmpty() {
-        return false;
-    }
-
     init() {
         this.color = [0.7, 0.6, 0.1];
+        this.empty = false;
     }
 
     getName() {

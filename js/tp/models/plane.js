@@ -4,12 +4,9 @@ class Plane extends Objeto3D {
         super(width, height);
     }
 
-    isEmpty() {
-        return false;
-    }
-
     init() {
         this.color = [1, 1, 0];
+        this.empty = false;
     }
     
     getPosition(u, v) {

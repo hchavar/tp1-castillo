@@ -51,10 +51,7 @@ class Column extends RevolutionSurface {
         ];
 
         super.init();
-    }
-
-    isEmpty(){
-        return false;
+        this.empty = false;
     }
 
 }
