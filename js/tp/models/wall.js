@@ -1,5 +1,5 @@
 class Wall extends TranslationSurface {
-    
+
     constructor(filas, columnas, menu) {
         super(filas, columnas, menu);
         this.menu.addWall(this);
@@ -7,7 +7,6 @@ class Wall extends TranslationSurface {
 
     init() {
         this.color = [0.3, 0.3, 0.3];
-        this.updateBezierControlPoints();
 
         super.init();
         this.empty = false;

@@ -1,16 +1,15 @@
 class Tower extends RevolutionSurface {
     constructor(rows, cols, menu) {
-        
+
         super(rows, cols, menu);
         this.menu.addWall(this);
-        
+
     }
 
     init() {
         this.color = [0.3, 0.3, 0.3];
 
-        // external radius
-        this.updateBezierControlPoints();
+        super.update();
 
         super.init();
         this.empty = false;
@@ -18,6 +17,7 @@ class Tower extends RevolutionSurface {
 
 
     updateBezierControlPoints() {
+        // external radius
         let er = -0.50;
         // cop height
         let ch = 0.20;
