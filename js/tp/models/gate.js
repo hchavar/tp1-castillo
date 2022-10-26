@@ -6,17 +6,17 @@ class Gate extends Box {
     }
 
     init() {
+        this.empty = false;
         this.color = [0.8, 0.3, 0.4];
         this.xScale = 1.0;
         this.yScale = 2.0;
         this.zScale = 0.1;
-        this.setPosition([0.0, 1.0, 0,0]);
-        this.updatePosition();
     }
 
     update() {
         
         let ang = this.menu.angleGateOpen;
+        this.renewLocalMatrix();
         
         this.setRotation([ang, [1, 0, 0]]);
         this.setPosition([0.0, 1, 0.0]);
