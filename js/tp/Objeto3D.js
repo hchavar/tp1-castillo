@@ -6,7 +6,7 @@ class Objeto3D {
     buffers = null;
     pos = defaultPosition;
     rot = defaultRotation;
-    scale = 1.0;
+    scaleFactor = 1.0;
     localMatrix = mat4.create();
     children = [];
 
@@ -71,14 +71,14 @@ class Objeto3D {
         //this.pos = defaultPosition;
     }
 
-    setScale(scale) {
-        this.scale = scale;
+    setScale(scaleFactor) {
+        this.scaleFactor = scaleFactor;
     }
 
     updateScale() {
         let scaleVec3 = vec3.fromValues(1, 1, 1);
-        if (this.scale != 1.0) {
-            vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scale);
+        if (this.scaleFactor != 1.0) {
+            vec3.scale(scaleVec3, vec3.fromValues(1, 1, 1), this.scaleFactor);
         }
         mat4.scale(this.localMatrix, this.localMatrix, scaleVec3);
     }
