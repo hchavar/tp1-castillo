@@ -10,8 +10,6 @@ class Floor extends Box {
         this.xScale = 4.9;
         this.yScale = 1.0;
         this.zScale = 4.9;
-        this.setPosition([0.0, 1.0, 0,0]);
-        this.updatePosition();
 
     }
 }
