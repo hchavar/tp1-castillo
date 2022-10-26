@@ -10,6 +10,7 @@ class Column extends RevolutionSurface {
     }
 
     updateRoofPosition() {
+        this.roof.renewLocalMatrix();
         this.roof.setScale(0.75);
         this.roof.setPosition([0, (copHeight + sHeight + this.menu.castleFloors * 0.78) / 0.75, 0]);
         this.roof.updateLocalMatrix();
