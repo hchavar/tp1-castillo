@@ -10,13 +10,6 @@ const defaultScale = {
     z: 1.0    
 }
 
-const xCenter = 0.5,
-    yCenter = 0.5,
-    zCenter = 0.5,
-    xSize = 1.0,
-    ySize = 1.0,
-    zSize = 1.0;
-
 class Box extends Objeto3D {
 
     constructor(width, height, menu) {
