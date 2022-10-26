@@ -1,7 +1,7 @@
 class Menu {
 
-    distanciaCamara = 7.8;
-    alturaCamara = 6.3;
+    distanciaCamara = 9.8;
+    alturaCamara = 3.3;
     modo = "edges";
 
     set wallScale(newScale) {
@@ -36,20 +36,20 @@ class Menu {
         this.walls = [];
         this.gates = [];
         this.castleParts = [];
-        this._castleFloors = 3;
+        this._castleFloors = 4;
         this._wallScale = 3.0;
         this._angleGateOpen = 0.0;
 
-        this.gui.add(this, "distanciaCamara",0.2,10).step(0.1);
-        
-        this.gui.add(this, "alturaCamara",-1,8).step(0.1);
-        
-        this.gui.add(this, "modo",["wireframe","smooth","edges"]);
-        
+        this.gui.add(this, "distanciaCamara", 0.2, 20).step(0.1);
+
+        this.gui.add(this, "alturaCamara", -1, 8).step(0.1);
+
+        this.gui.add(this, "modo", ["wireframe", "smooth", "edges"]);
+
         var f3 = this.gui.addFolder('Parametros');
-        f3.add(this,'wallScale', 2, 5).name("Altura Muralla");
-        f3.add(this,'castleFloors', 1, 4).name("Pisos Castillo").step(1);
-        f3.add(this,'angleGateOpen', 0, Math.PI/2).name("Apertura Puerta").step(0.01);
+        f3.add(this, 'wallScale', 2, 5).name("Altura Muralla");
+        f3.add(this, 'castleFloors', 1, 4).name("Pisos Castillo").step(1);
+        f3.add(this, 'angleGateOpen', 0, Math.PI / 2).name("Apertura Puerta").step(0.01);
         f3.open();
     }
 
@@ -58,8 +58,8 @@ class Menu {
     }
 
     notifyWalls() {
-        this.walls.forEach( w => {
-            w.updateSurface();
+        this.walls.forEach(w => {
+            w.update();
         })
     }
 
@@ -68,7 +68,7 @@ class Menu {
     }
 
     notifyCastleParts() {
-        this.castleParts.forEach( w => {
+        this.castleParts.forEach(w => {
             w.update();
         })
     }
@@ -78,7 +78,7 @@ class Menu {
     }
 
     notifyGates() {
-        this.gates.forEach( g => {
+        this.gates.forEach(g => {
             g.update();
         })
     }
