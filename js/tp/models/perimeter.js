@@ -34,12 +34,14 @@ class Perimeter extends Objeto3D {
 
                 this.addChild(section);
             } else {
-                let column = new Column(30, 30, menu);
-                column.build();
-                column.setPosition([x, 0, z]);
-                column.updateLocalMatrix();
-
-                this.addChild(column);
+                let section = new PerimeterEntrance(menu);
+                section.scale = wallScale;
+                section.build();
+                section.setPosition([x, 0, z]);
+                section.updateLocalMatrix();
+                section.setRotation([-a * (i - 1), [0, 1, 0]]);
+                section.updateRotation();
+                this.addChild(section);
             }
         }
 
