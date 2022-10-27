@@ -35,13 +35,6 @@ const entranceConfig = {
             y: (HEIGHT - THICKNESS),
             z: THICKNESS
         }
-    },
-    wall: {
-        scale: {
-            x: 1.0,
-            y: 1.0,
-            z: 2.0 // esto es variable
-        }
     }
 }
 
@@ -67,5 +60,35 @@ class Entrance extends Objeto3D {
             box.updateLocalMatrix();
             this.addChild(box);
         }
+
+        let wall1 = new Wall(20, 20, this.menu);
+        wall1.scale = {
+            x: 1.0,
+            y: 1.0,
+            z: (this.scale.z - HEIGHT) / 2
+        };
+
+        wall1.build();
+        wall1.setRotation([-Math.PI / 2, [0, 1, 0]]);
+        wall1.setPosition([0, 0, -(wall1.scale.z + HEIGHT / 2)]);
+        wall1.updateLocalMatrix();
+
+        this.addChild(wall1);
+
+        let wall2 = new Wall(20, 20, this.menu);
+        wall2.scale = {
+            x: 1.0,
+            y: 1.0,
+            z: (this.scale.z - HEIGHT) / 2
+        };
+
+        wall2.build();
+        wall2.setRotation([-Math.PI / 2, [0, 1, 0]]);
+
+        wall2.setPosition([0, 0, (HEIGHT / 2)]);
+        wall2.updateLocalMatrix();
+
+        this.addChild(wall2);
     }
+
 }
