@@ -1,3 +1,5 @@
+const PERIMETER_RADIUS = 8;
+
 class Perimeter extends Objeto3D {
     constructor(menu) {
         super(null, null, menu);
@@ -6,12 +8,13 @@ class Perimeter extends Objeto3D {
     }
 
     init() {
+        this.sections = [];
         this.update();
 
     }
 
     update() {
-        let r = 8;
+        let r = PERIMETER_RADIUS;
         const n = this.menu.towers;
         const a = 2 * Math.PI / n;
         let angle = this.getAngleFunction(n);
@@ -27,26 +30,23 @@ class Perimeter extends Objeto3D {
             let x = r * Math.cos(angle(i));
             let z = r * Math.sin(angle(i));
 
+            let section;
             if (i > 1) {
-                let section = new PerimeterSection(menu);
-                section.scale = wallScale;
-                section.build();
-                section.setPosition([x, 0, z]);
-                section.updateLocalMatrix();
-                section.setRotation([-a * (i - 1), [0, 1, 0]]);
-                section.updateRotation();
-
-                this.addChild(section);
+                section = new PerimeterSection(menu);
             } else {
-                let section = new PerimeterEntrance(menu);
-                section.scale = wallScale;
-                section.build();
-                section.setPosition([x, 0, z]);
-                section.updateLocalMatrix();
-                section.setRotation([-a * (i - 1), [0, 1, 0]]);
-                section.updateRotation();
-                this.addChild(section);
+                section = new PerimeterEntrance(menu);
             }
+            
+            section.scale = wallScale;
+            section.build();
+            section.setPosition([x, 0, z]);
+            section.updateLocalMatrix();
+            section.setRotation([-a * (i - 1), [0, 1, 0]]);
+            section.updateRotation();
+
+            this.addChild(section);
+
+            this.sections.push(section);
         }
     }
 
