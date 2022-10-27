@@ -61,12 +61,14 @@ class Entrance extends Objeto3D {
             this.addChild(box);
         }
 
-        let wall1 = new Wall(20, 20, this.menu);
-        wall1.scale = {
+        let we = {
             x: 1.0,
             y: 1.0,
-            z: (this.scale.z - HEIGHT) / 2
+            z: (this.scale.z - HEIGHT -1) / 2
         };
+
+        let wall1 = new Wall(20, 20, this.menu);
+        wall1.scale = we;
 
         wall1.build();
         wall1.setRotation([-Math.PI / 2, [0, 1, 0]]);
@@ -76,11 +78,7 @@ class Entrance extends Objeto3D {
         this.addChild(wall1);
 
         let wall2 = new Wall(20, 20, this.menu);
-        wall2.scale = {
-            x: 1.0,
-            y: 1.0,
-            z: (this.scale.z - HEIGHT) / 2
-        };
+        wall2.scale = we;
 
         wall2.build();
         wall2.setRotation([-Math.PI / 2, [0, 1, 0]]);
@@ -89,6 +87,7 @@ class Entrance extends Objeto3D {
         wall2.updateLocalMatrix();
 
         this.addChild(wall2);
+
     }
 
 }
