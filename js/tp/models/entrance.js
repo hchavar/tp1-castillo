@@ -64,7 +64,7 @@ class Entrance extends Objeto3D {
         let we = {
             x: 1.0,
             y: 1.0,
-            z: (this.scale.z - HEIGHT -1) / 2
+            z: (this.scale.z - HEIGHT - 0.5) / 2
         };
 
         let wall1 = new Wall(20, 20, this.menu);
