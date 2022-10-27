@@ -1,15 +1,22 @@
 
-var p, srh, c, d, m, t, f, cr, col, col2, box, gate;
+var water, srh, c, d, m, t, f, cr, col, col2, box, gate;
 
 var castle;
 var entrance;
-var perimeter, ps, pe;
+var perimeter, ps, pe, platform;
 
 function createConfiguration(menu){
     
-    p = new Plane(25, 25);
-    p.build();
-    //p.color = [1, 1, 0]; no funciona, el constructor lo necesita
+    water = new Plane(25, 25);
+    water.color = [0, 0.55, 0.8];
+    water.scale = {
+        x: 2.0,
+        y: 1.0,
+        z: 1.5
+    };
+    water.build();
+    water.setPosition([0,-0.4,0]);
+    water.updateLocalMatrix();
     // srh = new RevolutionSurface(20,20);
     // c = new Cylinder(10, 10);
     // d = new Demo(128, 256);
@@ -77,13 +84,16 @@ function createConfiguration(menu){
     pe.build();
     // pe.setPosition([0,0,-3]);
     // pe.updateLocalMatrix();
+
+    platform = new Platform();
+    platform.build();
     
 }
 
 function drawConfiguration() {
 
     
-    p.draw();
+    water.draw();
     // c.setPosition([4,0,0]);
     // c.updatePosition();
     // c.draw();
@@ -123,6 +133,7 @@ function drawConfiguration() {
 
     // col2.draw();
     // f.draw();
+    platform.draw();
 
 
 }
