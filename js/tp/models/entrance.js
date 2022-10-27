@@ -35,15 +35,25 @@ const entranceConfig = {
             y: (HEIGHT - THICKNESS),
             z: THICKNESS
         }
+    },
+    wall: {
+        scale: {
+            x: 1.0,
+            y: 1.0,
+            z: 2.0 // esto es variable
+        }
     }
 }
 
 class Entrance extends Objeto3D {
     constructor(menu) {
 
-        super();
+        super(null, null, menu);
 
-        let gate = new Gate(menu);
+    }
+
+    init() {
+        let gate = new Gate(this.menu);
         gate.scale = entranceConfig.gate.scale;
         gate.build();
         this.addChild(gate);
@@ -57,11 +67,5 @@ class Entrance extends Objeto3D {
             box.updateLocalMatrix();
             this.addChild(box);
         }
-
-
     }
-
-
-
-
 }
