@@ -5,8 +5,10 @@ class Menu {
     modo = "edges";
 
     set wallScale(newScale) {
-        this._wallScale = newScale;
-        this.notifyWalls();
+        if (this._wallScale != newScale) {
+            this._wallScale = newScale;
+            this.notifyWalls();
+        }
     }
 
     get wallScale() {
@@ -14,8 +16,10 @@ class Menu {
     }
 
     set castleFloors(floors) {
-        this._castleFloors = floors;
-        this.notifyCastleParts();
+        if (this._castleFloors != floors) {
+            this._castleFloors = floors;
+            this.notifyCastleParts();
+        }
     }
 
     get castleFloors() {
@@ -23,8 +27,10 @@ class Menu {
     }
 
     set angleGateOpen(angle) {
-        this._angleGateOpen = angle;
-        this.notifyGates();
+        if (this._angleGateOpen != angle) {
+            this._angleGateOpen = angle;
+            this.notifyGates();
+        }
     }
 
     get angleGateOpen() {
@@ -32,8 +38,10 @@ class Menu {
     }
 
     set towers(value) {
-        this._towers = value;
-        this.notifyPerimeters();
+        if (this._towers != value) {
+            this._towers = value;
+            this.notifyPerimeters();
+        }
     }
 
     get towers() {
@@ -58,9 +66,9 @@ class Menu {
         this.gui.add(this, "modo", ["wireframe", "smooth", "edges"]);
 
         var f3 = this.gui.addFolder('Parametros');
-        f3.add(this, 'wallScale', 2, 5).name("Altura Muralla");
+        f3.add(this, 'wallScale', 2, 5).name("Altura Muralla").step(0.5);
         f3.add(this, 'castleFloors', 1, 4).name("Pisos Castillo").step(1);
-        f3.add(this, 'angleGateOpen', 0, Math.PI / 2).name("Apertura Puerta").step(0.01);
+        f3.add(this, 'angleGateOpen', 0, Math.PI / 2).name("Apertura Puerta").step(0.2);
         f3.add(this, 'towers', 4, 8).name("Cantidad de torres").step(1);
         f3.open();
     }
