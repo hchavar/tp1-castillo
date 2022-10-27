@@ -68,7 +68,7 @@ class Menu {
         var f3 = this.gui.addFolder('Parametros');
         f3.add(this, 'wallScale', 2, 5).name("Altura Muralla").step(0.5);
         f3.add(this, 'castleFloors', 1, 4).name("Pisos Castillo").step(1);
-        f3.add(this, 'angleGateOpen', 0, Math.PI / 2).name("Apertura Puerta").step(0.2);
+        f3.add(this, 'angleGateOpen', 0, Math.PI / 2).name("Apertura Puerta").step(0.15);
         f3.add(this, 'towers', 4, 8).name("Cantidad de torres").step(1);
         f3.open();
     }
