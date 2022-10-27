@@ -2,11 +2,18 @@ class PerimeterSection extends Objeto3D {
     constructor(menu) {
         super(null, null, menu);
 
-        this.init();
     }
 
     init() {
+        this.scale = {
+            x: 1.0,
+            y: 1.0,
+            z: 3.0
+        };
+
         let wall = new Wall(20, 20, this.menu);
+        wall.scale = this.scale;
+
         wall.build();
         wall.setRotation([-Math.PI / 2, [0, 1, 0]]);
         wall.updateRotation();

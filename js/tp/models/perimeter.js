@@ -1,6 +1,6 @@
 class Perimeter extends Objeto3D {
     constructor(menu) {
-        super();
+        super(null, null, menu);
 
         this.init();
 
@@ -11,6 +11,13 @@ class Perimeter extends Objeto3D {
         const n = 7;
         const a = 2 * Math.PI / n;
         let angle = this.getAngleFunction(n);
+        
+        let wallScale = {
+            x: 1.0,
+            y: 1.0,
+            z: Math.sqrt(2 * r * r * (1 - Math.cos(a)))
+        };
+
         for (let i = 1; i <= n; i++) {
 
             let x = r * Math.cos(angle(i));
@@ -18,10 +25,11 @@ class Perimeter extends Objeto3D {
 
             if (i > 1) {
                 let section = new PerimeterSection(menu);
+                section.scale = wallScale;
                 section.build();
                 section.setPosition([x, 0, z]);
                 section.updateLocalMatrix();
-                section.setRotation([-a*(i-1), [0,1,0]]);
+                section.setRotation([-a * (i - 1), [0, 1, 0]]);
                 section.updateRotation();
 
                 this.addChild(section);
