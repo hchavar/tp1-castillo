@@ -276,7 +276,8 @@ class Objeto3D {
     }
 
     set color(value) {
-        this._color = value;
+        if (!this._color)
+            this._color = value;
     }
 
     get empty() {
@@ -285,5 +286,14 @@ class Objeto3D {
 
     set empty(value) {
         this._empty = value;
+    }
+
+    get scale() {
+        return this._scale;
+    }
+
+    set scale(value) {
+        if (!this._scale)
+            this._scale = value;
     }
 }

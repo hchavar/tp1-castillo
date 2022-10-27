@@ -17,10 +17,8 @@ class Box extends Objeto3D {
     }
     
     init() {
-        if (!this.scale)
-            this.scale = defaultScale;
-        if (!this.color)
-            this.color = [0.2, 0.6, 0.9];
+        this.scale = defaultScale;
+        this.color = [0.2, 0.6, 0.9];
         this.empty = false;
     }
 
