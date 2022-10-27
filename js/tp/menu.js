@@ -1,7 +1,7 @@
 class Menu {
 
-    distanciaCamara = 9.8;
-    alturaCamara = 3.3;
+    distanciaCamara = 0.2;
+    alturaCamara = 15.2;
     modo = "edges";
 
     set wallScale(newScale) {
@@ -31,18 +31,29 @@ class Menu {
         return this._angleGateOpen;
     }
 
+    set towers(value) {
+        this._towers = value;
+        this.notifyPerimeters();
+    }
+
+    get towers() {
+        return this._towers;
+    }
+
     constructor() {
         this.gui = new dat.GUI();
         this.walls = [];
         this.gates = [];
         this.castleParts = [];
+        this.perimeters = [];
         this._castleFloors = 4;
         this._wallScale = 3.0;
         this._angleGateOpen = 0.0;
+        this._towers = 5;
 
         this.gui.add(this, "distanciaCamara", 0.2, 20).step(0.1);
 
-        this.gui.add(this, "alturaCamara", -1, 8).step(0.1);
+        this.gui.add(this, "alturaCamara", -1, 20).step(0.1);
 
         this.gui.add(this, "modo", ["wireframe", "smooth", "edges"]);
 
@@ -50,6 +61,7 @@ class Menu {
         f3.add(this, 'wallScale', 2, 5).name("Altura Muralla");
         f3.add(this, 'castleFloors', 1, 4).name("Pisos Castillo").step(1);
         f3.add(this, 'angleGateOpen', 0, Math.PI / 2).name("Apertura Puerta").step(0.01);
+        f3.add(this, 'towers', 4, 8).name("Cantidad de torres").step(1);
         f3.open();
     }
 
@@ -80,6 +92,16 @@ class Menu {
     notifyGates() {
         this.gates.forEach(g => {
             g.update();
+        })
+    }
+
+    addPerimeter(p) {
+        this.perimeters.push(p);
+    }
+
+    notifyPerimeters() {
+        this.perimeters.forEach(p => {
+            p.update();
         })
     }
 

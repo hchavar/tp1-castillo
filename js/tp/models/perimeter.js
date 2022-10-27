@@ -1,17 +1,21 @@
 class Perimeter extends Objeto3D {
     constructor(menu) {
         super(null, null, menu);
-
-        this.init();
+        this.menu.addPerimeter(this);
 
     }
 
     init() {
+        this.update();
+
+    }
+
+    update() {
         let r = 8;
-        const n = 7;
+        const n = this.menu.towers;
         const a = 2 * Math.PI / n;
         let angle = this.getAngleFunction(n);
-        
+
         let wallScale = {
             x: 1.0,
             y: 1.0,
@@ -44,7 +48,6 @@ class Perimeter extends Objeto3D {
                 this.addChild(section);
             }
         }
-
     }
 
     getAngleFunction(n) {
