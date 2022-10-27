@@ -4,21 +4,21 @@ class TranslationSurface extends BezierSurface {
         super(rows, cols, menu);
     }
 
-    getPosition(u,v){
+    getPosition(u, v) {
         let pc = this.curve.points[Math.round(u * (this.curve.points.length - 1))];
         let x = pc[0];
         let y = pc[1];
         let z = v;
 
-        return [x, y, z*5];
+        return [x * this.scale.x, y * this.scale.y, z * this.scale.z];
     }
 
-    getNormal(u,v){
+    getNormal(u, v) {
         return this.getPosition(u, v);
     }
 
-    getTextureCoordinates(u,v){
-        return [u,v];
+    getTextureCoordinates(u, v) {
+        return [u, v];
     }
 
 }

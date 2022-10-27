@@ -6,7 +6,6 @@ class PerimeterSection extends Objeto3D {
     }
 
     init() {
-        let r = 8;
         let wall = new Wall(20, 20, this.menu);
         wall.build();
 

@@ -1,3 +1,9 @@
+const wallScale = {
+    x: 1.0,
+    y: 1.0,
+    z: 5.0
+};
+
 class Wall extends TranslationSurface {
 
     constructor(filas, columnas, menu) {
@@ -8,8 +14,9 @@ class Wall extends TranslationSurface {
     init() {
         this.color = [0.3, 0.3, 0.3];
 
-        super.init();
+        this.scale = wallScale;
         this.empty = false;
+        super.init();
     }
 
     updateBezierControlPoints() {
