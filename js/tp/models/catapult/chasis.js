@@ -1,14 +1,14 @@
 const chasisConfig = {
     axles: [
         {
-            position: [-2, 0.5, 0.0]
+            position: [-2, 0.0, 0.0]
         },
         {
-            position: [2, 0.5, 0.0]
+            position: [2, 0.0, 0.0]
         }
     ],
     base: {
-        position: [0.0, 1.8, 0.07],
+        position: [0.0, 1.3, 0.07],
         color: [0.9, 0.5, 0.3],
         scale: {
             x: 6.00,
@@ -51,12 +51,12 @@ class Chasis extends Objeto3D {
         base.build();
         this.addChild(base);
 
-        let armFrame = new Frame(4, 10);
-        armFrame.setPosition(chasisConfig.armFrame.position);
-        armFrame.setScale(chasisConfig.armFrame.scaleFactor);
-        armFrame.updateLocalMatrix();
-        armFrame.build();
-        this.addChild(armFrame);
+        // let armFrame = new Frame(4, 10);
+        // armFrame.setPosition(chasisConfig.armFrame.position);
+        // armFrame.setScale(chasisConfig.armFrame.scaleFactor);
+        // armFrame.updateLocalMatrix();
+        // armFrame.build();
+        // this.addChild(armFrame);
 
     }
 }
