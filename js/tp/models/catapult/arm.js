@@ -6,13 +6,13 @@ const armConfig = {
         reduction: 0.9,
         scale: {
             x: 0.6,
-            y: 6.8,
+            y: 10.0,
             z: 0.4
         }
     },
     hand: {
         color: [0.9, 0.5, 0.3],
-        position: [-5.5, 0.2, 0.0],
+        position: [-7.5, 0.2, 0.0],
         rotation: [Math.PI / 90, [0, 0, 1]],
         scale: {
             x: 1.0,
@@ -21,7 +21,7 @@ const armConfig = {
         }
     },
     counterWeight: {
-        position: [0.0, 0.0, 0.00],
+        position: [0.5, 0.0, 0.00],
         color: [0.9, 0.5, 0.3],
         rotation: [Math.PI / 2, [1, 0, 0]],
         scaleFactor: 3
