@@ -4,6 +4,7 @@ var water, srh, c, d, m, t, f, cr, col, col2, box, gate;
 var castle;
 var entrance;
 var perimeter, ps, pe, platform;
+var sphere;
 
 function createConfiguration(menu){
     
@@ -87,6 +88,11 @@ function createConfiguration(menu){
 
     platform = new Platform();
     platform.build();
+
+    sphere = new Sphere(20, 20);
+    sphere.build();
+    sphere.setPosition([0, 0, 15]);
+    sphere.updateLocalMatrix();
     
 }
 
@@ -134,6 +140,8 @@ function drawConfiguration() {
     // col2.draw();
     // f.draw();
     platform.draw();
+    sphere.draw();
+
 
 
 }
