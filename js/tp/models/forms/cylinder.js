@@ -1,5 +1,5 @@
 class Cylinder extends Objeto3D {
-    
+
     rotateAngle = 0;
 
     constructor(width, height) {
@@ -9,32 +9,33 @@ class Cylinder extends Objeto3D {
     init() {
         this.color = [0.7, 0.6, 0.1];
         this.empty = false;
+        this.scale = {
+            x: 1.0,
+            y: 1.0,
+            z: 1.0
+        }
     }
 
-    getName() {
-        return "Cylinder";
-    }
-    
     getPosition(u, v) {
 
         let x, y, z, r;
-        
+
         r = 1;
-        
+
         //colapso los extremos para formar la tapa
         if (v == 1) {
-            return [0, 1, 0];    
+            return [0, this.scale.y*(1 - 1/this.width), 0];
         } else if (v == 0) {
-            return [0, 0, 0];
+            return [0, this.scale.y/this.width, 0];
         }
 
-        let a = u * 2.0 * Math.PI; 
+        let a = u * 2.0 * Math.PI;
 
         x = r * Math.cos(a);
         y = v;
         z = r * Math.sin(a);
 
-        return [x, y, z];
+        return [x * this.scale.x, y * this.scale.y, z * this.scale.z];
     }
 
     getNormal(u, v) {
@@ -47,9 +48,9 @@ class Cylinder extends Objeto3D {
 
     animate() {
 
-        this.rotateAngle = time*Math.PI/3600;
+        this.rotateAngle = time * Math.PI / 3600;
         this.setRotation([this.rotateAngle, [0, 1, 0]]);
         this.updateRotation();
-    
+
     }
 }

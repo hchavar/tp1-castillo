@@ -1,6 +1,6 @@
 class TrapezoidBox extends Box {
     constructor(width, height) {
-        super(width, height, menu);
+        super(width, height);
     }
 
     getPosition(u, v) {

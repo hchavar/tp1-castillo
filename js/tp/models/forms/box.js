@@ -7,7 +7,7 @@ const defaultCenter = {
 const defaultScale = {
     x: 1.0,
     y: 1.0,
-    z: 1.0    
+    z: 1.0
 }
 
 class Box extends Objeto3D {
