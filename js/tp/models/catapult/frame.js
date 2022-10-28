@@ -8,14 +8,14 @@ const frameConfig = {
     },
     legs: [
         {
-            position: [0, 0.5, -0.5]
+            position: [0, -0.2, -0.5]
         },
         {
-            position: [0, 0.5, 0.5]
+            position: [0, -0.2, 0.5]
         }
     ],
     pivot: {
-        position: [0.0, -1.2, -0.8],
+        position: [0.0, -1.2, 0.0],
         color: [0, 0, 0],
         scale: {
             x: 0.07,

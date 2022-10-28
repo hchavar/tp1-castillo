@@ -26,7 +26,7 @@ const chasisConfig = {
         rotation: [Math.PI/2, [1,0,0]]
     },
     armFrame: {
-        position: [0.9, 0.9, 0.07],
+        position: [0.9, 1.7, 0.07],
         color: [0.9, 0.5, 0.3],
         scaleFactor: 2
     }
