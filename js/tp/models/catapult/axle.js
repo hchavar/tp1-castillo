@@ -44,9 +44,7 @@ class Axle extends Objeto3D {
             wheel.updateLocalMatrix();
     
             wheel.color = axleConfig.color;
-    
-            wheel.reduction = axleConfig.reduction;
-    
+       
             wheel.build();
             this.addChild(wheel);
         }
