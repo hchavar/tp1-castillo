@@ -1,7 +1,7 @@
 class Menu {
 
-    distanciaCamara = 0.2;
-    alturaCamara = 15.2;
+    distanciaCamara = 19.8;
+    alturaCamara = 7.0;
     modo = "edges";
 
     set wallScale(newScale) {

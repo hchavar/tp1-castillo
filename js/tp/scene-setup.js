@@ -6,9 +6,18 @@ var entrance;
 var perimeter, ps, pe, platform;
 var sphere;
 var tb;
+var fr;
+var axle, chasis, cw, arm, fs;
+var vp, catapult;
 
 function createConfiguration(menu){
     
+    vp =  new Plane(25, 25);
+    vp.setRotation([-Math.PI / 2, [0, 0, 1]]);
+    vp.updateLocalMatrix();
+    vp.build();
+    water =  new Plane(25, 25);
+    water.build();
     water = new Plane(25, 25);
     water.color = [0, 0.55, 0.8];
     water.scale = {
@@ -100,6 +109,32 @@ function createConfiguration(menu){
     tb.build();
     tb.setPosition([0, 0, 17]);
     tb.updateLocalMatrix();
+
+    fr = new Frame();
+    fr.build();
+    // fr.setRotation([Math.PI*time, [0, 0, 1]]);
+    // // fr.setPosition([0, 0, 17]);
+    // fr.updateLocalMatrix();
+
+    axle = new Axle();
+    axle.build();
+    chasis = new Chasis();
+    chasis.build();
+    cw = new CounterWeight();
+    cw.setPosition([0, 0.8, 0]);
+    cw.updateLocalMatrix();
+    cw.build();
+
+    arm = new Arm();
+    arm.build();
+    fs = new FiringSystem();
+
+    fs.build();
+
+    catapult = new Catapult();
+    catapult.build();
+    catapult.setPosition([-8, 0, 14]);
+    catapult.updateLocalMatrix();
     
 }
 
@@ -107,6 +142,7 @@ function drawConfiguration() {
 
     
     water.draw();
+    // vp.draw();
     // c.setPosition([4,0,0]);
     // c.updatePosition();
     // c.draw();
@@ -147,7 +183,16 @@ function drawConfiguration() {
     // col2.draw();
     // f.draw();
     platform.draw();
-    sphere.draw();
-    tb.draw();
+    //sphere.draw();
+    //tb.draw();
+    // fr.setRotation([Math.PI*time, [0, 0, 1]]);
+    // fr.updateLocalMatrix();
+    // fr.draw();
+    // axle.draw();
+    // chasis.draw();
+    // cw.draw();
 
+    // arm.draw();
+    // fs.draw();
+    catapult.draw();
 }
