@@ -1,12 +1,4 @@
 const chasisConfig = {
-    color: [0.9, 0.5, 0.3],
-    reduction: 0.7,
-    rotation: [Math.PI/2, [1,0,0]],
-    scale: {
-        x: 1.0,
-        y: 0.1,
-        z: 1.0
-    },
     axles: [
         {
             position: [-2, 0.5, 0.0]
