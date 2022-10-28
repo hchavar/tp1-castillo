@@ -5,6 +5,7 @@ var castle;
 var entrance;
 var perimeter, ps, pe, platform;
 var sphere;
+var tb;
 
 function createConfiguration(menu){
     
@@ -91,8 +92,14 @@ function createConfiguration(menu){
 
     sphere = new Sphere(20, 20);
     sphere.build();
-    sphere.setPosition([0, 0, 15]);
+    sphere.setPosition([0, 0, 12]);
     sphere.updateLocalMatrix();
+
+    tb = new TrapezoidBox(8, 4);
+    tb.reduction = 0.6;
+    tb.build();
+    tb.setPosition([0, 0, 17]);
+    tb.updateLocalMatrix();
     
 }
 
@@ -141,7 +148,6 @@ function drawConfiguration() {
     // f.draw();
     platform.draw();
     sphere.draw();
-
-
+    tb.draw();
 
 }
