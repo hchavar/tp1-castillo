@@ -32,7 +32,21 @@ class Objeto3D {
     }
 
     updateSurface() {
-        this.generateSurface(this.width, this.height);
+        if (this.reuseBuffer) {
+            if (!this.name) {
+                console.error('Cannot reuse unnamed surface: ' + this.constructor.name);
+                return;
+            }
+
+            if (!buffersDict[this.name]) {
+                buffersDict[this.name] = this.generateSurface(this.width, this.height);
+            }
+
+            this.buffers = buffersDict[this.name];
+
+        } else {
+            this.buffers = this.generateSurface(this.width, this.height);
+        }        
     }
 
     init() {
@@ -249,7 +263,7 @@ class Objeto3D {
         indexBuffer.itemSize = 1;
         indexBuffer.numItems = indexes.length;
     
-        this.buffers = {
+        return {
             positionBuffer,
             normalBuffer,
             colorBuffer,
