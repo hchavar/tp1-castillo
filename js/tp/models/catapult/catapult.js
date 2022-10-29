@@ -1,6 +1,6 @@
 const catapultConfig = {
     firingSystem: {
-        position: [2.0, 4.7, 0.0],
+        position: [2.0, 4.0, 0.0],
         scaleFactor: 0.6
     }
 }
@@ -11,8 +11,8 @@ class Catapult extends Objeto3D {
     }
 
     init() {
-        
-        
+
+
         let chasis = new Chasis();
         chasis.build();
         this.addChild(chasis);
