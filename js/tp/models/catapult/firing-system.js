@@ -22,12 +22,6 @@ class FiringSystem extends Objeto3D {
         arm.build();
         this.addChild(arm);
 
-        // let counterWeight = new CounterWeight();
-        // counterWeight.setPosition(firingSystemConfig.counterWeight.position);
-        // counterWeight.updateLocalMatrix();
-        // counterWeight.build();
-        // this.addChild(counterWeight);
-
         let armFrame = new Frame(4, 10);
         armFrame.setPosition(firingSystemConfig.armFrame.position);
         armFrame.setScale(firingSystemConfig.armFrame.scaleFactor);
