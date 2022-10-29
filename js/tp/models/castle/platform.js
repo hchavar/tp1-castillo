@@ -4,13 +4,8 @@ class Platform extends RevolutionSurface {
     }
 
     init() {
-
-    }
-
-    init() {
         this.color = [0.14, 0.55, 0.14];
-
-        super.update();
+        this.name = this.constructor.name;
 
         super.init();
         this.empty = false;

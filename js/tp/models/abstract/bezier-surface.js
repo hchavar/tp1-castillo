@@ -6,7 +6,8 @@ class BezierSurface extends Objeto3D {
 
     init() {
         this.reuseBuffer = true;
-        this.update();
+        this.updateBezierControlPoints();
+        this.updateBezierCurve();
     }
 
     update() {

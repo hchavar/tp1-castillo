@@ -8,8 +8,7 @@ class Tower extends RevolutionSurface {
 
     init() {
         this.color = [0.3, 0.3, 0.3];
-        this.name = "Tower";
-        super.update();
+        this.name = this.constructor.name;
 
         super.init();
         this.empty = false;

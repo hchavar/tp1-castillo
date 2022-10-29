@@ -14,6 +14,8 @@ class Floor extends Box {
         this.empty = false;
         this.color = [0.99, 0.85, 0.35];
         this.scale = floorScale;
+        this.reuseBuffer = true;
+        this.name = this.constructor.name;
 
     }
 }

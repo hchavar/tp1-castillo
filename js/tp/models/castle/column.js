@@ -23,13 +23,15 @@ class Column extends RevolutionSurface {
 
     init() {
         this.name = "Column";
+        this.empty = false;
         this.color = [0.99, 0.85, 0.35];
         this.roof = new ConicalRoof(20, 20);
         this.roof.build();
         this.addChild(this.roof);
-
-        this.update();
-        this.empty = false;
+        
+        this.updateRoofPosition();
+        super.init();
+        this.reuseBuffer = false;
     }
 
     updateBezierControlPoints() {
