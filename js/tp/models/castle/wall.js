@@ -6,14 +6,15 @@ const wallScale = {
 
 class Wall extends TranslationSurface {
 
-    constructor(filas, columnas, menu) {
+    constructor(filas, columnas, menu, sizeFactor) {
         super(filas, columnas, menu);
         this.menu.addWall(this);
+        
+        this.name = "Wall" + sizeFactor;
     }
 
     init() {
         this.color = [0.3, 0.3, 0.3];
-        this.name = "Wall";
         this.scale = wallScale;
         this.empty = false;
         super.init();

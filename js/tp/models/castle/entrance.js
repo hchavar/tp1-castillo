@@ -39,9 +39,10 @@ const entranceConfig = {
 }
 
 class Entrance extends Objeto3D {
-    constructor(menu) {
+    constructor(menu, wallSizeFactor) {
 
         super(null, null, menu);
+        this.wallSizeFactor = wallSizeFactor;
 
     }
 
@@ -67,7 +68,7 @@ class Entrance extends Objeto3D {
             z: (this.scale.z - HEIGHT - 0.5) / 2
         };
 
-        let wall1 = new Wall(20, 20, this.menu);
+        let wall1 = new Wall(20, 20, this.menu, "ent" + this.wallSizeFactor);
         wall1.scale = we;
 
         wall1.build();
@@ -77,7 +78,7 @@ class Entrance extends Objeto3D {
 
         this.addChild(wall1);
 
-        let wall2 = new Wall(20, 20, this.menu);
+        let wall2 = new Wall(20, 20, this.menu, "ent" + this.wallSizeFactor);
         wall2.scale = we;
 
         wall2.build();

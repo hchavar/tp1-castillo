@@ -1,6 +1,7 @@
 class PerimeterEntrance extends Objeto3D {
-    constructor(menu) {
+    constructor(menu, sizeFactor) {
         super(null, null, menu);
+        this.wallSizeFactor = sizeFactor
 
     }
 
@@ -11,7 +12,7 @@ class PerimeterEntrance extends Objeto3D {
             z: 3.0
         };
 
-        let entrance = new Entrance(this.menu);
+        let entrance = new Entrance(this.menu, this.wallSizeFactor);
         entrance.scale = this.scale;
 
         entrance.build();
