@@ -24,9 +24,9 @@ class Cylinder extends Objeto3D {
 
         //colapso los extremos para formar la tapa
         if (v == 1) {
-            return [0, this.scale.y*(1 - 1/this.width), 0];
+            return [0, this.scale.y * (0.5 - 1 / this.width), 0];
         } else if (v == 0) {
-            return [0, this.scale.y/this.width, 0];
+            return [0, this.scale.y * (1 / this.width - 0.5), 0];
         }
 
         let a = u * 2.0 * Math.PI;
@@ -35,7 +35,7 @@ class Cylinder extends Objeto3D {
         y = v;
         z = r * Math.sin(a);
 
-        return [x * this.scale.x, y * this.scale.y, z * this.scale.z];
+        return [x * this.scale.x, (y - 0.5) * this.scale.y, z * this.scale.z];
     }
 
     getNormal(u, v) {
