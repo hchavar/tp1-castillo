@@ -16,11 +16,6 @@ const chasisConfig = {
             z: 2.7
         },
         rotation: [Math.PI/2, [1,0,0]]
-    },
-    armFrame: {
-        position: [0.9, 1.7, 0.07],
-        color: [0.9, 0.5, 0.3],
-        scaleFactor: 2
     }
 }
 
@@ -50,13 +45,6 @@ class Chasis extends Objeto3D {
         base.updateLocalMatrix();
         base.build();
         this.addChild(base);
-
-        // let armFrame = new Frame(4, 10);
-        // armFrame.setPosition(chasisConfig.armFrame.position);
-        // armFrame.setScale(chasisConfig.armFrame.scaleFactor);
-        // armFrame.updateLocalMatrix();
-        // armFrame.build();
-        // this.addChild(armFrame);
 
     }
 }
