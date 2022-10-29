@@ -1,14 +1,14 @@
 const chasisConfig = {
     axles: [
         {
-            position: [-2, 0.0, 0.0]
+            position: [-2, 1.0, 0.0]
         },
         {
-            position: [2, 0.0, 0.0]
+            position: [2, 1.0, 0.0]
         }
     ],
     base: {
-        position: [0.0, 1.3, 0.07],
+        position: [0.0, 1.0, 0.0],
         color: [0.9, 0.5, 0.3],
         scale: {
             x: 6.00,
