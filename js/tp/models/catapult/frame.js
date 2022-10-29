@@ -15,7 +15,6 @@ const frameConfig = {
         }
     ],
     pivot: {
-        position: [0.0, -1.2, 0.0],
         color: [0, 0, 0],
         scale: {
             x: 0.07,
@@ -52,7 +51,6 @@ class Frame extends Objeto3D {
         let pivot = new Cylinder(4, 10);
         pivot.scale = frameConfig.pivot.scale;
         pivot.color = frameConfig.pivot.color;
-        pivot.setPosition(frameConfig.pivot.position);
         pivot.setRotation(frameConfig.pivot.rotation);
         pivot.updateLocalMatrix();
         pivot.build();
