@@ -18,5 +18,6 @@ class Wheel extends Cylinder {
         this.scale = wheelConfig.scale;
         this.color = wheelConfig.color;
         this.name = "Wheel";
+        this.reuseBuffer = true;
     }
 }

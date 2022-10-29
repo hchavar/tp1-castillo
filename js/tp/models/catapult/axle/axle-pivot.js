@@ -18,5 +18,6 @@ class AxlePivot extends Cylinder {
         this.scale = axlePivotConfig.scale;
         this.color = axlePivotConfig.color;
         this.name = "AxlePivot";
+        this.reuseBuffer = true;
     }
 }
