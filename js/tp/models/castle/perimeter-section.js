@@ -1,7 +1,6 @@
 class PerimeterSection extends Objeto3D {
-    constructor(menu, sizeFactor) {
+    constructor(menu) {
         super(null, null, menu);
-        this.wallSizeFactor = sizeFactor;
 
     }
 
@@ -12,7 +11,7 @@ class PerimeterSection extends Objeto3D {
             z: 3.0
         };
 
-        let wall = new Wall(20, 20, this.menu, this.wallSizeFactor);
+        let wall = new Wall(20, 20, this.menu);
         wall.scale = this.scale;
 
         wall.build();
