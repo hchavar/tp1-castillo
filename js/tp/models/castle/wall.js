@@ -13,7 +13,7 @@ class Wall extends TranslationSurface {
 
     init() {
         this.color = [0.3, 0.3, 0.3];
-
+        this.name = "Wall";
         this.scale = wallScale;
         this.empty = false;
         super.init();

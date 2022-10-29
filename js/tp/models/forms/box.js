@@ -1,7 +1,7 @@
 const defaultCenter = {
     x: 0.5,
     y: 0.5,
-    z: 0.5    
+    z: 0.5
 }
 
 const defaultScale = {
@@ -15,15 +15,11 @@ class Box extends Objeto3D {
     constructor(width, height, menu) {
         super(width, height, menu);
     }
-    
+
     init() {
         this.scale = defaultScale;
         this.color = [0.2, 0.6, 0.9];
         this.empty = false;
-    }
-
-    getName() {
-        return "Box";
     }
 
     getPosition(u, v) {

@@ -2,6 +2,8 @@ var MAX_CURVE_POINTS = 20;
 const defaultPosition = vec3.create();
 const defaultRotation = [0, vec3.create()];
 
+const buffersDict = {};
+
 class Objeto3D {
     buffers = null;
     pos = defaultPosition;
@@ -15,6 +17,7 @@ class Objeto3D {
         this.height = height;
         this.menu = menu;
         this.empty = true;
+        this.reuseBuffer = false;
     }
 
     build() {
@@ -30,10 +33,6 @@ class Objeto3D {
 
     updateSurface() {
         this.generateSurface(this.width, this.height);
-    }
-
-    getName() {
-        return "Objeto3D";
     }
 
     init() {
@@ -295,5 +294,21 @@ class Objeto3D {
     set scale(value) {
         if (!this._scale)
             this._scale = value;
+    }
+
+    get reuseBuffer() {
+        return this._reuseBuffer;
+    }
+
+    set reuseBuffer(value) {
+        this._reuseBuffer = value;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    set name(value) {
+        this._name = value;
     }
 }

@@ -22,6 +22,7 @@ class Column extends RevolutionSurface {
     }
 
     init() {
+        this.name = "Column";
         this.color = [0.99, 0.85, 0.35];
         this.roof = new ConicalRoof(20, 20);
         this.roof.build();

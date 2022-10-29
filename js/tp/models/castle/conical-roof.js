@@ -7,7 +7,7 @@ class ConicalRoof extends RevolutionSurface {
 
     init() {
         this.color = [0.3, 0.3, 0.9];
-
+        this.name = "ConicalRoof";
         super.init();
         this.empty = false;
     }
