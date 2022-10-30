@@ -18,5 +18,6 @@ class FrontWall extends AbstractWall {
         this.scale = wallScale;
         this.empty = false;
         super.init();
+        this.reuseBuffer = false;
     }
 }

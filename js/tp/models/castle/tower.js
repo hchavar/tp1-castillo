@@ -10,8 +10,9 @@ class Tower extends RevolutionSurface {
         this.color = [0.3, 0.3, 0.3];
         this.name = this.constructor.name;
 
-        super.init();
         this.empty = false;
+        super.init();
+        this.reuseBuffer = false;
     }
 
     updateBezierControlPoints() {

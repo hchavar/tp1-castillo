@@ -17,7 +17,6 @@ class Perimeter extends Objeto3D {
         
         this.children = this.children.filter(c => !((c instanceof PerimeterSection) || (c instanceof PerimeterEntrance)));
         
-        buffersDict["Wall"] = null;
         let r = PERIMETER_RADIUS;
         const n = this.menu.towers;
         const a = 2 * Math.PI / n;
