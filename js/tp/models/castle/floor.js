@@ -16,7 +16,7 @@ class Floor extends Objeto3D {
 
         floor.color = [0.99, 0.85, 0.35];
         floor.scale = floorScale;
-        floor.name = "Floor";
+        floor.name = "SingleFloor";
         floor.reuseBuffer = true;
         floor.build();
 

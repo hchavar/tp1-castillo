@@ -77,7 +77,7 @@ class Castle extends Objeto3D {
     update() {
         for (const floor of this.floors) {
             // hide upper floors
-            floor.empty = (floor.number > this.menu.castleFloors);
+            floor.visible = (floor.number <= this.menu.castleFloors);
         }
     }
 }

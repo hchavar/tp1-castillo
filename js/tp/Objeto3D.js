@@ -18,6 +18,7 @@ class Objeto3D {
         this.menu = menu;
         this.empty = true;
         this.reuseBuffer = false;
+        this.visible = true;
     }
 
     build() {
@@ -62,6 +63,8 @@ class Objeto3D {
     }
 
     draw(_transform = mat4.create()) {
+        if (!this.visible) return;
+        
         // el objeto raiz recibe la matriz cero
         // pero los hijos not deben modificar la matriz que reciben por eso se clona
         let transform = mat4.clone(_transform);
@@ -328,5 +331,13 @@ class Objeto3D {
 
     set name(value) {
         this._name = value;
+    }
+
+    get visible() {
+        return this._visible;
+    }
+
+    set visible(value) {
+        this._visible = value;
     }
 }
