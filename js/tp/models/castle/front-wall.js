@@ -13,7 +13,6 @@ class FrontWall extends AbstractWall {
     }
 
     init() {
-        this.updateName();
         
         this.scale = wallScale;
         this.empty = false;

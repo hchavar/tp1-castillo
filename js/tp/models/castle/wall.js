@@ -9,11 +9,9 @@ class Wall extends AbstractWall {
     constructor(filas, menu) {
         super(filas, menu);
 
-        this.updateName();
     }
 
     init() {
-        this.updateName();
 
         this.scale = wallScale;
         this.empty = false;

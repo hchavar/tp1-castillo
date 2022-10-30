@@ -6,13 +6,17 @@ class Tower extends RevolutionSurface {
 
     }
 
+    update() {
+        this.updateName();
+        super.update();
+    }
+    
     init() {
-        this.color = [0.3, 0.3, 0.3];
-        this.name = this.constructor.name;
+        this.updateName();
+        this.color = wallColor;
 
         this.empty = false;
         super.init();
-        this.reuseBuffer = false;
     }
 
     updateBezierControlPoints() {
@@ -32,5 +36,9 @@ class Tower extends RevolutionSurface {
             [[ir, b + ch, 0.00], [ir, b + ch / 2, 0.00], [ir, b + ch / 2, 0.00], [ir, b + ch / 2, 0.00]],
             [[ir, b + ch / 2, 0.00], [-0.20, b + ch / 2, 0.00], [-0.10, b + ch / 2, 0.00], [0.00, b + ch / 2, 0.00]]
         ];
+    }
+
+    updateName() {
+        this.name = this.constructor.name + '_' + this.menu.wallScale;
     }
 }

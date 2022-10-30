@@ -1,4 +1,5 @@
 const WALL_GRID_ROWS = 24;
+const wallColor = [0.3, 0.3, 0.3];
 
 class AbstractWall extends TranslationSurface {
 
@@ -12,9 +13,10 @@ class AbstractWall extends TranslationSurface {
         this.updateName();
         super.update();
     }
-
+    
     init() {
-        this.color = [0.3, 0.3, 0.3];
+        this.updateName();
+        this.color = wallColor;
         super.init();
     }
 
