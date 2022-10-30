@@ -34,7 +34,7 @@ function createConfiguration(menu){
     // //m.setRotation([-Math.PI / 2, [0, 1, 0]]);
     // m.setPosition([0,0,-6]);
     // m.updateLocalMatrix();
-    t = new Tower(30, 30, menu);
+    t = new Tower(30, menu);
     t.build();
     t.setPosition([6,0,0]);
     t.updateLocalMatrix();

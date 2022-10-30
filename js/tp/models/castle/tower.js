@@ -1,7 +1,7 @@
 class Tower extends RevolutionSurface {
-    constructor(rows, cols, menu) {
+    constructor(rows, menu) {
 
-        super(rows, cols, menu);
+        super(rows, WALL_GRID_ROWS, menu);
         this.menu.addWall(this);
 
     }

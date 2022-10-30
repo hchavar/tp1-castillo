@@ -6,15 +6,15 @@ const wallScale = {
 
 class Wall extends AbstractWall {
 
-    constructor(filas, columnas, menu) {
-        super(filas, columnas, menu);
-        
+    constructor(filas, menu) {
+        super(filas, menu);
+
         this.updateName();
     }
-    
+
     init() {
         this.updateName();
-        
+
         this.scale = wallScale;
         this.empty = false;
         super.init();

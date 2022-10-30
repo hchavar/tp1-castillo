@@ -11,7 +11,7 @@ class PerimeterSection extends Objeto3D {
             z: 3.0
         };
 
-        let wall = new Wall(20, 20, this.menu);
+        let wall = new Wall(20, this.menu);
         wall.scale = this.scale;
 
         wall.build();
@@ -20,7 +20,7 @@ class PerimeterSection extends Objeto3D {
 
         this.addChild(wall);
 
-        let tower = new Tower(20, 20, this.menu);
+        let tower = new Tower(20, this.menu);
         tower.build();
 
         this.addChild(tower);

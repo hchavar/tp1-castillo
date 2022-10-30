@@ -14,11 +14,11 @@ class Perimeter extends Objeto3D {
     }
 
     update() {
-        
+
         this.children = this.children.filter(c => !((c instanceof PerimeterSection) || (c instanceof PerimeterEntrance)));
 
         this.menu.walls = [];
-        
+
         let r = PERIMETER_RADIUS;
         const n = this.menu.towers;
         const a = 2 * Math.PI / n;
@@ -41,7 +41,7 @@ class Perimeter extends Objeto3D {
             } else {
                 section = new PerimeterEntrance(menu, n);
             }
-            
+
             section.scale = wallScale;
             section.build();
             section.setPosition([x, 0, z]);

@@ -8,7 +8,7 @@ class FrontWall extends AbstractWall {
 
     constructor(menu) {
         //TODO actualizar las columnas para que la textura quede bien
-        super(20, 20, menu);
+        super(10, menu);
         
     }
 

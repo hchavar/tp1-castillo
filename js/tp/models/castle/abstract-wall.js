@@ -1,16 +1,18 @@
+const WALL_GRID_ROWS = 24;
+
 class AbstractWall extends TranslationSurface {
 
-    constructor(filas, columnas, menu) {
-        super(filas, columnas, menu);
+    constructor(columns, menu) {
+        super(columns, WALL_GRID_ROWS, menu);
         this.menu.addWall(this);
-        
+
     }
 
     update() {
         this.updateName();
         super.update();
     }
-    
+
     init() {
         this.color = [0.3, 0.3, 0.3];
         super.init();
