@@ -4,6 +4,15 @@ class Casement extends Objeto3D {
         super(4, 32, menu);
     }
 
+    static create() {
+        let casement = new Casement();
+        casement.build();
+
+        casement.setRotation([Math.PI / 2, [0, 0, 1]]);
+
+        return casement;
+    }
+
     init() {
         this.scale = {
             x: 0.4,
