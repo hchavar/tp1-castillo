@@ -17,6 +17,7 @@ class Tower extends RevolutionSurface {
 
         this.empty = false;
         super.init();
+        this.reuseBuffer = true;
     }
 
     updateBezierControlPoints() {

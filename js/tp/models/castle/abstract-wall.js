@@ -17,6 +17,7 @@ class AbstractWall extends TranslationSurface {
     init() {
         this.updateName();
         this.color = wallColor;
+        this.reuseBuffer = true;
         super.init();
     }
 
