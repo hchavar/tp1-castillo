@@ -1,7 +1,7 @@
 class Casement extends Objeto3D {
 
     constructor(menu) {
-        super(20, 20, menu);
+        super(4, 32, menu);
     }
 
     init() {
@@ -12,6 +12,8 @@ class Casement extends Objeto3D {
         };
         this.color = [0.2, 0.1, 0.01];
         this.empty = false;
+        this.reuseBuffer = true;
+        this.name = this.constructor.name;
     }
     
     getPosition(u, v) {
