@@ -26,6 +26,7 @@ class Floor extends Objeto3D {
         for (let i = - m; i <= m; i++) {
             this.addChild(this.newFrontCasement(i));
             this.addChild(this.newBackCasement(i));
+            this.addChild(this.newDepthCasement(i));
         }
 
 
@@ -52,6 +53,16 @@ class Floor extends Objeto3D {
         casement.setRotation([Math.PI / 2, [0, 0, 1]]);
         casement.updateRotation();
         casement.setRotation([Math.PI / 2, [1, 0, 0]]);
+        return casement;
+    }
+
+    newDepthCasement(pos) {
+        let casement = new Casement();
+        casement.build();
+
+        casement.setRotation([Math.PI / 2, [0, 0, 1]]);
+        casement.setPosition([0, -floorScale.x / 2, pos]);
+        casement.updateLocalMatrix();
         return casement;
     }
 }
