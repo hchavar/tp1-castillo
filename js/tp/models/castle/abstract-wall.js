@@ -5,6 +5,11 @@ class AbstractWall extends TranslationSurface {
         this.menu.addWall(this);
         
     }
+
+    update() {
+        this.updateName();
+        super.update();
+    }
     
     init() {
         this.color = [0.3, 0.3, 0.3];
