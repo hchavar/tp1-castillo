@@ -1,22 +1,36 @@
 const floorScale = {
-    x: 5.0, // only odd numbers >= 3
-    y: 1.0,
-    z: 5.0
+    x: 5, // only odd numbers >= 3
+    y: 1,
+    z: 5
 };
 
 class Floor extends Objeto3D {
     constructor(menu) {
         super(null, null, menu);
         this.number = -1;
+        this.configs = {};
+    }
+
+    update() {
+        if(this.configs[this.configName]) {
+            this.children = this.configs[this.configName];
+        } else {
+            this.children = [];
+            this.create(this.configName);
+        }
     }
 
     init() {
+        this.create(this.configName);
+    }
+
+    create(config) {
 
         let floor = new Box(4 * floorScale.y, 8 * floorScale.x, this.menu)
 
         floor.color = [0.99, 0.85, 0.35];
         floor.scale = floorScale;
-        floor.name = "SingleFloor";
+        floor.name = "Floor_" + config;
         floor.reuseBuffer = true;
         floor.build();
 
@@ -34,7 +48,7 @@ class Floor extends Objeto3D {
             this.addChild(this.newRightCasement(i));
         }
 
-
+        this.configs[config] = this.children;
     }
 
     newFrontCasement(pos) {
@@ -73,5 +87,9 @@ class Floor extends Objeto3D {
         casement.setPosition([0, floorScale.x / 2, pos]);
         casement.updateLocalMatrix();
         return casement;
+    }
+
+    get configName() {
+        return floorScale.x + "x" + floorScale.y;
     }
 }
