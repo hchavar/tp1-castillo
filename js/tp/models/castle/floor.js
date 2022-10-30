@@ -24,24 +24,34 @@ class Floor extends Objeto3D {
 
         let m = (floorScale.x - 3) / 2;
         for (let i = - m; i <= m; i++) {
-            let casement = this.newCasement(i);
-            this.addChild(casement);
+            this.addChild(this.newFrontCasement(i));
+            this.addChild(this.newBackCasement(i));
         }
 
 
     }
 
-    newCasement(pos) {
+    newFrontCasement(pos) {
+        let casement = this.newHorizontalCasement();
+        casement.setPosition([0, floorScale.z / 2, pos]);
+        casement.updateLocalMatrix();
+        return casement;
+    }
+
+    newBackCasement(pos) {
+        let casement = this.newHorizontalCasement();
+        casement.setPosition([0, -floorScale.z / 2, pos]);
+        casement.updateLocalMatrix();
+        return casement;
+    }
+
+    newHorizontalCasement() {
         let casement = new Casement();
-        // casement.reuseBuffer = true;
         casement.build();
-        let scaleFactor = 0.4;
-        casement.setScale(scaleFactor);
+
         casement.setRotation([Math.PI / 2, [0, 0, 1]]);
         casement.updateRotation();
         casement.setRotation([Math.PI / 2, [1, 0, 0]]);
-        casement.setPosition([0, floorScale.z / (2 * scaleFactor), pos/scaleFactor]);
-        casement.updateLocalMatrix();
         return casement;
     }
 }

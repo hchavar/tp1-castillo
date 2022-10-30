@@ -6,9 +6,9 @@ class Casement extends Objeto3D {
 
     init() {
         this.scale = {
-            x: 1.0,
-            y: 0.1,
-            z: 1.0
+            x: 0.4,
+            y: 0.04,
+            z: 0.4
         };
         this.color = [0.2, 0.1, 0.01];
         this.empty = false;
