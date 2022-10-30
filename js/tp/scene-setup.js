@@ -17,8 +17,6 @@ function createConfiguration(menu){
     vp.updateLocalMatrix();
     vp.build();
     water =  new Plane(25, 25);
-    water.build();
-    water = new Plane(25, 25);
     water.color = [0, 0.55, 0.8];
     water.scale = {
         x: 2.0,
@@ -31,11 +29,11 @@ function createConfiguration(menu){
     // srh = new RevolutionSurface(20,20);
     // c = new Cylinder(10, 10);
     // d = new Demo(128, 256);
-    m = new Wall(20, 40, menu);
-    m.build();
-    //m.setRotation([-Math.PI / 2, [0, 1, 0]]);
-    m.setPosition([0,0,-6]);
-    m.updateLocalMatrix();
+    // m = new Wall(20, 40, menu);
+    // m.build();
+    // //m.setRotation([-Math.PI / 2, [0, 1, 0]]);
+    // m.setPosition([0,0,-6]);
+    // m.updateLocalMatrix();
     t = new Tower(30, 30, menu);
     t.build();
     t.setPosition([6,0,0]);
@@ -57,15 +55,15 @@ function createConfiguration(menu){
     // gate.setPosition([0, 1, 5.5]);
     // gate.updateLocalMatrix();
     castle = new Castle(menu);
-    entrance = new Entrance(menu);
-    entrance.scale = {
-        x: 1.0,
-        y: 1.0,
-        z: 11.0
-    };
-    entrance.build();
-    //entrance.setPosition([0, 0, 5.5]);
-    entrance.updateLocalMatrix();
+    // entrance = new Entrance(menu);
+    // entrance.scale = {
+    //     x: 1.0,
+    //     y: 1.0,
+    //     z: 11.0
+    // };
+    // entrance.build();
+    // //entrance.setPosition([0, 0, 5.5]);
+    // entrance.updateLocalMatrix();
 
     castle.setPosition([-2.50, 0, -2.50]);
     castle.updatePosition();
@@ -81,18 +79,18 @@ function createConfiguration(menu){
     perimeter = new Perimeter(menu);
     perimeter.build();
 
-    ps = new PerimeterSection(menu);
-    ps.build();
-    ps.setPosition([0,0,-3]);
-    ps.updateLocalMatrix();
+    // ps = new PerimeterSection(menu);
+    // ps.build();
+    // ps.setPosition([0,0,-3]);
+    // ps.updateLocalMatrix();
 
-    pe = new PerimeterEntrance(menu);
-    pe.scale = {
-        x: 1.0,
-        y: 1.0,
-        z: 11.0
-    };
-    pe.build();
+    // pe = new PerimeterEntrance(menu);
+    // pe.scale = {
+    //     x: 1.0,
+    //     y: 1.0,
+    //     z: 11.0
+    // };
+    // pe.build();
     // pe.setPosition([0,0,-3]);
     // pe.updateLocalMatrix();
 
