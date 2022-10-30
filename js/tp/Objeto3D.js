@@ -31,6 +31,10 @@ class Objeto3D {
         this.children.push(child);
     }
 
+    reuseExistingSurface() {
+        return this.reuseBuffer && this.name && buffersDict[this.name];
+    }
+
     updateSurface() {
         if (this.reuseBuffer) {
             if (!this.name) {

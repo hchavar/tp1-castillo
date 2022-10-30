@@ -18,11 +18,12 @@ class Column extends RevolutionSurface {
 
     update() {
         this.updateRoofPosition();
+        this.updateName();
         super.update();
     }
 
     init() {
-        this.name = this.constructor.name + this.menu.castleFloors;
+        this.updateName();
         this.empty = false;
         this.color = [0.99, 0.85, 0.35];
         this.roof = new ConicalRoof(20, 20);
@@ -31,6 +32,10 @@ class Column extends RevolutionSurface {
         
         this.updateRoofPosition();
         super.init();
+    }
+
+    updateName() {
+        this.name = this.constructor.name + this.menu.castleFloors;
     }
 
     updateBezierControlPoints() {
@@ -57,6 +62,5 @@ class Column extends RevolutionSurface {
             [[x0, b + ch, z0], [x0, b + ch + sh / 3, z0], [x0, b + ch + 2 * sh / 3, z0], [x0, b + ch + sh, z0]]
         ];
 
-        this.name = this.constructor.name + this.menu.castleFloors;
     }
 }
