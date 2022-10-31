@@ -12,8 +12,7 @@ const armConfig = {
     },
     hand: {
         color: [0.9, 0.5, 0.3],
-        position: [-7.5, 0.2, 0.0],
-        rotation: [Math.PI / 90, [0, 0, 1]],
+        position: [-7.5, 0.162, 0.0],
         scale: {
             x: 1.0,
             y: 0.1,
@@ -37,10 +36,13 @@ class Arm extends Objeto3D {
         let hand = new Box(4, 8);
         hand.scale = armConfig.hand.scale;
         hand.color = armConfig.hand.color;
+        
+        let m1 = mat4.create();
+        mat4.rotate( m1, m1, Math.PI / 180, [0, 0, 1] );
         hand.setPosition(armConfig.hand.position);
         hand.updateLocalMatrix();
-        // hand.setRotation(armConfig.hand.rotation);
-        // hand.updateLocalMatrix();
+        mat4.multiply(hand.localMatrix, hand.localMatrix, m1);
+        
         hand.build();
         this.addChild(hand);
 

@@ -8,7 +8,7 @@ var sphere;
 var tb;
 var fr;
 var axle, chasis, cw, arm, fs;
-var vp, catapult;
+var vp, vp2, catapult;
 
 function createConfiguration(menu){
     
@@ -16,6 +16,10 @@ function createConfiguration(menu){
     vp.setRotation([-Math.PI / 2, [0, 0, 1]]);
     vp.updateLocalMatrix();
     vp.build();
+    // vp2 =  new Plane(25, 25);
+    // vp2.setRotation([-Math.PI / 2, [0, 0, 1]]);
+    // vp2.updateLocalMatrix();
+    // vp2.build();
     water =  new Plane(25, 25);
     water.color = [0, 0.55, 0.8];
     water.scale = {
