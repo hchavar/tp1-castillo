@@ -129,7 +129,7 @@ function createConfiguration(menu){
 
     fs.build();
 
-    catapult = new Catapult();
+    catapult = new Catapult(menu);
     catapult.build();
     catapult.setPosition([-8, 0, 14]);
     catapult.updateLocalMatrix();

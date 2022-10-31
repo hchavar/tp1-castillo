@@ -70,6 +70,17 @@ class Menu {
         return this._castleHeight + 1;
     }
 
+    set catapultRotation(value) {
+        if (this._catapultRotation != value) {
+            this._catapultRotation = value;
+            this.notifyCatapults();
+        }
+    }
+
+    get catapultRotation() {
+        return this._catapultRotation;
+    }
+
     constructor() {
         this.gui = new dat.GUI();
         this.walls = [];
@@ -77,12 +88,14 @@ class Menu {
         this.castleParts = [];
         this.perimeters = [];
         this.floors = [];
+        this.catapults = [];
         this._castleFloors = 4;
         this._wallScale = 3.0;
         this._angleGateOpen = 0.0;
         this._towers = 5;
         this._castleWidth = 4;
         this._castleHeight = 4;
+        this._catapultRotation = 0;
 
         var f1 = this.gui.addFolder('Camara');
         f1.add(this, "distanciaCamara", 0.2, 20).name("Distancia").step(0.1);
@@ -90,6 +103,9 @@ class Menu {
         f1.add(this, "alturaCamara", -1, 20).name("Altura").step(0.1);
 
         f1.add(this, "modo", ["wireframe", "smooth", "edges"]);
+
+        var f2 = this.gui.addFolder('Catapulta');
+        f2.add(this, 'catapultRotation', 0, 360).name("Rotacion").step(2);
 
         var f3 = this.gui.addFolder('Perimetro');
         f3.add(this, 'wallScale', 2, 5).name("Altura Muralla").step(0.5);
@@ -102,6 +118,8 @@ class Menu {
         f4.add(this, 'castleWidth', 2, 10).name("Ancho").step(2);
         f4.add(this, 'castleHeight', 2, 10).name("Profundidad").step(2);
         f4.open();
+
+
     }
 
     addWall(wall) {
@@ -151,6 +169,16 @@ class Menu {
     notifyFloors() {
         this.floors.forEach(f => {
             f.update();
+        })
+    }
+
+    addCatapult(catapult) {
+        this.catapults.push(catapult);
+    }
+
+    notifyCatapults() {
+        this.catapults.forEach(w => {
+            w.update();
         })
     }
 
