@@ -28,17 +28,17 @@ const castleConfig = {
         }
     ],
     columns: [
-        {
-            position: [0, 0, 0]
+        (m) => {
+            return [-m.castleWidth/2 + center.x, 0, -m.castleHeight/2 + center.z];
         },
-        {
-            position: [floorScale.x, 0, 0]
+        (m) => {
+            return [m.castleWidth/2 + center.x, 0, -m.castleHeight/2 + center.z];
         },
-        {
-            position: [floorScale.x, 0, floorScale.z]
+        (m) => {
+            return [m.castleWidth/2 + center.x, 0, m.castleHeight/2 + center.z];
         },
-        {
-            position: [0, 0, floorScale.z]
+        (m) => {
+            return [-m.castleWidth/2 + center.x, 0, m.castleHeight/2 + center.z];
         },
     ]
 }
@@ -47,6 +47,7 @@ class Castle extends Objeto3D {
     constructor(menu) {
         super(null, null, menu);
         this.menu.addCastlePart(this);
+        this.menu.addFloor(this);
 
         this.columns = [];
         this.floors = [];
@@ -66,7 +67,10 @@ class Castle extends Objeto3D {
         for (const columnConfig of castleConfig.columns) {
             let column = new Column(30, 30, menu);
             column.build();
-            column.setPosition(columnConfig.position);
+            column.getUpdatedPos = columnConfig;
+            let pos = column.getUpdatedPos(this.menu);
+            column.renewLocalMatrix();
+            column.setPosition(pos);
             column.updateLocalMatrix();
             this.addChild(column);
 
@@ -78,6 +82,15 @@ class Castle extends Objeto3D {
         for (const floor of this.floors) {
             // hide upper floors
             floor.visible = (floor.number <= this.menu.castleFloors);
+            floor.update();
+        }
+
+        for (const col of this.columns) {
+            let pos = col.getUpdatedPos(this.menu);
+            col.renewLocalMatrix();
+            col.setPosition(pos);
+            col.updateLocalMatrix();
         }
     }
+
 }

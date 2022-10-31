@@ -1,17 +1,24 @@
-const floorScale = {
-    x: 5, // only odd numbers >= 3
-    y: 1,
-    z: 5
-};
-
 class Floor extends Objeto3D {
     constructor(menu) {
         super(null, null, menu);
         this.number = -1;
         this.configs = {};
+        // this.menu.addFloor(this);
+        this.scale = {
+            x: this.menu.castleWidth,
+            y: 1,
+            z: this.menu.castleHeight
+        };
     }
 
     update() {
+        this._scale = null;
+        this.scale = {
+            x: this.menu.castleWidth,
+            y: 1,
+            z: this.menu.castleHeight
+        };
+
         if(this.configs[this.configName]) {
             this.children = this.configs[this.configName];
         } else {
@@ -26,23 +33,23 @@ class Floor extends Objeto3D {
 
     create(config) {
 
-        let floor = new Box(4 * floorScale.y, 8 * floorScale.x, this.menu)
+        let floor = new Box(4 * this.scale.y, 8 * this.scale.x, this.menu)
 
         floor.color = [0.99, 0.85, 0.35];
-        floor.scale = floorScale;
+        floor.scale = this.scale;
         floor.name = "Floor_" + config;
         floor.reuseBuffer = true;
         floor.build();
 
         this.addChild(floor);
 
-        let m = (floorScale.x - 3) / 2;
+        let m = (this.scale.x - 3) / 2;
         for (let i = - m; i <= m; i++) {
             this.addChild(this.newFrontCasement(i));
             this.addChild(this.newBackCasement(i));
         }
 
-        m = (floorScale.z - 3) / 2;
+        m = (this.scale.z - 3) / 2;
         for (let i = - m; i <= m; i++) {
             this.addChild(this.newLeftCasement(i));
             this.addChild(this.newRightCasement(i));
@@ -53,14 +60,14 @@ class Floor extends Objeto3D {
 
     newFrontCasement(pos) {
         let casement = this.newHorizontalCasement();
-        casement.setPosition([0, floorScale.z / 2, pos]);
+        casement.setPosition([0, this.scale.z / 2, pos]);
         casement.updateLocalMatrix();
         return casement;
     }
 
     newBackCasement(pos) {
         let casement = this.newHorizontalCasement();
-        casement.setPosition([0, -floorScale.z / 2, pos]);
+        casement.setPosition([0, -this.scale.z / 2, pos]);
         casement.updateLocalMatrix();
         return casement;
     }
@@ -76,7 +83,7 @@ class Floor extends Objeto3D {
     newLeftCasement(pos) {
         let casement = Casement.create();
 
-        casement.setPosition([0, -floorScale.x / 2, pos]);
+        casement.setPosition([0, -this.scale.x / 2, pos]);
         casement.updateLocalMatrix();
         return casement;
     }
@@ -84,12 +91,12 @@ class Floor extends Objeto3D {
     newRightCasement(pos) {
         let casement = Casement.create();
 
-        casement.setPosition([0, floorScale.x / 2, pos]);
+        casement.setPosition([0, this.scale.x / 2, pos]);
         casement.updateLocalMatrix();
         return casement;
     }
 
     get configName() {
-        return floorScale.x + "x" + floorScale.y;
+        return this.scale.x + "x" + this.scale.z;
     }
 }
