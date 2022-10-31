@@ -144,6 +144,10 @@ function drawConfiguration() {
 
     
     water.draw();
+    castle.draw();
+    perimeter.draw();
+    platform.draw();
+    catapult.draw();
     // vp.draw();
     // c.setPosition([4,0,0]);
     // c.updatePosition();
@@ -176,15 +180,12 @@ function drawConfiguration() {
     // gate.draw();
     // entrance.draw();
 
-    castle.draw();
 
-    perimeter.draw();
     // ps.draw();
     // pe.draw();
 
     // col2.draw();
     // f.draw();
-    platform.draw();
     //sphere.draw();
     //tb.draw();
     // fr.setRotation([Math.PI*time, [0, 0, 1]]);
@@ -196,5 +197,4 @@ function drawConfiguration() {
 
     // arm.draw();
     // fs.draw();
-    catapult.draw();
 }
