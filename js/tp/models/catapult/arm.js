@@ -19,6 +19,12 @@ const armConfig = {
             z: 1.0
         }
     },
+    load: {
+        color: [0.5, 0.5, 0.5],
+        position: [-7.5/0.8, 1.2, 0.0],
+        scaleFactor: 0.8
+        
+    },
     counterWeight: {
         position: [0.5, 0.0, 0.00],
         color: [0.9, 0.5, 0.3],
@@ -45,6 +51,14 @@ class Arm extends Objeto3D {
         
         hand.build();
         this.addChild(hand);
+
+        let load = new Sphere(10, 10);
+        load.color = armConfig.load.color;
+        load.setScale(armConfig.load.scaleFactor);
+        load.setPosition(armConfig.load.position);
+        load.updateLocalMatrix();
+        load.build();
+        this.addChild(load);
 
         let arm = new TrapezoidBox(4, 8);
         arm.scale = armConfig.arm.scale;
