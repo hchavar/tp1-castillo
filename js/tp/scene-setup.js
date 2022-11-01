@@ -127,9 +127,13 @@ function createConfiguration(menu){
     cw.updateLocalMatrix();
     cw.build();
 
-    arm = new Arm();
+    arm = new Arm(menu);
     arm.build();
-    fs = new FiringSystem();
+
+    // arm.setPosition([7.5, -0.2, 0]);
+    arm.updateLocalMatrix();
+
+    fs = new FiringSystem(menu);
 
     fs.build();
 
@@ -148,6 +152,7 @@ function drawConfiguration() {
     perimeter.draw();
     platform.draw();
     catapult.draw();
+    catapult.animate();
     // vp.draw();
     // c.setPosition([4,0,0]);
     // c.updatePosition();
@@ -194,7 +199,7 @@ function drawConfiguration() {
     // axle.draw();
     // chasis.draw();
     // cw.draw();
-
+    // arm.animate();
     // arm.draw();
     // fs.draw();
 }

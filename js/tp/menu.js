@@ -89,6 +89,7 @@ class Menu {
         this.perimeters = [];
         this.floors = [];
         this.catapults = [];
+        this.firecatapults = [];
         this._castleFloors = 4;
         this._wallScale = 3.0;
         this._angleGateOpen = 0.0;
@@ -106,6 +107,7 @@ class Menu {
 
         var f2 = this.gui.addFolder('Catapulta');
         f2.add(this, 'catapultRotation', 0, 360).name("Rotacion").step(2);
+        f2.add(this, 'fireCatapult').name("Cargar y disparar");
 
         var f3 = this.gui.addFolder('Perimetro');
         f3.add(this, 'wallScale', 2, 5).name("Altura Muralla").step(0.5);
@@ -178,6 +180,16 @@ class Menu {
 
     notifyCatapults() {
         this.catapults.forEach(w => {
+            w.update();
+        })
+    }
+
+    addFireCatapult(fireSystem) {
+        this.firecatapults.push(fireSystem);
+    }
+
+    fireCatapult() {
+        this.firecatapults.forEach(w => {
             w.update();
         })
     }

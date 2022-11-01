@@ -10,17 +10,17 @@ const firingSystemConfig = {
 }
 
 class FiringSystem extends Objeto3D {
-    constructor() {
-        super();
+    constructor(menu) {
+        super(null, null, menu);
     }
 
     init() {
 
-        let arm = new Arm();
-        arm.setPosition(firingSystemConfig.arm.position);
-        arm.updateLocalMatrix();
-        arm.build();
-        this.addChild(arm);
+        this.arm = new Arm(this.menu);
+        this.arm.setPosition(firingSystemConfig.arm.position);
+        this.arm.updateLocalMatrix();
+        this.arm.build();
+        this.addChild(this.arm);
 
         let armFrame = new Frame(4, 10);
         armFrame.setPosition(firingSystemConfig.armFrame.position);
@@ -29,5 +29,9 @@ class FiringSystem extends Objeto3D {
         armFrame.build();
         this.addChild(armFrame);
 
+    }
+
+    animate() {
+        this.arm.animate();
     }
 }

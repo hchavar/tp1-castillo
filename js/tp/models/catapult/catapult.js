@@ -18,7 +18,7 @@ class Catapult extends Objeto3D {
         chasis.build();
         this.addChild(chasis);
 
-        this.firingSystem = new FiringSystem();
+        this.firingSystem = new FiringSystem(this.menu);
         this.firingSystem.setPosition(catapultConfig.firingSystem.position);
         this.firingSystem.setScale(catapultConfig.firingSystem.scaleFactor);
         this.firingSystem.updateLocalMatrix();
@@ -31,5 +31,9 @@ class Catapult extends Objeto3D {
         this.firingSystem.renewLocalMatrix();
         this.firingSystem.setRotation([this.menu.catapultRotation * Math.PI / 180, [0, 1, 0]]);
         this.firingSystem.updateLocalMatrix();
+    }
+
+    animate() {
+        this.firingSystem.animate();
     }
 }
