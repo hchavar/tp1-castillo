@@ -8,19 +8,41 @@ var gl;
 var $canvas = $("#myCanvas");
 var aspect;
 
-const camera = new Camera();
+const CAMERA_ANGULAR_VELOCITY = Math.PI/360;
+
+const castleTarget = new CastleTarget();
+castleTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
+
+const catapultTarget = new CatapultTarget();
+catapultTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
+
+const firstPersonTarget = new FirstPersonTarget();
+firstPersonTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
+
+const camera = new Camera(castleTarget);
 
 const viewCanvas = document.getElementById("myCanvas");
+
 viewCanvas.onmousemove = (e) => { 
-    camera.mouseMove(e.offsetX, e.offsetY);
+    camera.move(e.offsetX, e.offsetY);
 };
 
 viewCanvas.onmousedown = (e) => { 
-    camera.mouseDown(e.offsetX, e.offsetY);
+    camera.hold(e.offsetX, e.offsetY);
 };
 
 viewCanvas.onmouseup = (e) => { 
-    camera.mouseUp(e.offsetX, e.offsetY);
+    camera.release(e.offsetX, e.offsetY);
+};
+
+window.onkeypress = (e) => {
+    if (e.key === '1') {
+        camera.target = castleTarget;
+    } else if (e.key === '2') {
+        camera.target = catapultTarget;
+    } else if (e.key === '3') {
+        camera.target = firstPersonTarget;
+    }
 };
 
 function onResize() {
@@ -72,6 +94,7 @@ function tick() {
     requestAnimationFrame(tick);
     time += 0.1*1/60;
     drawScene($canvas.width(), $canvas.height());
+    camera.update();
 }
 
 

@@ -1,0 +1,9 @@
+class OrbitalTarget {
+    constructor() {
+        
+    }
+
+    update() {
+        
+    }
+}
