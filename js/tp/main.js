@@ -8,6 +8,20 @@ var gl;
 var $canvas = $("#myCanvas");
 var aspect;
 
+const camera = new Camera();
+
+const viewCanvas = document.getElementById("myCanvas");
+viewCanvas.onmousemove = (e) => { 
+    camera.mouseMove(e.offsetX, e.offsetY);
+};
+
+viewCanvas.onmousedown = (e) => { 
+    camera.mouseDown(e.offsetX, e.offsetY);
+};
+
+viewCanvas.onmouseup = (e) => { 
+    camera.mouseUp(e.offsetX, e.offsetY);
+};
 
 function onResize() {
     gl.canvas.width = $canvas.width();
@@ -30,8 +44,8 @@ function initGL(canvas) {
 
 
 function webGLStart() {
-    let canvas = document.getElementById("myCanvas");
-    initGL(canvas);
+
+    initGL(viewCanvas);
     initShaders();
 
     initScene();
@@ -57,7 +71,7 @@ function tick() {
 
     requestAnimationFrame(tick);
     time += 0.1*1/60;
-    drawScene();
+    drawScene($canvas.width(), $canvas.height());
 }
 
 
