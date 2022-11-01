@@ -1,6 +1,6 @@
 const catapultConfig = {
     firingSystem: {
-        position: [0.0, 4.0, 0.0],
+        position: [0.0, 7.4, 0.0],
         scaleFactor: 0.6
     }
 }

@@ -3,15 +3,15 @@ const frameConfig = {
     reduction: 0.7,
     scale: {
         x: 1.0,
-        y: 1.0,
+        y: 2.0,
         z: 0.1
     },
     legs: [
         {
-            position: [0, -0.2, -0.5]
+            position: [0, -0.8, -0.5]
         },
         {
-            position: [0, -0.2, 0.5]
+            position: [0, -0.8, 0.5]
         }
     ],
     pivot: {

@@ -1,6 +1,6 @@
 const counterWeightConfig = {
     load: {
-        position: [0.0, -0.34, 0.0],
+        position: [0.0, -0.45, 0.0],
         color: [0.6, 0.6, 0.6],
         scale: {
             x: 0.4,
