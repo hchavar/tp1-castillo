@@ -87,12 +87,12 @@ class Arm extends Objeto3D {
         arm.build();
         this.addChild(arm);
 
-        let counterWeight = new CounterWeight();
-        counterWeight.setScale(armConfig.counterWeight.scaleFactor);
-        counterWeight.setPosition(armConfig.counterWeight.position);
-        counterWeight.updateLocalMatrix();
-        counterWeight.build();
-        this.addChild(counterWeight);
+        this.counterWeight = new CounterWeight();
+        this.counterWeight.setScale(armConfig.counterWeight.scaleFactor);
+        this.counterWeight.setPosition(armConfig.counterWeight.position);
+        this.counterWeight.updateLocalMatrix();
+        this.counterWeight.build();
+        this.addChild(this.counterWeight);
 
     }
 
@@ -168,8 +168,18 @@ class Arm extends Objeto3D {
 
         this.angle += this.velocity * Math.PI / 18;
 
+        // rotate the arm
         this.renewLocalMatrix();
         this.setRotation([this.angle, [0, 0, 1]]);
         this.updateLocalMatrix();
+        
+        // now rotate the conterweight
+        
+        let m1 = mat4.create();
+        mat4.rotate(m1, m1, -this.velocity * Math.PI / 18, [0, 0, 1]);
+        
+        mat4.multiply(this.counterWeight.localMatrix, this.counterWeight.localMatrix, m1);
+
+
     }
 }

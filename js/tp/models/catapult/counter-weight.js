@@ -1,13 +1,13 @@
 const counterWeightConfig = {
     load: {
-        position: [0.0, -0.3, 0.0],
+        position: [0.0, -0.34, 0.0],
         color: [0.6, 0.6, 0.6],
         scale: {
             x: 0.4,
             y: 0.4,
             z: 0.4
         },
-        rotation: [Math.PI/2, [1,0,0]]
+        rotation: [Math.PI / 2, [1, 0, 0]]
     },
     hangerFrame: {
         position: [0.0, 0.0, 0.0],
@@ -22,7 +22,7 @@ class CounterWeight extends Objeto3D {
     }
 
     init() {
-        
+
         // counter weight load
         let load = new Box(4, 4);
         load.scale = counterWeightConfig.load.scale;
