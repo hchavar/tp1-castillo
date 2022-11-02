@@ -1,7 +1,5 @@
 class Menu {
 
-    distanciaCamara = 19.8;
-    alturaCamara = 7.0;
     modo = "edges";
 
     set wallScale(newScale) {
@@ -98,12 +96,7 @@ class Menu {
         this._castleHeight = 4;
         this._catapultRotation = 0;
 
-        var f1 = this.gui.addFolder('Camara');
-        f1.add(this, "distanciaCamara", 0.2, 20).name("Distancia").step(0.1);
-
-        f1.add(this, "alturaCamara", -1, 20).name("Altura").step(0.1);
-
-        f1.add(this, "modo", ["wireframe", "smooth", "edges"]);
+        this.gui.add(this, "modo", ["wireframe", "smooth", "edges"]);
 
         var f2 = this.gui.addFolder('Catapulta');
         f2.add(this, 'catapultRotation', 0, 360).name("Rotacion").step(2);

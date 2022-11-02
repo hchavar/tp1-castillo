@@ -19,7 +19,7 @@ const catapultTarget = new CatapultTarget();
 const firstPersonTarget = new FirstPersonTarget();
 // firstPersonTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
 
-const camera = new Camera(castleTarget, menu);
+const camera = new Camera(castleTarget);
 camera.angularVelocity = CAMERA_ANGULAR_VELOCITY;
 
 const viewCanvas = document.getElementById("myCanvas");

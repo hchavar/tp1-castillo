@@ -1,5 +1,5 @@
 class Camera {
-    constructor(defaultTarget, menu) {
+    constructor(defaultTarget) {
         this.target = defaultTarget;
         this.moving = false;
         this.posX = 0;
@@ -13,9 +13,8 @@ class Camera {
         this.back = 0;
         this.alfa = 0.3;
         this.beta = 1.3;
-        this.menu = menu;
         this.eye = [0, 0, 10];
-        this.offset = [0, this.menu.distanciaCamara, 0];
+        this.offset = [0, 15.0, 0];
     }
 
     move(x, y) {
@@ -51,7 +50,9 @@ class Camera {
     }
 
     update() {
+        this.offset[1] += (this.back - this.front)*0.1;
         this.updateEye();
+
     }
 
     get at() {
@@ -70,7 +71,7 @@ class Camera {
 
         glMatrix.mat4.rotateY(m, m, this.alfa);
         glMatrix.mat4.rotateX(m, m, this.beta);
-        this.offset = [0, this.menu.distanciaCamara, 0];
+        
         glMatrix.mat4.translate(m, m, this.offset);
 
 
