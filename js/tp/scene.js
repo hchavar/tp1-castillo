@@ -7,14 +7,14 @@ var vec3 = glMatrix.vec3;
 var projMatrix = mat4.create();
 var viewMatrix = mat4.create();
 var matrizModelado = mat4.create();
-var menu;
 
-function initScene() {
-    menu = new Menu();
+
+function initScene(menu) {
+    
     createConfiguration(menu);
 }
 
-function drawScene(width, height) {
+function drawScene(width, height, camera) {
 
     gl.viewport(0, 0, width, height);
 
@@ -33,10 +33,11 @@ function drawScene(width, height) {
     gl.uniform1i(shaderProgram.useLightingUniform, (lighting == "true"));
 
     // Camera location
+    viewMatrix = camera.viewMatrix;
     mat4.lookAt(viewMatrix,
-        vec3.fromValues(0, menu.alturaCamara, menu.distanciaCamara),
-        vec3.fromValues(0, 0, 0),
-        vec3.fromValues(0, 1, 0)
+        camera.eye,
+        camera.at,
+        camera.up
     );
 
     var lightPosition = [10.0, 0.0, 3.0];
