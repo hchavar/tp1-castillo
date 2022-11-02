@@ -121,8 +121,8 @@ function tick() {
 
     requestAnimationFrame(tick);
     time += 0.1 * 1 / 60;
-    drawScene($canvas.width(), $canvas.height(), camera);
     camera.update();
+    drawScene($canvas.width(), $canvas.height(), camera);
 }
 
 
