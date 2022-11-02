@@ -12,7 +12,7 @@ class Camera {
         this.front = 0;
         this.back = 0;
         this.alfa = 0;
-        this.beta = 0;
+        this.beta = 0.01;
         this.menu = menu;
     }
 
