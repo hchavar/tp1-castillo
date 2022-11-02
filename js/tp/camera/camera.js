@@ -18,8 +18,6 @@ class Camera {
 
     move(x, y) {
         if (this.moving) {
-            this.previousPosX = this.posX;
-            this.previousPosY = this.posY;
             this.posX = x;
             this.posY = y;
 
@@ -33,12 +31,17 @@ class Camera {
             this.beta += deltaY * this.angularVelocity;
 
             if (this.beta < 0.01) this.beta = 0.01;
-            if (this.beta > Math.PI/2) this.beta = Math.PI/2;
+            if (this.beta > Math.PI / 2) this.beta = Math.PI / 2;
+
+            this.previousPosX = this.posX;
+            this.previousPosY = this.posY;
         }
     }
 
     hold(x, y) {
         this.moving = true;
+        this.previousPosX = x;
+        this.previousPosY = y;
     }
 
     release(x, y) {
@@ -51,7 +54,7 @@ class Camera {
 
     get eye() {
         let r = this.menu.distanciaCamara;
-        let a = [r * Math.sin(this.alfa) * Math.sin(this.beta), r * Math.cos(this.beta) ,r * Math.cos(this.alfa) * Math.sin(this.beta)]; 
+        let a = [r * Math.sin(this.alfa) * Math.sin(this.beta), r * Math.cos(this.beta), r * Math.cos(this.alfa) * Math.sin(this.beta)];
         return a;
     }
 
