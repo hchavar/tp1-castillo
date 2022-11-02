@@ -32,19 +32,16 @@ class Camera {
             this.alfa += deltaX * this.angularVelocity;
             this.beta += deltaY * this.angularVelocity;
 
-            if (this.beta < 0) this.beta = 0;
-            if (this.beta > Math.PI) this.beta = Math.PI;
+            if (this.beta < 0.01) this.beta = 0.01;
+            if (this.beta > Math.PI/2) this.beta = Math.PI/2;
         }
     }
 
     hold(x, y) {
-        // console.log('Camera. Mouse down x: ' + x + ' y: ' + y);
         this.moving = true;
-        this.move(x, y);
     }
 
     release(x, y) {
-        // console.log('Camera. Mouse up x: ' + x + ' y: ' + y);
         this.moving = false;
     }
 
@@ -53,7 +50,9 @@ class Camera {
     }
 
     get eye() {
-        return [0, this.menu.alturaCamara, this.menu.distanciaCamara];
+        let r = this.menu.distanciaCamara;
+        let a = [r * Math.sin(this.alfa) * Math.sin(this.beta), r * Math.cos(this.beta) ,r * Math.cos(this.alfa) * Math.sin(this.beta)]; 
+        return a;
     }
 
     get at() {
