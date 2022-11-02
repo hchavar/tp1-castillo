@@ -8,7 +8,7 @@ const menu = new Menu();
 var $canvas = $("#myCanvas");
 var aspect;
 
-const CAMERA_ANGULAR_VELOCITY = Math.PI / 360;
+const CAMERA_ANGULAR_VELOCITY = Math.PI / 1440;
 
 const castleTarget = new CastleTarget();
 // castleTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
@@ -37,7 +37,6 @@ viewCanvas.onmouseup = (e) => {
 };
 
 window.onkeypress = (e) => {
-    console.log('Keypress:' + e.key);
     if (e.key === '1') {
         camera.target = castleTarget;
     } else if (e.key === '2') {
@@ -67,12 +66,10 @@ const manageKey = (key, value) => {
 }
 
 window.onkeydown = (e) => {
-    console.log('KeyDown:' + e.key);
     manageKey(e.key, 1);
 }
 
 window.onkeyup = (e) => {
-    console.log('KeyUp:' + e.key);
     manageKey(e.key, 0);
 }
 

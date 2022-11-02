@@ -11,9 +11,11 @@ class Camera {
         this.right = 0;
         this.front = 0;
         this.back = 0;
-        this.alfa = 0;
-        this.beta = 0.01;
+        this.alfa = 0.3;
+        this.beta = 1.3;
         this.menu = menu;
+        this.eye = [0, 0, 10];
+        this.offset = [0, this.menu.distanciaCamara, 0];
     }
 
     move(x, y) {
@@ -49,13 +51,7 @@ class Camera {
     }
 
     update() {
-        console.log('Update camara');
-    }
-
-    get eye() {
-        let r = this.menu.distanciaCamara;
-        let a = [r * Math.sin(this.alfa) * Math.sin(this.beta), r * Math.cos(this.beta), r * Math.cos(this.alfa) * Math.sin(this.beta)];
-        return a;
+        this.updateEye();
     }
 
     get at() {
@@ -64,5 +60,24 @@ class Camera {
 
     get up() {
         return [0, 1, 0];
+    }
+
+    updateEye() {
+
+        let m = glMatrix.mat4.create();
+
+        glMatrix.mat4.translate(m, m, this.target.at);
+
+        glMatrix.mat4.rotateY(m, m, this.alfa);
+        glMatrix.mat4.rotateX(m, m, this.beta);
+        this.offset = [0, this.menu.distanciaCamara, 0];
+        glMatrix.mat4.translate(m, m, this.offset);
+
+
+        vec3.transformMat4(this.eye, vec3.create(), m);
+
+        // // debug
+        // console.log('a: ' + this.alfa + ' , beta: ' + this.beta);
+        // console.log('e: ' + (Math.round(this.eye[0] * 100) / 100) + ' , ' + (Math.round(this.eye[1] * 100) / 100) + ' , ' + (Math.round(this.eye[2] * 100) / 100));
     }
 }
