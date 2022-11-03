@@ -18,7 +18,7 @@ function drawScene(width, height, camera) {
 
     gl.viewport(0, 0, width, height);
 
-    gl.clearColor(0.2, 0.2, 0.2, 1);
+    gl.clearColor(0.1, 0.8, 0.8, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     // Projection matrix

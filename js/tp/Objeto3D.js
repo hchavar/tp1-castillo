@@ -135,6 +135,7 @@ class Objeto3D {
         gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
         gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
+        gl.uniform3f(shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
     
         let normalMatrix = mat3.create();
         mat3.fromMat4(normalMatrix, modelMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));
@@ -151,25 +152,27 @@ class Objeto3D {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.positionBuffer);
         gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
-        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
+        // gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.normalBuffer);
         gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.colorBuffer);
-        gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.colorBuffer);
+        // gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
            
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
+
+        gl.uniform1i(shaderProgram.uColorNormals, true);
     
     
         if (menu.modo != "wireframe"){
-            gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));                    
+            // gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));                    
             gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         }
         
         if (menu.modo != "smooth") {
-            gl.uniform1i(shaderProgram.useLightingUniform,false);
+            // gl.uniform1i(shaderProgram.useLightingUniform,false);
             gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         }
      
