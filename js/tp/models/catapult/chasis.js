@@ -38,7 +38,7 @@ class Chasis extends Objeto3D {
             this.addChild(axle);
         }
 
-        let base = new Box(4, 8);
+        let base = new Box();
         base.scale = chasisConfig.base.scale;
         base.color = chasisConfig.base.color;
         base.setPosition(chasisConfig.base.position);

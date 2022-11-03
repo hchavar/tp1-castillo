@@ -24,7 +24,7 @@ class CounterWeight extends Objeto3D {
     init() {
 
         // counter weight load
-        let load = new Box(4, 4);
+        let load = new Box();
         load.scale = counterWeightConfig.load.scale;
         load.color = counterWeightConfig.load.color;
         load.setPosition(counterWeightConfig.load.position);

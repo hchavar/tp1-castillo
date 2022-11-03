@@ -33,7 +33,7 @@ class Floor extends Objeto3D {
 
     create(config) {
 
-        let floor = new Box(4 * this.scale.y, 8 * this.scale.x, this.menu)
+        let floor = new Box(this.menu)
 
         floor.color = [0.99, 0.85, 0.35];
         floor.scale = this.scale;

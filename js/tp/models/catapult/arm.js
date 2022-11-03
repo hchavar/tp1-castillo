@@ -55,7 +55,7 @@ class Arm extends Objeto3D {
     }
 
     init() {
-        let hand = new Box(4, 8);
+        let hand = new Box();
         hand.scale = armConfig.hand.scale;
         hand.color = armConfig.hand.color;
 

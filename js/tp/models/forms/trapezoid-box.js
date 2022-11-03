@@ -1,6 +1,6 @@
 class TrapezoidBox extends Box {
     constructor(width, height) {
-        super(width, height);
+        super();
     }
 
     getPosition(u, v) {
@@ -8,6 +8,8 @@ class TrapezoidBox extends Box {
         pos[0] = pos[0] * (1 - v * this.reduction);
         return pos;
     }
+
+    //TODO: Fix normals
 
     set reduction(value) {
         this._reduction = value;

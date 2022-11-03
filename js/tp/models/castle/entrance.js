@@ -52,7 +52,7 @@ class Entrance extends Objeto3D {
         this.addChild(gate);
 
         for (const lidConfig of entranceConfig.lids) {
-            let box = new Box(20, 20);
+            let box = new Box();
             box.scale = lidConfig.scale;
             box.color = [1, 1, 1];
             box.build();

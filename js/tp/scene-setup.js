@@ -50,7 +50,7 @@ function createConfiguration(menu){
     col2.build();
     col2.setPosition([3.00, 0, -5.00]);
     col2.updatePosition();
-    box = new Box(8, 16);
+    box = new Box();
     box.build();
     box.setPosition([0.00, 0.0, 9.00]);
     box.updatePosition();
@@ -71,7 +71,6 @@ function createConfiguration(menu){
 
     castle.setPosition([-2.50, 0, -2.50]);
     castle.updatePosition();
-    box.updatePosition();
 
     f = new Floor(menu);
 

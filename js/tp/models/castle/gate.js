@@ -1,6 +1,6 @@
 class Gate extends Box {
     constructor(menu) {
-        super(20.0, 12.0, menu);
+        super(menu);
         this.menu.addGate(this);
 
     }
