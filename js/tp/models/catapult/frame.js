@@ -48,7 +48,7 @@ class Frame extends Objeto3D {
             this.addChild(box);
         }
 
-        let pivot = new Cylinder(4, 10);
+        let pivot = new Cylinder(1, 10);
         pivot.scale = frameConfig.pivot.scale;
         pivot.color = frameConfig.pivot.color;
         pivot.setRotation(frameConfig.pivot.rotation);

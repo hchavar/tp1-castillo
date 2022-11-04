@@ -3,7 +3,7 @@ class Cylinder extends Objeto3D {
     rotateAngle = 0;
 
     constructor(width, height) {
-        super(width, height);
+        super(width*6, height);
     }
 
     init() {
@@ -29,6 +29,16 @@ class Cylinder extends Objeto3D {
             return [0, this.scale.y * (1 / this.width - 0.5), 0];
         }
 
+        // las penultimas 2 filas las mando al mismo nivel para 
+        // que tengan la misma normal
+        if (v >= (this.width - 1) / this.width) {
+            return this.getPosition(u, v - 1 / this.width);
+        }
+
+        if (v <= 1 / this.width) {
+            return this.getPosition(u, v + 1 / this.width);
+        }
+
         let a = u * 2.0 * Math.PI;
 
         x = r * Math.cos(a);
@@ -39,7 +49,25 @@ class Cylinder extends Objeto3D {
     }
 
     getNormal(u, v) {
-        return this.getPosition(u, v);
+        if (v >= 1.0) {
+            return [0, 1, 0];
+        } else if (v <= 0.0) {
+            return [0, -1, 0];
+        } else {
+            if (v >= (this.width - 1) / this.width) {
+                return [0, 1, 0];
+            } else {
+                if (v <= 1 / this.width) {
+                    return [0, -1, 0];
+                } else {
+                    let a = u * 2.0 * Math.PI;
+
+                    return [Math.cos(a), 0, Math.sin(a)];
+
+                }
+            }
+        }
+
     }
 
     getTextureCoordinates(u, v) {
