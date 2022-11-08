@@ -25,5 +25,6 @@ class BezierSurface extends Objeto3D {
 
     updateBezierCurve() {
         this.curve = getConcatenatedBezierCurve(this.pc);
+        this.height = this.curve.points.length;
     }
 }
