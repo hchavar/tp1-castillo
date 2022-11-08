@@ -1,6 +1,7 @@
 
 var shaderProgram;
 var time = 0;
+var normalsMode = false;
 
 var gl;
 const menu = new Menu();
@@ -11,13 +12,10 @@ var aspect;
 const CAMERA_ANGULAR_VELOCITY = Math.PI / 1440;
 
 const castleTarget = new CastleTarget();
-// castleTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
 
 const catapultTarget = new CatapultTarget();
-// catapultTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
 
 const firstPersonTarget = new FirstPersonTarget();
-// firstPersonTarget.angularVelocity = CAMERA_ANGULAR_VELOCITY;
 
 const camera = new Camera(castleTarget);
 camera.angularVelocity = CAMERA_ANGULAR_VELOCITY;

@@ -163,18 +163,19 @@ class Objeto3D {
            
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
 
-        gl.uniform1i(shaderProgram.uColorNormals, true);
+        gl.uniform1i(shaderProgram.uColorNormals, normalsMode);
     
+        gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     
-        if (menu.modo != "wireframe"){
-            // gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));                    
-            gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-        }
+        // if (menu.modo != "wireframe"){
+        //     // gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));
+        //     gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        // }
         
-        if (menu.modo != "smooth") {
-            // gl.uniform1i(shaderProgram.useLightingUniform,false);
-            gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-        }
+        // if (menu.modo != "smooth") {
+        //     // gl.uniform1i(shaderProgram.useLightingUniform,false);
+        //     gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        // }
      
     }
 
