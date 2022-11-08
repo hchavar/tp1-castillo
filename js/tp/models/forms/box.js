@@ -42,7 +42,7 @@ class Box extends Objeto3D {
                 if (v <= 1 / this.width) {
                     return this.getPosition(u, v + 1 / this.width);
                 } else {
-                    
+
                     if (u < 0.125) {
                         x = 0.0;
                         z = 0.0;
@@ -77,31 +77,32 @@ class Box extends Objeto3D {
     }
 
     getNormal(u, v) {
-        if (v >= 1.0) {
+        if (this.isTopFace(v)) {
             return [0, 1, 0];
-        } else if (v <= 0.0) {
+        } else if (this.isBottomFace(v)) {
             return [0, -1, 0];
         } else {
-            if (v >= (this.width - 1) / this.width) {
-                return [0, 1, 0];
-            } else {
-                if (v <= 1 / this.width) {
-                    return [0, -1, 0];
-                } else {
-                    if (u <= 0.25) {
-                        return [-1, 0, 0];
-                    } else if (u <= 0.5) {
-                        return [0, 0, 1];
-                    } else if (u <= 0.75) {
-                        return [1, 0, 0];
-                    } else {
-                        return [0, 0, -1];
-                    }
 
-                }
+            if (u <= 0.25) {
+                return [-1, 0, 0];
+            } else if (u <= 0.5) {
+                return [0, 0, 1];
+            } else if (u <= 0.75) {
+                return [1, 0, 0];
+            } else {
+                return [0, 0, -1];
             }
+
         }
 
+    }
+
+    isBottomFace(v) {
+        return v <= 1 / this.width;
+    }
+
+    isTopFace(v) {
+        return v >= (this.width - 1) / this.width;
     }
 
     getTextureCoordinates(u, v) {
