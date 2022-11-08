@@ -36,41 +36,42 @@ class Box extends Objeto3D {
             y = 0.0;
             z = defaultCenter.z;
         } else {
+            let newV = v;
+            // hago coincidir los puntos en los bordes
             if (v >= (this.width - 1) / this.width) {
-                return this.getPosition(u, v - 1 / this.width);
-            } else {
-                if (v <= 1 / this.width) {
-                    return this.getPosition(u, v + 1 / this.width);
-                } else {
-
-                    if (u < 0.125) {
-                        x = 0.0;
-                        z = 0.0;
-                    } else if (u <= 0.25) {
-                        x = 0.0;
-                        z = 1.0;
-                    } else if (u < 0.375) {
-                        x = 0.0;
-                        z = 1.0;
-                    } else if (u <= 0.5) {
-                        x = 1.0;
-                        z = 1.0;
-                    } else if (u < 0.625) {
-                        x = 1.0;
-                        z = 1.0;
-                    } else if (u <= 0.75) {
-                        x = 1.0;
-                        z = 0.0;
-                    } else if (u < 0.875) {
-                        x = 1.0;
-                        z = 0.0;
-                    } else {
-                        z = 0.0;
-                        x = 0.0;
-                    }
-                    y = (v - 2 / this.width) / (0.5 - 2 / this.width) * 0.5;
-                }
+                newV = v - 1 / this.width;
             }
+            if (v <= 1 / this.width) {
+                newV = v + 1 / this.width;
+            }
+
+            if (u < 0.125) {
+                x = 0.0;
+                z = 0.0;
+            } else if (u <= 0.25) {
+                x = 0.0;
+                z = 1.0;
+            } else if (u < 0.375) {
+                x = 0.0;
+                z = 1.0;
+            } else if (u <= 0.5) {
+                x = 1.0;
+                z = 1.0;
+            } else if (u < 0.625) {
+                x = 1.0;
+                z = 1.0;
+            } else if (u <= 0.75) {
+                x = 1.0;
+                z = 0.0;
+            } else if (u < 0.875) {
+                x = 1.0;
+                z = 0.0;
+            } else {
+                z = 0.0;
+                x = 0.0;
+            }
+            y = (newV - 2 / this.width) / (0.5 - 2 / this.width) * 0.5;
+
         }
 
         return [(x - defaultCenter.x) * this.scale.x, (y - defaultCenter.y) * this.scale.y, (z - defaultCenter.z) * this.scale.z];
