@@ -20,7 +20,7 @@
 
         void main(void) {
             
-            vec3 lightDirection = normalize(vec3(0.0, 3.0, 5.0) - vec3(vWorldPosition));
+            vec3 lightDirection = normalize(vec3(0.0, 3.0, 5.0) - vWorldPosition);
 
             
             vec3 diffColor = uColor;
@@ -28,12 +28,15 @@
             color = mix(uColor, color, 0.3);
 
             if (uColorNormals) { 
-                diffColor = mix(vec3(0.7,0.7,0.7), vNormal, 0.5);
+                diffColor = mix(vec3(0.7,0.7,0.7), vNormal, 0.4);
                 // color = dot(lightDirection, vNormal) * diffColor + vec3(0.2, 0.2, 0.2);
-                color = vNormal;
+                // gl_FragColor = vec4(vNormal * .5 + .5, 1);
+                gl_FragColor = vec4(vNormal, 1);
+            } else {
+
+                gl_FragColor = vec4(color, 1.0);
             }
             
-            gl_FragColor = vec4(color, 1.0);
             
             // vec3 color = (uAmbientColor + uDirectionalColor *max(dot(vNormal, lightDirection), 0.0));
            
