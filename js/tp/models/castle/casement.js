@@ -24,7 +24,7 @@ class Casement extends Objeto3D {
         this.reuseBuffer = true;
         this.name = this.constructor.name;
     }
-    
+
     getPosition(u, v) {
 
         let x, y, z;
@@ -50,26 +50,32 @@ class Casement extends Objeto3D {
                 newV = 1 / this.width;
             }
 
-            if (u < 0.25) {
+            if (u <= 0.25) {
                 x = 0.0;
                 z = 4 * u;
-                
+
             } else if (u < 0.5) {
+                if (u <= 0.25 + 1 / this.width) {
+                    x = 0.0;
+
+                } else {
+                    x = 4 * (u - 0.25);
+                }
+
                 z = 1.0;
-                x = 4 * (u - 0.25);
 
             } else if (u < 0.75) {
-                
-                let aux = 0.5 + 4*(u-0.5);
+
+                let aux = 0.5 + 4 * (u - 0.5);
                 let a = aux * Math.PI;
-                
-                x = 1.0 - Math.cos(a)/3;
+
+                x = 1.0 - Math.cos(a) / 3;
                 z = 1 - 4 * (u - 0.5);
-                
+
             } else {
                 z = 0.0;
                 x = 1 - 4 * (u - 0.75);
-                
+
             }
             y = (newV - 1 / this.width) / (0.5 - 1 / this.width) * 0.5;
         }
