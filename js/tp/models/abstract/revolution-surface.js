@@ -20,16 +20,14 @@ class RevolutionSurface extends BezierSurface {
 
         let pathPosition = vec3.fromValues(0, 0, 0);
 
-        let mat = glMatrix.mat4.fromValues(
+        let mat = mat4.fromValues(
             pathNormal[0], pathBinormal[0], pathTangent[0], pathPosition[0],
             pathNormal[1], pathBinormal[1], pathTangent[1], pathPosition[1],
             pathNormal[2], pathBinormal[2], pathTangent[2], pathPosition[2],
             0, 0, 0, 1
         );
 
-        let pos = Math.round(u * (this.curve.points.length - 1));
-
-        let pc = vec3.clone(this.curve.points[pos]);
+        let pc = this.getPointAt(u);
 
         glMatrix.vec3.transformMat4(pc, pc, mat);
 
@@ -49,17 +47,15 @@ class RevolutionSurface extends BezierSurface {
 
         let pathPosition = vec3.fromValues(0, 0, 0);
 
-        let mat = glMatrix.mat4.fromValues(
+        let mat = mat4.fromValues(
             pathNormal[0], pathBinormal[0], pathTangent[0], pathPosition[0],
             pathNormal[1], pathBinormal[1], pathTangent[1], pathPosition[1],
             pathNormal[2], pathBinormal[2], pathTangent[2], pathPosition[2],
             0, 0, 0, 1
         );
 
-        let pos = Math.round(u * (this.curve.points.length - 1));
-
-        let pn = vec3.clone(this.curve.normals[pos]);
-        glMatrix.vec3.transformMat4(pn, pn, mat);
+        let pn = this.getNormalAt(u);
+        vec3.transformMat4(pn, pn, mat);
 
         return pn;
 
