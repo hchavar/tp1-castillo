@@ -30,7 +30,6 @@ class RevolutionSurface extends BezierSurface {
         let pos = Math.round(u * (this.curve.points.length - 1));
 
         let pc = vec3.clone(this.curve.points[pos]);
-        let p2 = [pc[0], pc[1], pc[2], 0];
 
         glMatrix.vec3.transformMat4(pc, pc, mat);
 
