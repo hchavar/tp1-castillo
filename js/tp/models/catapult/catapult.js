@@ -24,6 +24,7 @@ class Catapult extends Objeto3D {
         this.firingSystem.updateLocalMatrix();
         this.firingSystem.build();
         this.addChild(this.firingSystem);
+        this.update();
 
     }
 

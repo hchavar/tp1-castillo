@@ -111,7 +111,7 @@ class Objeto3D {
 
     updateRotation() {
         mat4.rotate( this.localMatrix, this.localMatrix, this.rot[0], this.rot[1] );
-        //this.rot = defaultRotation;
+        this.rot = defaultRotation;
     }
 
     updateRotationRespectWorld(worldMatrix) {

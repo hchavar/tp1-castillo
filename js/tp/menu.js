@@ -104,7 +104,7 @@ class Menu {
         this._towers = 5;
         this._castleWidth = 4;
         this._castleHeight = 4;
-        this._catapultRotation = 0;
+        this._catapultRotation = 180;
 
         this.gui.add(this, "mode", ["Default", "Normales"]);
 

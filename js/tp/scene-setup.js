@@ -102,7 +102,7 @@ function createConfiguration(menu){
 
     sphere = new Sphere(20, 20);
     sphere.build();
-    sphere.setPosition([0, 0, 12]);
+    sphere.setPosition([8.5, 0, 15]);
     sphere.updateLocalMatrix();
 
     tb = new TrapezoidBox(8, 4);
@@ -138,7 +138,11 @@ function createConfiguration(menu){
 
     catapult = new Catapult(menu);
     catapult.build();
-    catapult.setPosition([-8, 0, 14]);
+    catapult.setScale(0.6);
+    catapult.updateLocalMatrix();
+    catapult.setRotation([-Math.PI/3, [0, 1, 0]]);
+    catapult.updateLocalMatrix();
+    catapult.setPosition([80, 0, 0]);
     catapult.updateLocalMatrix();
     
 }
@@ -190,7 +194,7 @@ function drawConfiguration() {
 
     // col2.draw();
     // f.draw();
-    //sphere.draw();
+    // sphere.draw();
     //tb.draw();
     // fr.setRotation([Math.PI*time, [0, 0, 1]]);
     // fr.updateLocalMatrix();

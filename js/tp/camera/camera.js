@@ -11,10 +11,10 @@ class Camera {
         this.right = 0;
         this.front = 0;
         this.back = 0;
-        this.alfa = 0.3;
-        this.beta = 1.3;
-        this.eye = [0, 0, 10];
-        this.offset = [0, 6.8, 0];
+        this.alfa = -0.16;
+        this.beta = 1.35;
+        this.eye = [-3.5, 5, 22];
+        // this.offset = [0, 23.0, 0];
     }
 
     move(x, y) {
@@ -50,7 +50,8 @@ class Camera {
     }
 
     update() {
-        this.offset[1] += (this.back - this.front)*0.1;
+        this.target.offset[1] += (this.back - this.front)*0.1;
+        this.target.offset[1] = Math.max(0.1, this.target.offset[1]);
         this.updateEye();
 
     }
@@ -72,7 +73,7 @@ class Camera {
         glMatrix.mat4.rotateY(m, m, this.alfa);
         glMatrix.mat4.rotateX(m, m, this.beta);
         
-        glMatrix.mat4.translate(m, m, this.offset);
+        glMatrix.mat4.translate(m, m, this.target.offset);
 
 
         vec3.transformMat4(this.eye, vec3.create(), m);
