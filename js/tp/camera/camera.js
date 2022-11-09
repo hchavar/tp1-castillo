@@ -14,7 +14,7 @@ class Camera {
         this.alfa = 0.3;
         this.beta = 1.3;
         this.eye = [0, 0, 10];
-        this.offset = [0, 2.0, 0];
+        this.offset = [0, 6.8, 0];
     }
 
     move(x, y) {

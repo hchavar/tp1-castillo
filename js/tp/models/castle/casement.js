@@ -95,7 +95,15 @@ class Casement extends Objeto3D {
             } else if (u <= 0.5) {
                 return [0, 0, 1];
             } else if (u <= 0.75) {
-                return [1, 0, 0];
+                let aux = 0.5 + 4 * (u - 0.5);
+                let a = aux * Math.PI;
+
+                let x = 1.0 - Math.cos(a) / 3;
+                let z = 1 - 4 * (u - 0.5);
+                
+                let n = [x, 0, z]; 
+                vec3.normalize(n,n);
+                return n;
             } else {
                 return [0, 0, -1];
             }
