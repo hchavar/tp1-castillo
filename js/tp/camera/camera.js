@@ -32,7 +32,7 @@ class Camera {
             this.beta += deltaY * this.angularVelocity;
 
             if (this.beta < 0.01) this.beta = 0.01;
-            if (this.beta > Math.PI) this.beta = Math.PI;
+            if (this.beta > (Math.PI / 2 - 0.04)) this.beta = Math.PI / 2 - 0.04;
 
             this.previousPosX = this.posX;
             this.previousPosY = this.posY;
@@ -51,7 +51,7 @@ class Camera {
 
     update() {
         this.target.offset[1] += (this.back - this.front)*0.1;
-        this.target.offset[1] = Math.max(0.1, this.target.offset[1]);
+        this.target.offset[1] = Math.max(0.5, this.target.offset[1]);
         this.updateEye();
 
     }

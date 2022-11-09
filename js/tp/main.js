@@ -34,6 +34,10 @@ viewCanvas.onmouseup = (e) => {
     camera.release(e.offsetX, e.offsetY);
 };
 
+viewCanvas.onmouseleave = (e) => { 
+    camera.release();
+};
+
 window.onkeypress = (e) => {
     if (e.key === '1') {
         camera.target = castleTarget;
