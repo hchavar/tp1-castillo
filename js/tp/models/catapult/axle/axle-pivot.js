@@ -10,7 +10,7 @@ const axlePivotConfig = {
 
 class AxlePivot extends Cylinder {
     constructor() {
-        super(4, 10);
+        super(1, 10);
     }
 
     init() {

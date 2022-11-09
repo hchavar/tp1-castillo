@@ -67,7 +67,9 @@ function getNormalAt(u, ctrlPoints) {
 
     let tangent = getDerivativePointAt(u, ctrlPoints);
     let normal = [];
-    vec3.cross(normal, tangent, [0, 0, 1])
+    glMatrix.vec3.cross(normal, tangent, [0, 0, 1]);
+
+    glMatrix.vec3.normalize(normal,normal);
 
     return normal;
 }

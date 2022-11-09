@@ -25,5 +25,24 @@ class BezierSurface extends Objeto3D {
 
     updateBezierCurve() {
         this.curve = getConcatenatedBezierCurve(this.pc);
+        this.height = this.curve.points.length;
+    }
+
+    getNormalAt(u) {
+        let pos = this.positionAt(u);
+
+        let pc = vec3.clone(this.curve.normals[pos]);
+        return pc;
+    }
+
+    positionAt(u) {
+        return Math.round(u * (this.curve.points.length - 1));
+    }
+
+    getPointAt(u) {
+        let pos = this.positionAt(u);
+
+        let pc = vec3.clone(this.curve.points[pos]);
+        return pc;
     }
 }

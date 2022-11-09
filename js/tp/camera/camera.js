@@ -14,7 +14,7 @@ class Camera {
         this.alfa = 0.3;
         this.beta = 1.3;
         this.eye = [0, 0, 10];
-        this.offset = [0, 15.0, 0];
+        this.offset = [0, 6.8, 0];
     }
 
     move(x, y) {
@@ -32,7 +32,7 @@ class Camera {
             this.beta += deltaY * this.angularVelocity;
 
             if (this.beta < 0.01) this.beta = 0.01;
-            if (this.beta > Math.PI / 2) this.beta = Math.PI / 2;
+            if (this.beta > Math.PI) this.beta = Math.PI;
 
             this.previousPosX = this.posX;
             this.previousPosY = this.posY;

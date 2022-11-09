@@ -10,7 +10,7 @@ const wheelConfig = {
 
 class Wheel extends Cylinder {
     constructor() {
-        super(4, 20);
+        super(1, 20);
     }
 
     init() {

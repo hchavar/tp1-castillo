@@ -15,8 +15,8 @@ class Catapult extends Objeto3D {
 
 
         this.chasis = new Chasis();
-        chasis.build();
-        this.addChild(chasis);
+        this.chasis.build();
+        this.addChild(this.chasis);
 
         this.firingSystem = new FiringSystem(this.menu);
         this.firingSystem.setPosition(catapultConfig.firingSystem.position);

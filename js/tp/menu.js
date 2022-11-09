@@ -1,6 +1,7 @@
 class Menu {
 
-    modo = "edges";
+    // modo = "edges";
+    _mode = "Default";
 
     set wallScale(newScale) {
         if (this._wallScale != newScale) {
@@ -79,6 +80,15 @@ class Menu {
         return this._catapultRotation;
     }
 
+    set mode(value) {
+        this._mode = value;
+        normalsMode = (value == "Normales");
+    }
+
+    get mode() {
+        return this._mode;
+    }
+
     constructor() {
         this.gui = new dat.GUI();
         this.walls = [];
@@ -96,7 +106,7 @@ class Menu {
         this._castleHeight = 4;
         this._catapultRotation = 0;
 
-        this.gui.add(this, "modo", ["wireframe", "smooth", "edges"]);
+        this.gui.add(this, "mode", ["Default", "Normales"]);
 
         var f2 = this.gui.addFolder('Catapulta');
         f2.add(this, 'catapultRotation', 0, 360).name("Rotacion").step(2);

@@ -1,8 +1,8 @@
 const frameConfig = {
     color: [0.9, 0.5, 0.3],
-    reduction: 0.7,
+    reduction: 1.35,
     scale: {
-        x: 1.0,
+        x: 2.5,
         y: 2.0,
         z: 0.1
     },
@@ -48,7 +48,7 @@ class Frame extends Objeto3D {
             this.addChild(box);
         }
 
-        let pivot = new Cylinder(4, 10);
+        let pivot = new Cylinder(1, 10);
         pivot.scale = frameConfig.pivot.scale;
         pivot.color = frameConfig.pivot.color;
         pivot.setRotation(frameConfig.pivot.rotation);

@@ -68,23 +68,27 @@ function initShaders() {
     shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aPosition");
     gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
-    shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aUv");
-    gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
+    // shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aUv");
+    // gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
 
     shaderProgram.vertexNormalAttribute = gl.getAttribLocation(shaderProgram, "aNormal");
     gl.enableVertexAttribArray(shaderProgram.vertexNormalAttribute);
 
-    shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aColor");
-    gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+    // shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aColor");
+    // gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
 
     shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "projMatrix");
     shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "modelMatrix");
     shaderProgram.vMatrixUniform = gl.getUniformLocation(shaderProgram, "viewMatrix");
     shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "normalMatrix");
-    shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
-    shaderProgram.useLightingUniform = gl.getUniformLocation(shaderProgram, "uUseLighting");
-    shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
-    shaderProgram.frameUniform = gl.getUniformLocation(shaderProgram, "time");
-    shaderProgram.lightingDirectionUniform = gl.getUniformLocation(shaderProgram, "uLightPosition");
-    shaderProgram.directionalColorUniform = gl.getUniformLocation(shaderProgram, "uDirectionalColor");
+    // shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
+    // shaderProgram.useLightingUniform = gl.getUniformLocation(shaderProgram, "uUseLighting");
+    // shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
+    // shaderProgram.frameUniform = gl.getUniformLocation(shaderProgram, "time");
+    // shaderProgram.lightingDirectionUniform = gl.getUniformLocation(shaderProgram, "uLightPosition");
+    // shaderProgram.directionalColorUniform = gl.getUniformLocation(shaderProgram, "uDirectionalColor");
+
+    shaderProgram.uColorUniform = gl.getUniformLocation(shaderProgram, "uColor");
+
+    shaderProgram.uColorNormals = gl.getUniformLocation(shaderProgram, "uColorNormals");
 }

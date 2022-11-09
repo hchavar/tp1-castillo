@@ -27,7 +27,9 @@ class Sphere extends Objeto3D {
     }
 
     getNormal(u, v) {
-        return this.getPosition(u, v);
+        let p = this.getPosition(u, v);
+        vec3.normalize(p, p);
+        return p;
     }
 
     getTextureCoordinates(u, v) {
