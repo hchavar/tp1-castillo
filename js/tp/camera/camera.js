@@ -15,6 +15,7 @@ class Camera {
         this.beta = 1.35;
         this.eye = [-3.5, 5, 22];
         // this.offset = [0, 23.0, 0];
+        this.zoom = 0.0;
     }
 
     move(x, y) {
@@ -50,8 +51,9 @@ class Camera {
     }
 
     update() {
-        this.target.offset[1] += (this.back - this.front)*0.1;
+        this.target.offset[1] += (this.back - this.front + this.zoom * 0.05) * 0.1;
         this.target.offset[1] = Math.max(0.5, this.target.offset[1]);
+        this.zoom = 0.0;
         this.updateEye();
 
     }
@@ -72,7 +74,7 @@ class Camera {
 
         glMatrix.mat4.rotateY(m, m, this.alfa);
         glMatrix.mat4.rotateX(m, m, this.beta);
-        
+
         glMatrix.mat4.translate(m, m, this.target.offset);
 
 

@@ -38,6 +38,10 @@ viewCanvas.onmouseleave = (e) => {
     camera.release();
 };
 
+viewCanvas.onwheel = (e) => { 
+    camera.zoom = e.deltaY;
+};
+
 window.onkeypress = (e) => {
     if (e.key === '1') {
         camera.target = castleTarget;
