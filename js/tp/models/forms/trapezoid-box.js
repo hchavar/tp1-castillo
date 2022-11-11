@@ -16,7 +16,7 @@ class TrapezoidBox extends Box {
     }
 
     getNormal(u, v) {
-        let angle = Math.atan(1 - 2 * this.reduction / this.width);
+        let angle = Math.atan( this.reduction / (this.width *this.scale.y ));
         let sn = super.getNormal(u, v);
         vec3.rotateZ(sn, sn, [0, 0, 0], sn[0]*angle);
         return sn;
