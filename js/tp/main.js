@@ -2,6 +2,7 @@
 var shaderProgram;
 var time = 0;
 var normalsMode = false;
+var noHasError = true;
 
 var gl;
 const menu = new Menu();
@@ -124,11 +125,12 @@ function loadShadersAndStartWebGL() {
 
 
 function tick() {
-
-    requestAnimationFrame(tick);
-    time += 0.1 * 1 / 60;
-    camera.update();
-    drawScene($canvas.width(), $canvas.height(), camera);
+    if (noHasError) {
+        requestAnimationFrame(tick);
+        time += 0.1 * 1 / 60;
+        camera.update();
+        drawScene($canvas.width(), $canvas.height(), camera);
+    }
 }
 
 

@@ -22,9 +22,15 @@ class Objeto3D {
     }
 
     build() {
-        this.init();
-        if (!this.empty) {
-            this.updateSurface();
+        try {
+            this.init();
+            if (!this.empty) {
+                this.updateSurface();
+            }
+        } catch (error) {
+            console.log('Hubo un error: ' + error);
+            console.error(error);
+            noHasError = false;
         }
     }
 
@@ -40,6 +46,7 @@ class Objeto3D {
         if (this.reuseBuffer) {
             if (!this.name) {
                 console.error('Cannot reuse unnamed surface: ' + this.constructor.name);
+                noHasError = false;
                 return;
             }
 
@@ -73,8 +80,14 @@ class Objeto3D {
 
         if (!this.empty) {
             
-            this.setMatrixUniforms(transform);
-            this.drawFromBuffers();
+            try {
+                this.setMatrixUniforms(transform);
+                this.drawFromBuffers();
+            } catch (error) {
+                console.log('Hubo un error: ' + error);
+                console.error(error);
+                noHasError = false;
+            }
         }
 
         this.children.forEach((child) => child.draw(transform));
