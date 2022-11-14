@@ -53,11 +53,9 @@ class Camera {
     update() {
         
         try {
-            this.target.offset[1] += (this.back - this.front + this.zoom * 0.05) * 0.1;
-            this.target.offset[1] = Math.max(0.5, this.target.offset[1]);
-            this.zoom = 0.0;
-            // this.updateEye();
+            
             this.target.update(this);
+            this.zoom = 0.0;
         } catch (error) {
             console.log('Hubo un error: ' + error);
             console.error(error);
@@ -78,22 +76,4 @@ class Camera {
         return [0, 1, 0];
     }
 
-    // updateEye() {
-
-    //     let m = glMatrix.mat4.create();
-
-    //     glMatrix.mat4.translate(m, m, this.target.at);
-
-    //     glMatrix.mat4.rotateY(m, m, this.alfa);
-    //     glMatrix.mat4.rotateX(m, m, this.beta);
-
-    //     glMatrix.mat4.translate(m, m, this.target.offset);
-
-
-    //     vec3.transformMat4(this.eye, vec3.create(), m);
-
-    //     // // debug
-    //     // console.log('a: ' + this.alfa + ' , beta: ' + this.beta);
-    //     // console.log('e: ' + (Math.round(this.eye[0] * 100) / 100) + ' , ' + (Math.round(this.eye[1] * 100) / 100) + ' , ' + (Math.round(this.eye[2] * 100) / 100));
-    // }
 }

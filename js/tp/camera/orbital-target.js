@@ -6,8 +6,9 @@ class OrbitalTarget extends Target {
         this._beta = 1.35;
     }
 
-    update() {
-
+    update(camera) {
+        this.offset[1] += (camera.back - camera.front + camera.zoom * 0.05) * 0.1;
+        this.offset[1] = Math.max(0.5, this.offset[1]);
         this.updateEye();
 
     }
