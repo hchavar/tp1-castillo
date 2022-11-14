@@ -11,8 +11,8 @@ class Camera {
         this.right = 0;
         this.front = 0;
         this.back = 0;
-        this.alfa = -0.16;
-        this.beta = 1.35;
+        // this.alfa = -0.16;
+        // this.beta = 1.35;
         // this.eye = [-3.5, 5, 22];
         // this.offset = [0, 23.0, 0];
         this.zoom = 0.0;
@@ -29,11 +29,11 @@ class Camera {
             if (this.previousPosX) deltaX = this.posX - this.previousPosX;
             if (this.previousPosY) deltaY = this.posY - this.previousPosY;
 
-            this.alfa += deltaX * this.angularVelocity;
-            this.beta += deltaY * this.angularVelocity;
+            this.target.alfa += deltaX * this.angularVelocity;
+            this.target.beta += deltaY * this.angularVelocity;
 
-            if (this.beta < 0.01) this.beta = 0.01;
-            if (this.beta > (Math.PI / 2 - 0.04)) this.beta = Math.PI / 2 - 0.04;
+            // if (this.beta < 0.01) this.beta = 0.01;
+            // if (this.beta > (Math.PI / 2 - 0.04)) this.beta = Math.PI / 2 - 0.04;
 
             this.previousPosX = this.posX;
             this.previousPosY = this.posY;
