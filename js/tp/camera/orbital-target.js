@@ -1,27 +1,9 @@
-class OrbitalTarget {
+class OrbitalTarget extends Target {
     constructor() {
+        super();
         this.eye = [-3.5, 5, 22];
         this._alfa = -0.16;
         this._beta = 1.35;
-    }
-
-    get alfa() {
-        return this._alfa;
-    }
-
-    set alfa(value) {
-        this._alfa = value;
-    }
-
-    get beta() {
-        return this._beta;
-    }
-
-    set beta(value) {
-        this._beta = value;
-
-        if (this._beta < 0.01) this._beta = 0.01;
-        if (this._beta > (Math.PI / 2 - 0.04)) this._beta = Math.PI / 2 - 0.04;
     }
 
     update() {
@@ -35,8 +17,7 @@ class OrbitalTarget {
 
         glMatrix.mat4.translate(m, m, this.at);
 
-        glMatrix.mat4.rotateY(m, m, this.alfa);
-        glMatrix.mat4.rotateX(m, m, this.beta);
+        this.rotate(m);
 
         glMatrix.mat4.translate(m, m, this.offset);
 

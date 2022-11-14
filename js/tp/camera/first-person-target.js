@@ -1,29 +1,11 @@
-class FirstPersonTarget {
+class FirstPersonTarget extends Target {
     constructor() {
+        super();
         this.eye = [-3.5, 5, 22];
         this.offset = [0, 23.0, 0];
         this.at = [0, 0, 0];
         this.alfa = 2.75;
         this.beta = 1.53;
-    }
-
-    get alfa() {
-        return this._alfa;
-    }
-
-    set alfa(value) {
-        this._alfa = value;
-    }
-
-    get beta() {
-        return this._beta;
-    }
-
-    set beta(value) {
-        this._beta = value;
-
-        if (this._beta < 0.01) this._beta = 0.01;
-        if (this._beta > (Math.PI / 2 - 0.04)) this._beta = Math.PI / 2 - 0.04;
     }
 
     update() {
@@ -37,8 +19,7 @@ class FirstPersonTarget {
 
         glMatrix.mat4.translate(m, m, this.eye);
 
-        glMatrix.mat4.rotateY(m, m, this.alfa);
-        glMatrix.mat4.rotateX(m, m, this.beta);
+        this.rotate(m);
 
         glMatrix.mat4.translate(m, m, this.offset);
 
