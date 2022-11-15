@@ -12,10 +12,10 @@ var vp, vp2, catapult;
 
 function createConfiguration(menu){
     
-    vp =  new Plane(25, 25);
-    vp.setRotation([-Math.PI / 2, [0, 0, 1]]);
-    vp.updateLocalMatrix();
-    vp.build();
+    // vp =  new Plane(25, 25);
+    // vp.setRotation([-Math.PI / 2, [0, 0, 1]]);
+    // vp.updateLocalMatrix();
+    // vp.build();
     // vp2 =  new Plane(25, 25);
     // vp2.setRotation([-Math.PI / 2, [0, 0, 1]]);
     // vp2.updateLocalMatrix();
@@ -28,34 +28,34 @@ function createConfiguration(menu){
         z: 1.5
     };
     water.build();
-    water.setPosition([0,-0.4,0]);
+    water.setPosition([0, -0.4, 0]);
     water.updateLocalMatrix();
     // srh = new RevolutionSurface(20,20);
     // c = new Cylinder(10, 10);
     // d = new Demo(128, 256);
-    // m = new Wall(20, 40, menu);
+    // m = new Wall(20, menu);
     // m.build();
     // //m.setRotation([-Math.PI / 2, [0, 1, 0]]);
     // m.setPosition([0,0,-6]);
     // m.updateLocalMatrix();
-    t = new Tower(30, menu);
-    t.build();
-    t.setPosition([6,0,0]);
-    t.updateLocalMatrix();
-    cr = new ConicalRoof(30, 30);
-    cr.build();
-    col = new Column(30, 30, menu);
-    col.build();
-    col2 = new Column(30, 30, menu);
-    col2.build();
-    col2.setPosition([3.00, 0, -5.00]);
-    col2.updatePosition();
-    box = new Box();
-    box.build();
-    box.setPosition([0.00, 0.0, 9.00]);
-    box.updatePosition();
-    gate = new Gate(menu);
-    gate.build();
+    // t = new Tower(30, menu);
+    // t.build();
+    // t.setPosition([6,0,0]);
+    // t.updateLocalMatrix();
+    // cr = new ConicalRoof(30, 30);
+    // cr.build();
+    // col = new Column(30, 30, menu);
+    // col.build();
+    // col2 = new Column(30, 30, menu);
+    // col2.build();
+    // col2.setPosition([3.00, 0, -5.00]);
+    // col2.updatePosition();
+    // box = new Box();
+    // box.build();
+    // box.setPosition([0.00, 0.0, 9.00]);
+    // box.updatePosition();
+    // gate = new Gate(menu);
+    // gate.build();
     // gate.setPosition([0, 1, 5.5]);
     // gate.updateLocalMatrix();
     castle = new Castle(menu);
@@ -72,12 +72,12 @@ function createConfiguration(menu){
     castle.setPosition([-2.50, 0, -2.50]);
     castle.updatePosition();
 
-    f = new Floor(menu);
+    // f = new Floor(menu);
 
-    f.build();
-    f.setPosition([0, 1.0, 5.5]);
-    // f.updatePosition();
-    f.updateLocalMatrix();
+    // f.build();
+    // f.setPosition([0, 1.0, 5.5]);
+    // // f.updatePosition();
+    // f.updateLocalMatrix();
 
     perimeter = new Perimeter(menu);
     perimeter.build();
@@ -100,41 +100,41 @@ function createConfiguration(menu){
     platform = new Platform();
     platform.build();
 
-    sphere = new Sphere(20, 20);
-    sphere.build();
-    sphere.setPosition([8.5, 0, 15]);
-    sphere.updateLocalMatrix();
+    // sphere = new Sphere(20, 20);
+    // sphere.build();
+    // sphere.setPosition([8.5, 0, 15]);
+    // sphere.updateLocalMatrix();
 
-    tb = new TrapezoidBox(8, 4);
-    tb.reduction = 0.6;
-    tb.build();
-    tb.setPosition([0, 0, 17]);
-    tb.updateLocalMatrix();
+    // tb = new TrapezoidBox();
+    // tb.reduction = 0.6;
+    // tb.build();
+    // tb.setPosition([0, 0, 17]);
+    // tb.updateLocalMatrix();
 
-    fr = new Frame();
-    fr.build();
+    // fr = new Frame();
+    // fr.build();
     // fr.setRotation([Math.PI*time, [0, 0, 1]]);
     // // fr.setPosition([0, 0, 17]);
     // fr.updateLocalMatrix();
 
-    axle = new Axle();
-    axle.build();
-    chasis = new Chasis();
-    chasis.build();
-    cw = new CounterWeight();
-    cw.setPosition([0, 0.8, 0]);
-    cw.updateLocalMatrix();
-    cw.build();
+    // axle = new Axle();
+    // axle.build();
+    // chasis = new Chasis();
+    // chasis.build();
+    // cw = new CounterWeight();
+    // cw.setPosition([0, 0.8, 0]);
+    // cw.updateLocalMatrix();
+    // cw.build();
 
-    arm = new Arm(menu);
-    arm.build();
+    // arm = new Arm(menu);
+    // arm.build();
 
-    // arm.setPosition([7.5, -0.2, 0]);
-    arm.updateLocalMatrix();
+    // // arm.setPosition([7.5, -0.2, 0]);
+    // arm.updateLocalMatrix();
 
-    fs = new FiringSystem(menu);
+    // fs = new FiringSystem(menu);
 
-    fs.build();
+    // fs.build();
 
     catapult = new Catapult(menu);
     catapult.build();
