@@ -83,7 +83,7 @@ function initShaders() {
     shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "normalMatrix");
     // shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
     // shaderProgram.useLightingUniform = gl.getUniformLocation(shaderProgram, "uUseLighting");
-    // shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
+    shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
     // shaderProgram.frameUniform = gl.getUniformLocation(shaderProgram, "time");
     // shaderProgram.lightingDirectionUniform = gl.getUniformLocation(shaderProgram, "uLightPosition");
     // shaderProgram.directionalColorUniform = gl.getUniformLocation(shaderProgram, "uDirectionalColor");

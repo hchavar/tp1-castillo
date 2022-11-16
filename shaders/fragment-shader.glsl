@@ -6,7 +6,7 @@
         // varying vec3 vColor;
 
 
-        // uniform vec3 uAmbientColor;
+        uniform vec3 uAmbientColor;
         // uniform vec3 uDirectionalColor;
         // uniform vec3 uLightPosition;
         uniform vec3 uColor;
@@ -24,11 +24,14 @@
 
             
             vec3 diffColor = uColor;
-            color = dot(lightDirection, vNormal) * diffColor + vec3(0.2, 0.2, 0.2);
-            color = mix(uColor, color, 0.3);
+            // color = dot(lightDirection, vNormal) * diffColor + vec3(0.2, 0.2, 0.2);
+            // color = dot(uAmbientColor, vNormal) * diffColor;
+            // color = mix(uColor, color, 0.3);
+
+            color = uAmbientColor * diffColor;
 
             if (uColorNormals) { 
-                diffColor = mix(vec3(0.7,0.7,0.7), vNormal, 0.4);
+                diffColor = mix(vec3(0.5,0.5,0.5), vNormal, 0.4);
                 // color = dot(lightDirection, vNormal) * diffColor + vec3(0.2, 0.2, 0.2);
                 // gl_FragColor = vec4(vNormal * .5 + .5, 1);
                 gl_FragColor = vec4(vNormal, 1);

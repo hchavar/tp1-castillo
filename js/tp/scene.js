@@ -18,7 +18,7 @@ function drawScene(width, height, camera) {
 
     gl.viewport(0, 0, width, height);
 
-    gl.clearColor(0.1, 0.8, 0.8, 1.0);
+    gl.clearColor(0.1, 0.6, 0.7, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     // Projection matrix
@@ -28,7 +28,7 @@ function drawScene(width, height, camera) {
 
     // Illumination
     gl.uniform1f(shaderProgram.frameUniform, time/10.0 );
-    gl.uniform3f(shaderProgram.ambientColorUniform, 0.6, 0.6, 0.6 );
+    gl.uniform3f(shaderProgram.ambientColorUniform, 0.35, 0.35, 0.5 );
     gl.uniform3f(shaderProgram.directionalColorUniform, 1.2, 1.1, 0.7);
     gl.uniform1i(shaderProgram.useLightingUniform, (lighting == "true"));
 
