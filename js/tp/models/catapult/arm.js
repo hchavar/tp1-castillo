@@ -45,14 +45,14 @@ const armConfig = {
 }
 
 class Arm extends Objeto3D {
-    constructor(menu, flyingLoad) {
+    constructor(menu) {
         super(null, null, menu);
         this.status = ArmStatus.WAITING;
         this.angle = 0.0;
         this.statusTime = time;
         this.velocity = 0.0;
         this.menu.addFireCatapult(this);
-        this.flyingLoad = flyingLoad;
+        this.flyingLoad = null;
     }
 
     init() {

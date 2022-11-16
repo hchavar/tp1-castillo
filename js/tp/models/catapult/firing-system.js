@@ -19,7 +19,7 @@ class FiringSystem extends Objeto3D {
 
     init() {
 
-        this.arm = new Arm(this.menu, this.flyingLoad);
+        this.arm = new Arm(this.menu);
         this.arm.setPosition(firingSystemConfig.arm.position);
         this.arm.updateLocalMatrix();
         this.arm.build();
@@ -38,6 +38,8 @@ class FiringSystem extends Objeto3D {
         this.flyingLoad.build();
         this.addChild(this.flyingLoad);
         this.menu.flyingLoad = this.flyingLoad;
+        this.arm.flyingLoad = this.flyingLoad;
+
     }
 
     animate() {
