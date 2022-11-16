@@ -1,5 +1,5 @@
 class TrapezoidBox extends Box {
-    constructor(width, height) {
+    constructor() {
         super();
 
     }

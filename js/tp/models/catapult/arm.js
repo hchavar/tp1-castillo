@@ -9,6 +9,8 @@ const ArmStatus = {
     CHARGED: 7
 }
 
+const HAND_DISTANCE = 7.5;
+
 const armConfig = {
     arm: {
         position: [0, 3.0, 0.0],
@@ -23,7 +25,7 @@ const armConfig = {
     },
     hand: {
         color: [0.9, 0.5, 0.3],
-        position: [-7.5, 0.162, 0.0],
+        position: [-HAND_DISTANCE, 0.162, 0.0],
         scale: {
             x: 1.0,
             y: 0.1,
@@ -31,13 +33,11 @@ const armConfig = {
         }
     },
     load: {
-        color: [0.5, 0.5, 0.5],
-        position: [-7.5 / 0.8, 1.2, 0.0],
-        scaleFactor: 0.8
+        position: [-HAND_DISTANCE / 1.0, 1.2, 0.0]
 
     },
     counterWeight: {
-        position: [0.5, 0.0, 0.00],
+        position: [0.5, 0.0, 0.0],
         color: [0.9, 0.5, 0.3],
         rotation: [Math.PI / 2, [1, 0, 0]],
         scaleFactor: 3
@@ -45,13 +45,14 @@ const armConfig = {
 }
 
 class Arm extends Objeto3D {
-    constructor(menu) {
+    constructor(menu, flyingLoad) {
         super(null, null, menu);
         this.status = ArmStatus.WAITING;
         this.angle = 0.0;
         this.statusTime = time;
         this.velocity = 0.0;
         this.menu.addFireCatapult(this);
+        this.flyingLoad = flyingLoad;
     }
 
     init() {
@@ -68,14 +69,11 @@ class Arm extends Objeto3D {
         hand.build();
         this.addChild(hand);
 
-        this.load = new Sphere(10, 10);
-        this.load.color = armConfig.load.color;
-        this.load.setScale(armConfig.load.scaleFactor);
+        this.load = new Load();
         this.load.setPosition(armConfig.load.position);
         this.load.updateLocalMatrix();
         this.load.build();
         this.addChild(this.load);
-        this.load.visible = false;
 
         let arm = new TrapezoidBox(4, 8);
         arm.scale = armConfig.arm.scale;
@@ -109,7 +107,7 @@ class Arm extends Objeto3D {
         this._status = value;
         this.statusTime = time;
     }
-    
+
     animate() {
         if (this.status == ArmStatus.WAITING) return;
 
@@ -117,6 +115,7 @@ class Arm extends Objeto3D {
         let deltaTime = () => (time - this.statusTime);
 
         if (this.status == ArmStatus.FIRING && this.angle < -2 * Math.PI / 5) {
+            this.flyingLoad.fire();
             this.status = ArmStatus.STOPPING;
         } else {
             if (this.status == ArmStatus.STOPPING && this.angle < -41 * Math.PI / 90) {
@@ -172,12 +171,12 @@ class Arm extends Objeto3D {
         this.renewLocalMatrix();
         this.setRotation([this.angle, [0, 0, 1]]);
         this.updateLocalMatrix();
-        
+
         // now rotate the conterweight
-        
+
         let m1 = mat4.create();
         mat4.rotate(m1, m1, -this.velocity * Math.PI / 18, [0, 0, 1]);
-        
+
         mat4.multiply(this.counterWeight.localMatrix, this.counterWeight.localMatrix, m1);
 
 

@@ -6,6 +6,9 @@ const firingSystemConfig = {
     armFrame: {
         position: [0.0, 0.0, 0.0],
         scaleFactor: 3
+    },
+    load: {
+        position: [0.0, HAND_DISTANCE + 0.2, 0.0]
     }
 }
 
@@ -16,7 +19,7 @@ class FiringSystem extends Objeto3D {
 
     init() {
 
-        this.arm = new Arm(this.menu);
+        this.arm = new Arm(this.menu, this.flyingLoad);
         this.arm.setPosition(firingSystemConfig.arm.position);
         this.arm.updateLocalMatrix();
         this.arm.build();
@@ -29,9 +32,16 @@ class FiringSystem extends Objeto3D {
         armFrame.build();
         this.addChild(armFrame);
 
+        this.flyingLoad = new Load();
+        this.flyingLoad.initialPosition = firingSystemConfig.load.position;
+        this.flyingLoad.updateLocalMatrix();
+        this.flyingLoad.build();
+        this.addChild(this.flyingLoad);
+        this.menu.flyingLoad = this.flyingLoad;
     }
 
     animate() {
         this.arm.animate();
+        this.flyingLoad.animate();
     }
 }

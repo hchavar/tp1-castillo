@@ -70,10 +70,11 @@ class Menu {
     }
 
     set catapultRotation(value) {
-        if (this._catapultRotation != value) {
-            this._catapultRotation = value;
-            this.notifyCatapults();
-        }
+        if (this._catapultRotation == value) return;
+        if (this.flyingLoad.visible) return;
+        
+        this._catapultRotation = value;
+        this.notifyCatapults();
     }
 
     get catapultRotation() {
@@ -111,6 +112,7 @@ class Menu {
         var f2 = this.gui.addFolder('Catapulta');
         f2.add(this, 'catapultRotation', 0, 360).name("Rotacion").step(2);
         f2.add(this, 'fireCatapult').name("Cargar y disparar");
+        f2.open();
 
         var f3 = this.gui.addFolder('Perimetro');
         f3.add(this, 'wallScale', 2, 5).name("Altura Muralla").step(0.5);
@@ -122,7 +124,7 @@ class Menu {
         f4.add(this, 'castleFloors', 1, 4).name("Pisos").step(1);
         f4.add(this, 'castleWidth', 2, 10).name("Ancho").step(2);
         f4.add(this, 'castleHeight', 2, 10).name("Profundidad").step(2);
-        f4.open();
+        // f4.open();
 
 
     }
