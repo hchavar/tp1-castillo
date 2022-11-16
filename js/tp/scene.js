@@ -43,5 +43,12 @@ function drawScene(width, height, camera) {
     var lightPosition = [10.0, 0.0, 3.0];
     gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightPosition);
 
-    drawConfiguration();
+   try {
+        drawConfiguration();
+    } catch (error) {
+        console.log('Hubo un error: ' + error);
+        console.error(error);
+        noHasError = false;
+
+    }
 }
