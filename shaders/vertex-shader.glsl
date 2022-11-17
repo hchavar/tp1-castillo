@@ -16,7 +16,7 @@
         void main(void) {
 
             highp vec3 directionalLightColor = vec3(1, 0.8, 0.4);
-            highp vec3 directionalVector = normalize(vec3(0.85, 0.2, 0.75));
+            highp vec3 directionalVector = normalize(vec3(0.738433, 0.173749, 0.651558));
             
             vec3 position = aPosition;
 
