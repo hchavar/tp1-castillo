@@ -28,7 +28,6 @@ function drawScene(width, height, camera) {
 
     // Illumination
     gl.uniform1f(shaderProgram.frameUniform, time/10.0 );
-    gl.uniform3f(shaderProgram.ambientColorUniform, 0.35, 0.35, 0.5 );
     gl.uniform3f(shaderProgram.directionalColorUniform, 1.2, 1.1, 0.7);
     gl.uniform1i(shaderProgram.useLightingUniform, (lighting == "true"));
 

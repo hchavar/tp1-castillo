@@ -1,6 +1,7 @@
 var MAX_CURVE_POINTS = 20;
 const defaultPosition = vec3.create();
 const defaultRotation = [0, vec3.create()];
+const defaultAmbientColor = [0.35, 0.35, 0.5];
 
 const buffersDict = {};
 
@@ -11,6 +12,7 @@ class Objeto3D {
     scaleFactor = 1.0;
     localMatrix = mat4.create();
     children = [];
+    ambientColor = defaultAmbientColor;
 
     constructor(width, height, menu) {
         this.width = width;
@@ -149,6 +151,7 @@ class Objeto3D {
         gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
         gl.uniform3f(shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
+        gl.uniform3f(shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
     
         let normalMatrix = mat3.create();
         mat3.fromMat4(normalMatrix, modelMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));
