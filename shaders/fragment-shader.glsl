@@ -36,7 +36,7 @@
         
         void colorNormals();
         void colorDefault();
-        void intensityLight(in vec3 L, out vec3 intenLight);
+        void intensityLight(in vec3 L, in vec3 A, out vec3 intenLight);
 
         void main(void) {
             
@@ -57,9 +57,9 @@
         void colorDefault() {
             // compute intensity for every light
             vec3 il = vec3(0.0);
-            for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 vec3 ili = vec3(0.0);
-                intensityLight(normalize(lights[i].position - vWorldPosition), ili);
+                intensityLight(normalize(lights[j].position - vWorldPosition), lights[j].ambient, ili);
                 il = il + ili;
             }
 
@@ -72,7 +72,7 @@
 
         }
 
-        void intensityLight(in vec3 L, out vec3 intenLight) {
+        void intensityLight(in vec3 L, in vec3 A, out vec3 intenLight) {
 
             vec3 N = normalize(vNormal);
 
@@ -89,9 +89,9 @@
             specular = pow(specAngle, shininessVal);
             
 
-            vec3 ld = Kd * lambertian * lights[0].ambient;
+            vec3 ld = Kd * lambertian * A;
 
-            vec3 ls = Ks * specular * lights[0].ambient;
+            vec3 ls = Ks * specular * A;
 
             vec3 rd = Kd * uColor;
             vec3 rs = vec3(1.0, 1.0, 1.0);
