@@ -5,10 +5,10 @@ const defaultConfig = {
     rotation: [0, vec3.create()],
     ambientColor: [0.35, 0.35, 0.5],
     reflection: {
-        ka: 0.7, // Ambient reflection coefficient
-        kd: 1.0, // Diffuse reflection coefficient
+        ka: 0.4, // Ambient reflection coefficient
+        kd: 0.6, // Diffuse reflection coefficient
         ks: 1.0, // Specular reflection coefficient
-        glossiness: 128.0
+        glossiness: 200.0
     }
 }
 

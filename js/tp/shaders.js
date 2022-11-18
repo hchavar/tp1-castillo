@@ -87,10 +87,12 @@ function initShaders() {
     // shaderProgram.frameUniform = gl.getUniformLocation(shaderProgram, "time");
     shaderProgram.lightingDirectionUniform = gl.getUniformLocation(shaderProgram, "uDirLightNormal");
     shaderProgram.directionalColorUniform = gl.getUniformLocation(shaderProgram, "uDirLightColor");
+    shaderProgram.viewPositionUniform = gl.getUniformLocation(shaderProgram, "uViewPosition");
     shaderProgram.glossinessFactorUniform = gl.getUniformLocation(shaderProgram, "shininessVal");
     shaderProgram.kaFactorUniform = gl.getUniformLocation(shaderProgram, "Ka");
     shaderProgram.kdFactorUniform = gl.getUniformLocation(shaderProgram, "Kd");
     shaderProgram.ksFactorUniform = gl.getUniformLocation(shaderProgram, "Ks");
+    shaderProgram.light1PositionUniform = gl.getUniformLocation(shaderProgram, "uPosLight1");
 
     shaderProgram.uColorUniform = gl.getUniformLocation(shaderProgram, "uColor");
 

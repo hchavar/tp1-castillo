@@ -41,6 +41,8 @@ function drawScene(width, height, camera) {
     var lightDirection = [0.85, 0.2, 0.75];
     vec3.normalize(lightDirection, lightDirection);
     gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightDirection);
+    gl.uniform3fv(shaderProgram.viewPositionUniform, camera.eye);
+    gl.uniform3f(shaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
 
    try {
         drawConfiguration();
