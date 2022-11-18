@@ -40,6 +40,8 @@ class FiringSystem extends Objeto3D {
         this.menu.flyingLoad = this.flyingLoad;
         this.arm.flyingLoad = this.flyingLoad;
 
+        this.menu.lights.push(this.flyingLoad);
+
     }
 
     animate() {

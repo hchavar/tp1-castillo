@@ -30,7 +30,8 @@ class Lamp extends Objeto3D {
         this.light.ka = 1.0;
         this.light.kd = 0.8;
         this.light.color = [1, 1, 1];
-        this.light.name = "LampLight"
+        this.light.name = "LampLight";
+        this.light.visible = true;
         // this.light.color = lampConfig.light.color;
         this.light.setScale(lampConfig.light.scaleFactor);
         this.light.setPosition(lampConfig.light.position);
