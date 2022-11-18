@@ -1,16 +1,33 @@
 var MAX_CURVE_POINTS = 20;
-const defaultPosition = vec3.create();
-const defaultRotation = [0, vec3.create()];
+
+const defaultConfig = {
+    position: vec3.create(),
+    rotation: [0, vec3.create()],
+    ambientColor: [0.35, 0.35, 0.5],
+    reflection: {
+        ka: 0.4, // Ambient reflection coefficient
+        kd: 0.6, // Diffuse reflection coefficient
+        ks: 0.2, // Specular reflection coefficient
+        glossiness: 8.0
+    }
+}
 
 const buffersDict = {};
 
 class Objeto3D {
     buffers = null;
-    pos = defaultPosition;
-    rot = defaultRotation;
+    pos = defaultConfig.position;
+    rot = defaultConfig.rotation;
     scaleFactor = 1.0;
     localMatrix = mat4.create();
     children = [];
+    ambientColor = defaultConfig.ambientColor;
+
+    // Phong model coefficients
+    ka = defaultConfig.reflection.ka;
+    kd = defaultConfig.reflection.kd;
+    ks = defaultConfig.reflection.ks;
+    glossiness = defaultConfig.reflection.glossiness;
 
     constructor(width, height, menu) {
         this.width = width;
@@ -124,7 +141,7 @@ class Objeto3D {
 
     updateRotation() {
         mat4.rotate( this.localMatrix, this.localMatrix, this.rot[0], this.rot[1] );
-        this.rot = defaultRotation;
+        this.rot = defaultConfig.rotation;
     }
 
     updateRotationRespectWorld(worldMatrix) {
@@ -149,6 +166,8 @@ class Objeto3D {
         gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
         gl.uniform3f(shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
+        gl.uniform3f(shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
+
     
         let normalMatrix = mat3.create();
         mat3.fromMat4(normalMatrix, modelMatrix); // normalMatrix= (inversa(traspuesta(matrizModelado)));
@@ -177,6 +196,10 @@ class Objeto3D {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
 
         gl.uniform1i(shaderProgram.uColorNormals, normalsMode);
+        gl.uniform1f(shaderProgram.kaFactorUniform, this.ka );
+        gl.uniform1f(shaderProgram.kdFactorUniform, this.kd );
+        gl.uniform1f(shaderProgram.ksFactorUniform, this.ks );
+        gl.uniform1f(shaderProgram.glossinessFactorUniform, this.glossiness );
     
         gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     
