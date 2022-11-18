@@ -27,9 +27,8 @@ function drawScene(width, height, camera) {
     mat4.scale(projMatrix, projMatrix, [1, -1, 1]); // parche para hacer un flip de Y, parece haber un bug en glmatrix
 
     // Illumination
-    gl.uniform1f(shaderProgram.frameUniform, time/10.0 );
-    gl.uniform3f(shaderProgram.directionalColorUniform, 1.2, 1.1, 0.7);
-    gl.uniform1i(shaderProgram.useLightingUniform, (lighting == "true"));
+    // gl.uniform1f(shaderProgram.frameUniform, time/10.0 );
+    gl.uniform3f(shaderProgram.directionalColorUniform, 1.0, 0.8, 0.4); 
 
     // Camera location
     viewMatrix = camera.viewMatrix;
@@ -39,8 +38,9 @@ function drawScene(width, height, camera) {
         camera.up
     );
 
-    var lightPosition = [10.0, 0.0, 3.0];
-    gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightPosition);
+    var lightDirection = [0.85, 0.2, 0.75];
+    vec3.normalize(lightDirection, lightDirection);
+    gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightDirection);
 
    try {
         drawConfiguration();
