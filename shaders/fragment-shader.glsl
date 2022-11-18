@@ -57,7 +57,7 @@
         void colorDefault() {
             // compute intensity for every light
             vec3 il = vec3(0.0);
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < 4; j++) {
                 vec3 ili = vec3(0.0);
                 intensityLight(normalize(lights[j].position - vWorldPosition), lights[j].ambient, ili);
                 il = il + ili;
