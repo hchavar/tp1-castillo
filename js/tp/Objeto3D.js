@@ -7,8 +7,8 @@ const defaultConfig = {
     reflection: {
         ka: 0.4, // Ambient reflection coefficient
         kd: 0.6, // Diffuse reflection coefficient
-        ks: 1.0, // Specular reflection coefficient
-        glossiness: 200.0
+        ks: 0.2, // Specular reflection coefficient
+        glossiness: 8.0
     }
 }
 

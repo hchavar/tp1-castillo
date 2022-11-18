@@ -27,6 +27,8 @@ function createConfiguration(menu){
         y: 1.0,
         z: 1.5
     };
+    water.glossiness = 100;
+    water.ks = 1.0;
     water.build();
     water.setPosition([0, -0.4, 0]);
     water.updateLocalMatrix();
@@ -100,10 +102,14 @@ function createConfiguration(menu){
     platform = new Platform();
     platform.build();
 
-    // sphere = new Sphere(20, 20);
-    // sphere.build();
-    // sphere.setPosition([8.5, 0, 15]);
-    // sphere.updateLocalMatrix();
+    sphere = new Sphere(20, 20);
+    sphere.ambientColor = [1, 1, 1];
+    sphere.color = [1, 1, 1];
+    sphere.ka = 1.0;
+    // sphere.ks = -2.0;
+    sphere.build();
+    sphere.setPosition([14.0, 4.0, 7.4]);
+    sphere.updateLocalMatrix();
 
     // tb = new TrapezoidBox();
     // tb.reduction = 0.6;
@@ -194,7 +200,7 @@ function drawConfiguration() {
 
     // col2.draw();
     // f.draw();
-    // sphere.draw();
+    sphere.draw();
     //tb.draw();
     // fr.setRotation([Math.PI*time, [0, 0, 1]]);
     // fr.updateLocalMatrix();
