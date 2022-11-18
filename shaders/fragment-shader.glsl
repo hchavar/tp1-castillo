@@ -20,6 +20,8 @@
         // uniform vec3 uPosLight2;
         // uniform vec3 uPosLight3;
 
+        uniform vec3 uColorLight1;
+
         uniform vec3 uDirLightColor;
         uniform vec3 uDirLightNormal;
         uniform vec3 uViewPosition;
@@ -78,9 +80,9 @@
             vec3 rd = Kd * uColor;
             vec3 rs = vec3(1.0, 1.0, 1.0);
 
-            float ld = Kd * lambertian;
+            vec3 ld = Kd * lambertian * uColorLight1;
 
-            float ls = Ks * specular;
+            vec3 ls = Ks * specular * uColorLight1;
 
             vec3 i = ra * la + rd * ld + rs * ls;
 

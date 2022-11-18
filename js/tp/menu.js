@@ -90,6 +90,26 @@ class Menu {
         return this._mode;
     }
 
+    set lightColor(value) {
+        if (this._lightColor != value) {
+            this._lightColor = value;
+            // this.notifyLights();
+        }
+    }
+
+    get lightColor() {
+        return this._lightColor;
+    }
+
+    lightColorToVector() {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this._lightColor);
+        return result ? [
+          parseInt(result[1], 16) / 255.0,
+          parseInt(result[2], 16) / 255.0,
+          parseInt(result[3], 16) / 255.0
+        ] : null;
+      }
+
     constructor() {
         this.gui = new dat.GUI();
         this.walls = [];
@@ -106,6 +126,8 @@ class Menu {
         this._castleWidth = 4;
         this._castleHeight = 4;
         this._catapultRotation = 180;
+        this._lightColor = "#1861b3";
+        this.gui.addColor(this,'lightColor').name("Color luz");
 
         this.gui.add(this, "mode", ["Default", "Normales"]);
 

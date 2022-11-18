@@ -14,7 +14,7 @@ function initScene(menu) {
     createConfiguration(menu);
 }
 
-function drawScene(width, height, camera) {
+function drawScene(width, height, camera, menu) {
 
     gl.viewport(0, 0, width, height);
 
@@ -43,6 +43,7 @@ function drawScene(width, height, camera) {
     gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightDirection);
     gl.uniform3fv(shaderProgram.viewPositionUniform, camera.eye);
     gl.uniform3f(shaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
+    gl.uniform3fv(shaderProgram.light1ColorUniform, menu.lightColorToVector());
 
    try {
         drawConfiguration();

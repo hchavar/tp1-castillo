@@ -93,6 +93,7 @@ function initShaders() {
     shaderProgram.kdFactorUniform = gl.getUniformLocation(shaderProgram, "Kd");
     shaderProgram.ksFactorUniform = gl.getUniformLocation(shaderProgram, "Ks");
     shaderProgram.light1PositionUniform = gl.getUniformLocation(shaderProgram, "uPosLight1");
+    shaderProgram.light1ColorUniform = gl.getUniformLocation(shaderProgram, "uColorLight1");
 
     shaderProgram.uColorUniform = gl.getUniformLocation(shaderProgram, "uColor");
 
