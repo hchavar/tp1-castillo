@@ -22,6 +22,7 @@ class Objeto3D {
     localMatrix = mat4.create();
     children = [];
     ambientColor = defaultConfig.ambientColor;
+    worldPosition = vec3.create();
 
     // Phong model coefficients
     ka = defaultConfig.reflection.ka;
@@ -94,6 +95,10 @@ class Objeto3D {
         let transform = mat4.clone(_transform);
 
         mat4.multiply(transform, transform, this.localMatrix);
+
+        this.worldPosition = vec3.create();
+
+        vec3.transformMat4(this.worldPosition, this.worldPosition, transform);
 
         if (!this.empty) {
             
