@@ -24,12 +24,12 @@ class Lamp extends Objeto3D {
     }
     
     init() {
-        this.name = this.constructor.name;
+        this.name = this.name ? this.name : this.constructor.name;
         this.light = new Sphere(20, 20);
-        this.light.ambientColor = this.ambientColor;
+        this.light.ambientColor = [1, 1, 1];
         this.light.ka = 1.0;
         this.light.kd = 0.8;
-        this.light.color = this.color;
+        this.light.color = [1, 1, 1];
         this.light.name = "LampLight"
         // this.light.color = lampConfig.light.color;
         this.light.setScale(lampConfig.light.scaleFactor);

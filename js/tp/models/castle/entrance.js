@@ -88,6 +88,38 @@ class Entrance extends Objeto3D {
 
         this.addChild(wall2);
 
+        let light1 = new Lamp(this.menu);
+        light1.name = "Lamp1";
+        let m1 = mat4.create();
+        mat4.rotate(m1, m1, -Math.PI / 4, [1, 0, 0]);
+        
+        light1.setScale(0.3);
+        light1.setPosition([-3 * HEIGHT, 1.5, -2.5]);
+        light1.updateLocalMatrix();
+        mat4.multiply(light1.localMatrix, light1.localMatrix, m1);
+        light1.build();
+
+
+
+        this.addChild(light1);
+
+        this.menu.lights.push(light1.light);
+
+        let light2 = new Lamp(this.menu);
+        light2.name = "Lamp2";
+        m1 = mat4.create();
+        mat4.rotate(m1, m1, -Math.PI / 4, [1, 0, 0]);
+        
+        light2.setScale(0.3);
+        light2.setPosition([3 * HEIGHT, 1.5, -2.5]);
+        light2.updateLocalMatrix();
+        mat4.multiply(light2.localMatrix, light2.localMatrix, m1);
+        light2.build();
+
+        this.addChild(light2);
+
+        this.menu.lights.push(light2.light);
+
     }
 
 }

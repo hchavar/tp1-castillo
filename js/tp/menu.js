@@ -113,6 +113,7 @@ class Menu {
     constructor() {
         this.gui = new dat.GUI();
         this.walls = [];
+        this.lights = [];
         this.gates = [];
         this.castleParts = [];
         this.perimeters = [];
