@@ -92,8 +92,14 @@ function initShaders() {
     shaderProgram.kaFactorUniform = gl.getUniformLocation(shaderProgram, "Ka");
     shaderProgram.kdFactorUniform = gl.getUniformLocation(shaderProgram, "Kd");
     shaderProgram.ksFactorUniform = gl.getUniformLocation(shaderProgram, "Ks");
-    shaderProgram.light1PositionUniform = gl.getUniformLocation(shaderProgram, "uPosLight1");
-    shaderProgram.light1ColorUniform = gl.getUniformLocation(shaderProgram, "uColorLight1");
+    shaderProgram.lights = [];
+    for (let i = 0; i < 4; i++) {
+        const light = {
+            position: gl.getUniformLocation(shaderProgram, "lights["+ i + "].position"),
+            color: gl.getUniformLocation(shaderProgram, "lights["+ i + "].ambient")
+        };
+        shaderProgram.lights.push(light);
+    }
 
     shaderProgram.uColorUniform = gl.getUniformLocation(shaderProgram, "uColor");
 

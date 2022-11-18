@@ -35,4 +35,10 @@ class Sphere extends Objeto3D {
     getTextureCoordinates(u, v) {
         return [u, v];
     }
+
+    get lightColor() {
+        if (this.visible) return this.color;
+
+        return [0, 0, 0];
+    }
 }

@@ -16,9 +16,12 @@
         // // Material color
         uniform vec3 uAmbientColor;
 
-        uniform vec3 uPosLight1;
-        // uniform vec3 uPosLight2;
-        // uniform vec3 uPosLight3;
+        struct Light {
+            vec3 position;
+            vec3 ambient;
+        };
+
+        uniform Light lights[4];
 
         uniform vec3 uColorLight1;
 
@@ -52,16 +55,16 @@
         }
 
         void colorDefault() {
-            // // lights directions
-            vec3 lightDir1 = normalize(uPosLight1 - vWorldPosition);
-            // vec3 lightDir2 = normalize(uPosLight2 - vWorldPosition);
-            // vec3 lightDir3 = normalize(uPosLight3 - vWorldPosition);
+            // compute intensity for every light
+            vec3 il = vec3(0.0);
+            for (int i = 0; i < 3; i++) {
+                vec3 ili = vec3(0.0);
+                intensityLight(normalize(lights[i].position - vWorldPosition), ili);
+                il = il + ili;
+            }
 
             vec3 ra = Ka * uColor;
             vec3 la = uAmbientColor;
-
-            vec3 il = vec3(0.0);
-            intensityLight(lightDir1, il);
 
             vec3 i = ra * la + il;
 
@@ -86,9 +89,9 @@
             specular = pow(specAngle, shininessVal);
             
 
-            vec3 ld = Kd * lambertian * uColorLight1;
+            vec3 ld = Kd * lambertian * lights[0].ambient;
 
-            vec3 ls = Ks * specular * uColorLight1;
+            vec3 ls = Ks * specular * lights[0].ambient;
 
             vec3 rd = Kd * uColor;
             vec3 rs = vec3(1.0, 1.0, 1.0);

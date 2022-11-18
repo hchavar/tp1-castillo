@@ -16,37 +16,44 @@ function initScene(menu) {
 
 function drawScene(width, height, camera, menu) {
 
-    gl.viewport(0, 0, width, height);
+    try {
+        gl.viewport(0, 0, width, height);
 
-    gl.clearColor(0.1, 0.6, 0.7, 1.0);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        gl.clearColor(0.1, 0.6, 0.7, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    // Projection matrix
-    mat4.identity(projMatrix);
-    mat4.perspective(projMatrix, 30, aspect, 0.1, 100.0);
-    mat4.scale(projMatrix, projMatrix, [1, -1, 1]); // parche para hacer un flip de Y, parece haber un bug en glmatrix
+        // Projection matrix
+        mat4.identity(projMatrix);
+        mat4.perspective(projMatrix, 30, aspect, 0.1, 100.0);
+        mat4.scale(projMatrix, projMatrix, [1, -1, 1]); // parche para hacer un flip de Y, parece haber un bug en glmatrix
 
-    // Illumination
-    // gl.uniform1f(shaderProgram.frameUniform, time/10.0 );
-    gl.uniform3f(shaderProgram.directionalColorUniform, 1.0, 0.8, 0.4); 
+        // Illumination
+        // gl.uniform1f(shaderProgram.frameUniform, time/10.0 );
+        gl.uniform3f(shaderProgram.directionalColorUniform, 1.0, 0.8, 0.4); 
 
-    // Camera location
-    viewMatrix = camera.viewMatrix;
-    mat4.lookAt(viewMatrix,
-        camera.eye,
-        camera.at,
-        camera.up
-    );
+        // Camera location
+        viewMatrix = camera.viewMatrix;
+        mat4.lookAt(viewMatrix,
+            camera.eye,
+            camera.at,
+            camera.up
+        );
 
-    var lightDirection = [0.85, 0.2, 0.75];
-    vec3.normalize(lightDirection, lightDirection);
-    gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightDirection);
-    gl.uniform3fv(shaderProgram.viewPositionUniform, camera.eye);
-    gl.uniform3f(shaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
-    gl.uniform3fv(shaderProgram.light1ColorUniform, menu.lightColorToVector());
+        var lightDirection = [0.85, 0.2, 0.75];
+        vec3.normalize(lightDirection, lightDirection);
+        gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightDirection);
+        gl.uniform3fv(shaderProgram.viewPositionUniform, camera.eye);
+        gl.uniform3f(shaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
+        gl.uniform3fv(shaderProgram.light1ColorUniform, menu.lightColorToVector());
 
-   try {
+        for (let i = 0; i < 4; i++) {
+
+            gl.uniform3fv(shaderProgram.lights[i].position, menu.lights[i].worldPosition);
+            gl.uniform3fv(shaderProgram.lights[i].color, menu.lights[i].lightColor);
+        }
+
         drawConfiguration();
+
     } catch (error) {
         console.log('Hubo un error: ' + error);
         console.error(error);
