@@ -126,7 +126,7 @@ class Menu {
         this._castleWidth = 4;
         this._castleHeight = 4;
         this._catapultRotation = 180;
-        this._lightColor = "#1861b3";
+        this._lightColor = "#ffffff";
         this.gui.addColor(this,'lightColor').name("Color luz");
 
         this.gui.add(this, "mode", ["Default", "Normales"]);
