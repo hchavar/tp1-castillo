@@ -58,7 +58,7 @@
             vec3 il = vec3(0.0);
             for (int j = 0; j < 4; j++) {
                 vec3 ili = vec3(0.0);
-                intensityLight(normalize(lights[j].position - vWorldPosition), lights[j].ambient, ili);
+                intensityLight(lights[j].position - vWorldPosition, lights[j].ambient, ili);
                 il = il + ili;
             }
 
@@ -77,8 +77,10 @@
 
         }
 
-        void intensityLight(in vec3 L, in vec3 A, out vec3 intenLight) {
+        void intensityLight(in vec3 positionToLightSource, in vec3 A, out vec3 intenLight) {
 
+            float attenuation = 1.0 / length(positionToLightSource);
+            vec3 L = normalize(positionToLightSource);
             vec3 N = normalize(vNormal);
 
             vec3 viewDir = normalize(uViewPosition - vWorldPosition);
@@ -94,9 +96,9 @@
             specular = pow(specAngle, shininessVal);
             
 
-            vec3 ld = Kd * lambertian * A;
+            vec3 ld = Kd * lambertian * A * attenuation;
 
-            vec3 ls = Ks * specular * A;
+            vec3 ls = Ks * specular * A * attenuation;
 
             vec3 rd = Kd * uColor;
             vec3 rs = vec3(1.0, 1.0, 1.0);
