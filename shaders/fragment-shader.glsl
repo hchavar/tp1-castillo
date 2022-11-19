@@ -23,8 +23,6 @@
 
         uniform Light lights[4];
 
-        uniform vec3 uColorLight1;
-
         uniform vec3 uDirLightColor;
         uniform vec3 uDirLightNormal;
         uniform vec3 uViewPosition;

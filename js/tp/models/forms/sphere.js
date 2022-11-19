@@ -37,7 +37,7 @@ class Sphere extends Objeto3D {
     }
 
     get lightColor() {
-        if (this.visible) return this.color;
+        if (this.visible) return this.ambientColor;
 
         return [0, 0, 0];
     }

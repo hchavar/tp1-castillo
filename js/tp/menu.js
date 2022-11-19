@@ -93,7 +93,12 @@ class Menu {
     set lightColor(value) {
         if (this._lightColor != value) {
             this._lightColor = value;
-            // this.notifyLights();
+            
+            let colorVector = this.lightColorToVector();
+            for (const l of this.lights) {
+                l.color = colorVector;
+                l.ambientColor = colorVector;
+            }
         }
     }
 
