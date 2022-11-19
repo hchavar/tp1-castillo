@@ -28,7 +28,8 @@ class Lamp extends Objeto3D {
         this.light = new Sphere(20, 20);
         this.light.ambientColor = [1, 1, 1];
         this.light.ka = 1.0;
-        this.light.kd = 0.8;
+        this.light.kd = 0.0;
+        this.light.ks = 0.0;
         this.light.color = [1, 1, 1];
         this.light.name = "LampLight";
         this.light.visible = true;
