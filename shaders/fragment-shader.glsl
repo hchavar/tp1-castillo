@@ -6,6 +6,7 @@
 
         uniform vec3 uColor;
         uniform bool uColorNormals;
+        uniform bool uDirLight;
 
         // uniform int mode;   // Rendering mode
         uniform float Ka;   // Ambient reflection coefficient
@@ -59,6 +60,12 @@
                 vec3 ili = vec3(0.0);
                 intensityLight(normalize(lights[j].position - vWorldPosition), lights[j].ambient, ili);
                 il = il + ili;
+            }
+
+            if (uDirLight) {
+                vec3 ild = vec3(0.0);
+                intensityLight(uDirLightNormal, uDirLightColor, ild);
+                il = il + ild;
             }
 
             vec3 ra = Ka * uColor;

@@ -104,4 +104,5 @@ function initShaders() {
     shaderProgram.uColorUniform = gl.getUniformLocation(shaderProgram, "uColor");
 
     shaderProgram.uColorNormals = gl.getUniformLocation(shaderProgram, "uColorNormals");
+    shaderProgram.uDirectionalActivated = gl.getUniformLocation(shaderProgram, "uDirLight");
 }

@@ -50,6 +50,8 @@ window.onkeypress = (e) => {
         camera.target = catapultTarget;
     } else if (e.key === '3') {
         camera.target = firstPersonTarget;
+    } else if (e.key === 'l') {
+        menu.directionalLight = !menu.directionalLight;
     }
 };
 

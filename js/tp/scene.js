@@ -39,12 +39,14 @@ function drawScene(width, height, camera, menu) {
             camera.up
         );
 
+        gl.uniform1i(shaderProgram.uDirectionalActivated, menu.directionalLight);
+        
         var lightDirection = [0.85, 0.2, 0.75];
         vec3.normalize(lightDirection, lightDirection);
         gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightDirection);
         gl.uniform3fv(shaderProgram.viewPositionUniform, camera.eye);
-        gl.uniform3f(shaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
-        gl.uniform3fv(shaderProgram.light1ColorUniform, menu.lightColorToVector());
+        // gl.uniform3f(shaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
+        // gl.uniform3fv(shaderProgram.light1ColorUniform, menu.lightColorToVector());
 
         for (let i = 0; i < 4; i++) {
 
