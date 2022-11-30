@@ -1,5 +1,5 @@
 
-var shaderProgram;
+var globalShaderProgram;
 var time = 0;
 var normalsMode = false;
 var noHasError = true;

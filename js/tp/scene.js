@@ -28,8 +28,8 @@ function drawScene(width, height, camera, menu) {
         mat4.scale(projMatrix, projMatrix, [1, -1, 1]); // parche para hacer un flip de Y, parece haber un bug en glmatrix
 
         // Illumination
-        // gl.uniform1f(shaderProgram.frameUniform, time/10.0 );
-        gl.uniform3f(shaderProgram.directionalColorUniform, 1.0, 0.8, 0.4); 
+        // gl.uniform1f(globalShaderProgram.frameUniform, time/10.0 );
+        gl.uniform3f(globalShaderProgram.directionalColorUniform, 1.0, 0.8, 0.4); 
 
         // Camera location
         viewMatrix = camera.viewMatrix;
@@ -39,19 +39,19 @@ function drawScene(width, height, camera, menu) {
             camera.up
         );
 
-        gl.uniform1i(shaderProgram.uDirectionalActivated, menu.directionalLight);
+        gl.uniform1i(globalShaderProgram.uDirectionalActivated, menu.directionalLight);
         
         var lightDirection = [0.85, 0.2, 0.75];
         vec3.normalize(lightDirection, lightDirection);
-        gl.uniform3fv(shaderProgram.lightingDirectionUniform, lightDirection);
-        gl.uniform3fv(shaderProgram.viewPositionUniform, camera.eye);
-        // gl.uniform3f(shaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
-        // gl.uniform3fv(shaderProgram.light1ColorUniform, menu.lightColorToVector());
+        gl.uniform3fv(globalShaderProgram.lightingDirectionUniform, lightDirection);
+        gl.uniform3fv(globalShaderProgram.viewPositionUniform, camera.eye);
+        // gl.uniform3f(globalShaderProgram.light1PositionUniform, 14.0, 4.0, 7.4); 
+        // gl.uniform3fv(globalShaderProgram.light1ColorUniform, menu.lightColorToVector());
 
         for (let i = 0; i < 4; i++) {
 
-            gl.uniform3fv(shaderProgram.lights[i].position, menu.lights[i].worldPosition);
-            gl.uniform3fv(shaderProgram.lights[i].color, menu.lights[i].lightColor);
+            gl.uniform3fv(globalShaderProgram.lights[i].position, menu.lights[i].worldPosition);
+            gl.uniform3fv(globalShaderProgram.lights[i].color, menu.lights[i].lightColor);
         }
 
         drawConfiguration();

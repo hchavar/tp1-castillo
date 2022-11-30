@@ -23,6 +23,7 @@ class Objeto3D {
     children = [];
     ambientColor = defaultConfig.ambientColor;
     worldPosition = vec3.create();
+    shaderProgram = globalShaderProgram;
 
     // Phong model coefficients
     ka = defaultConfig.reflection.ka;
@@ -106,7 +107,8 @@ class Objeto3D {
                 this.setMatrixUniforms(transform);
                 this.drawFromBuffers();
             } catch (error) {
-                console.log('Hubo un error: ' + error);
+                const objectName = this.name ? this.name : this.constructor.name; 
+                console.log(objectName + '. Error: ' + error);
                 console.error(error);
                 noHasError = false;
             }
@@ -167,11 +169,11 @@ class Objeto3D {
 
     setMatrixUniforms(modelMatrix) {
 
-        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
-        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
-        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
-        gl.uniform3f(shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
-        gl.uniform3f(shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
+        gl.uniformMatrix4fv(this.shaderProgram.mMatrixUniform, false, modelMatrix);
+        gl.uniformMatrix4fv(this.shaderProgram.vMatrixUniform, false, viewMatrix);
+        gl.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, projMatrix);
+        gl.uniform3f(this.shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
+        gl.uniform3f(this.shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
 
     
         let normalMatrix = mat3.create();
@@ -180,41 +182,41 @@ class Objeto3D {
         mat3.invert(normalMatrix, normalMatrix);
         mat3.transpose(normalMatrix, normalMatrix);
     
-        gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
+        gl.uniformMatrix3fv(this.shaderProgram.nMatrixUniform, false, normalMatrix);
     }
 
     drawFromBuffers() {
     
         // Se configuran los buffers que alimentaron el pipeline
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.positionBuffer);
-        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
-        // gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        // gl.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.normalBuffer);
-        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(this.shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.colorBuffer);
-        // gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        // gl.vertexAttribPointer(this.shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
            
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
 
-        gl.uniform1i(shaderProgram.uColorNormals, normalsMode);
-        gl.uniform1f(shaderProgram.kaFactorUniform, this.ka );
-        gl.uniform1f(shaderProgram.kdFactorUniform, this.kd );
-        gl.uniform1f(shaderProgram.ksFactorUniform, this.ks );
-        gl.uniform1f(shaderProgram.glossinessFactorUniform, this.glossiness );
+        gl.uniform1i(this.shaderProgram.uColorNormals, normalsMode);
+        gl.uniform1f(this.shaderProgram.kaFactorUniform, this.ka );
+        gl.uniform1f(this.shaderProgram.kdFactorUniform, this.kd );
+        gl.uniform1f(this.shaderProgram.ksFactorUniform, this.ks );
+        gl.uniform1f(this.shaderProgram.glossinessFactorUniform, this.glossiness );
     
         gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     
         // if (menu.modo != "wireframe"){
-        //     // gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));
+        //     // gl.uniform1i(this.shaderProgram.useLightingUniform,(lighting=="true"));
         //     gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         // }
         
         // if (menu.modo != "smooth") {
-        //     // gl.uniform1i(shaderProgram.useLightingUniform,false);
+        //     // gl.uniform1i(this.shaderProgram.useLightingUniform,false);
         //     gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         // }
      
