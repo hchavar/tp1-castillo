@@ -213,6 +213,7 @@ class Objeto3D {
         gl.uniform1f(this.shaderProgram.kdFactorUniform, this.kd );
         gl.uniform1f(this.shaderProgram.ksFactorUniform, this.ks );
         gl.uniform1f(this.shaderProgram.glossinessFactorUniform, this.glossiness );
+        gl.uniform1i(this.shaderProgram.uHasTexture, this.srcImage ? true : false);
     
         gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     

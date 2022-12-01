@@ -8,6 +8,7 @@
         uniform vec3 uColor;
         uniform bool uColorNormals;
         uniform bool uDirLight;
+        uniform bool uHasTexture;
 
         // uniform int mode;   // Rendering mode
         uniform float Ka;   // Ambient reflection coefficient
@@ -67,13 +68,19 @@
                 il = il + ild;
             }
 
-            vec3 ra = Ka * uColor;
-            vec3 la = uAmbientColor;
+            vec4 color = vec4(uColor, 1.0);
 
-            vec3 i = ra * la + il;
+            if (uHasTexture) {
+                color = texture2D(uSampler2D, vUv);
+            }
+
+            vec4 ra = Ka * color;
+            vec4 la = vec4(uAmbientColor, 1.0);
+
+            vec4 i = ra * la + vec4(il, 1.0);
 
             // gl_FragColor = texture2D(uSampler2D, vUv);
-            gl_FragColor = vec4(i, 1.0);
+            gl_FragColor = i;
 
         }
 

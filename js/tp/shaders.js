@@ -105,4 +105,5 @@ function initShaders() {
 
     globalShaderProgram.uColorNormals = gl.getUniformLocation(globalShaderProgram, "uColorNormals");
     globalShaderProgram.uDirectionalActivated = gl.getUniformLocation(globalShaderProgram, "uDirLight");
+    globalShaderProgram.uHasTexture = gl.getUniformLocation(globalShaderProgram, "uHasTexture");
 }
