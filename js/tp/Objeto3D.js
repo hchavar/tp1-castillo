@@ -197,8 +197,8 @@ class Objeto3D {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.positionBuffer);
         gl.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
-        // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
-        // gl.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
+        gl.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.normalBuffer);
         gl.vertexAttribPointer(this.shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);

@@ -2,6 +2,7 @@
 
         varying vec3 vNormal;
         varying vec3 vWorldPosition;
+        varying vec2 vUv;
 
 
         uniform vec3 uColor;
@@ -28,10 +29,8 @@
         uniform vec3 uDirLightNormal;
         uniform vec3 uViewPosition;
 
+        uniform sampler2D uSampler2D;
 
-        vec3 color;
-
-        varying highp vec3 vLighting;
         
         void colorNormals();
         void colorDefault();
@@ -73,6 +72,7 @@
 
             vec3 i = ra * la + il;
 
+            // gl_FragColor = texture2D(uSampler2D, vUv);
             gl_FragColor = vec4(i, 1.0);
 
         }

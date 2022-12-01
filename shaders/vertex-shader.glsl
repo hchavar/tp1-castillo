@@ -1,5 +1,6 @@
         attribute vec3 aPosition;
         attribute vec3 aNormal;
+        attribute vec2 aUv;
 
 
         uniform mat4 projMatrix;
@@ -10,6 +11,7 @@
 
         varying vec3 vWorldPosition;
         varying vec3 vNormal;
+        varying vec2 vUv;
 
         void main(void) {
 
@@ -21,5 +23,6 @@
 
             vWorldPosition = worldPos.xyz;
             vNormal = normalize(normalMatrix * aNormal);
+            vUv = aUv;
 
         }
