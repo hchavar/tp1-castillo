@@ -47,6 +47,7 @@ class Objeto3D {
         try {
             this.init();
             if (!this.empty) {
+                this.loadTexture();
                 this.updateSurface();
             }
         } catch (error) {
@@ -392,6 +393,8 @@ class Objeto3D {
     }
 
     loadTexture() {
+        
+        if (!this.srcImage) return;
         
         function isPowerOf2(value) {
             return (value & (value - 1)) === 0;
