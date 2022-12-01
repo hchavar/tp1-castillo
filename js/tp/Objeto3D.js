@@ -13,6 +13,7 @@ const defaultConfig = {
 }
 
 const buffersDict = {};
+const texturesDict = {};
 
 class Objeto3D {
     buffers = null;
@@ -395,9 +396,15 @@ class Objeto3D {
         function isPowerOf2(value) {
             return (value & (value - 1)) === 0;
         }
+
+        if (texturesDict[this.name]) {
+            this.texture = texturesDict[this.name];
+            return;
+        }
         
         this.texture = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
+        texturesDict[this.name] = this.texture;
 
         const level = 0;
         const internalFormat = gl.RGBA;
