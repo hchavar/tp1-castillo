@@ -51,9 +51,7 @@ class Objeto3D {
                 this.updateSurface();
             }
         } catch (error) {
-            console.log('Hubo un error: ' + error);
-            console.error(error);
-            noHasError = false;
+            this.handleError(error);
         }
     }
 
@@ -111,14 +109,18 @@ class Objeto3D {
                 this.setMatrixUniforms(transform);
                 this.drawFromBuffers();
             } catch (error) {
-                const objectName = this.name ? this.name : this.constructor.name; 
-                console.log(objectName + '. Error: ' + error);
-                console.error(error);
-                noHasError = false;
+                this.handleError(error);
             }
         }
 
         this.children.forEach((child) => child.draw(transform));
+    }
+
+    handleError(error) {
+        const objectName = this.name ? this.name : this.constructor.name;
+        console.log(objectName + '. Error: ' + error);
+        console.error(error);
+        noHasError = false;
     }
 
     setPosition(position) {
