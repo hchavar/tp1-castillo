@@ -2,6 +2,7 @@ class Menu {
 
     // modo = "edges";
     _mode = "Default";
+    directionalLight = true;
 
     set wallScale(newScale) {
         if (this._wallScale != newScale) {
