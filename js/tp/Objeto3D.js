@@ -3,7 +3,7 @@ var MAX_CURVE_POINTS = 20;
 const defaultConfig = {
     position: vec3.create(),
     rotation: [0, vec3.create()],
-    ambientColor: [0.35, 0.35, 0.5],
+    ambientColor: [0.75, 0.75, 0.85],
     reflection: {
         ka: 0.4, // Ambient reflection coefficient
         kd: 0.6, // Diffuse reflection coefficient
@@ -14,6 +14,13 @@ const defaultConfig = {
 
 const buffersDict = {};
 const texturesDict = {};
+
+const level = 0;
+const width = 1;
+const height = 1;
+const border = 0;
+const pixel = new Uint8Array([0, 0, 255, 255]); // opaque blue
+
 
 class Objeto3D {
     buffers = null;
@@ -27,6 +34,7 @@ class Objeto3D {
     shaderProgram = globalShaderProgram;
     srcImage = null;
     texture = null;
+    image = null;
 
     // Phong model coefficients
     ka = defaultConfig.reflection.ka;
@@ -107,6 +115,9 @@ class Objeto3D {
             
             try {
                 this.setMatrixUniforms(transform);
+                // esto afecta la performance
+                // if (this.image && this.image.loaded)
+                //     this.bindImage(level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
                 this.drawFromBuffers();
             } catch (error) {
                 this.handleError(error);
@@ -213,7 +224,7 @@ class Objeto3D {
         gl.uniform1f(this.shaderProgram.kdFactorUniform, this.kd );
         gl.uniform1f(this.shaderProgram.ksFactorUniform, this.ks );
         gl.uniform1f(this.shaderProgram.glossinessFactorUniform, this.glossiness );
-        gl.uniform1i(this.shaderProgram.uHasTexture, this.srcImage ? true : false);
+        gl.uniform1i(this.shaderProgram.uHasTexture, this.image ? this.image.loaded : false);
     
         gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     
@@ -399,9 +410,7 @@ class Objeto3D {
         
         if (!this.srcImage) return;
         
-        function isPowerOf2(value) {
-            return (value & (value - 1)) === 0;
-        }
+        
 
         if (texturesDict[this.name]) {
             this.texture = texturesDict[this.name];
@@ -412,49 +421,53 @@ class Objeto3D {
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
         texturesDict[this.name] = this.texture;
 
-        const level = 0;
-        const internalFormat = gl.RGBA;
-        const width = 1;
-        const height = 1;
-        const border = 0;
-        const srcFormat = gl.RGBA;
-        const srcType = gl.UNSIGNED_BYTE;
-        const pixel = new Uint8Array([0, 0, 255, 255]); // opaque blue
+        
         gl.texImage2D(
             gl.TEXTURE_2D,
             level,
-            internalFormat,
+            gl.RGBA,
             width,
             height,
             border,
-            srcFormat,
-            srcType,
+            gl.RGBA,
+            gl.UNSIGNED_BYTE,
             pixel
         );
 
-        const image = new Image();
-        image.onload = () => {
-            gl.bindTexture(gl.TEXTURE_2D, this.texture);
-            gl.texImage2D(
-                gl.TEXTURE_2D,
-                level,
-                internalFormat,
-                srcFormat,
-                srcType,
-                image
-            );
+        this.image = new Image();
+        this.image.onload = () => {
+            this.bindImage(level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
+            this.image.loaded = true;
 
-            if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
-                gl.generateMipmap(gl.TEXTURE_2D);
-            } else {
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-            }
         };
-        image.src = this.srcImage;
+        this.image.src = this.srcImage;
 
     }
 
 
+
+    bindImage(level, internalFormat, srcFormat, srcType, image) {
+        
+        function isPowerOf2(value) {
+            return (value & (value - 1)) === 0;
+        }
+        
+        gl.bindTexture(gl.TEXTURE_2D, this.texture);
+        gl.texImage2D(
+            gl.TEXTURE_2D,
+            level,
+            internalFormat,
+            srcFormat,
+            srcType,
+            image
+        );
+
+        if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
+            gl.generateMipmap(gl.TEXTURE_2D);
+        } else {
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        }
+    }
 }

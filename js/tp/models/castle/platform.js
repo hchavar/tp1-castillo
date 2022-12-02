@@ -8,6 +8,7 @@ class Platform extends RevolutionSurface {
         this.name = this.constructor.name;
         this.glossiness = 5;
         this.ks = 0.01;
+        this.srcImage = "img/seamless_grass2.jpg";
 
         super.init();
         this.empty = false;
@@ -32,5 +33,16 @@ class Platform extends RevolutionSurface {
             [[wir, -2.00, 0.00], [wir*0.75 + 0.25*cr, -1.5, 0.00], [wir*0.50 + 0.50*cr, -0.5, 0.00], [cr, 0.00, 0.00]],
             [[cr, 0.00, 0.00], [cr/2, 0.00, 0.00], [cr/4, 0.00, 0.00], [0.0, 0.00, 0.00]]
         ];
+    }
+
+    getTextureCoordinates(u, v) {
+        let pos = this.getPosition(u, v);
+
+        if (pos[1] == 0.0) {
+            return [pos[2]/2.0 - 0.5, pos[0]/2.0 - 0.5]
+        }
+        
+        
+        return [pos[1], pos[0]];
     }
 }

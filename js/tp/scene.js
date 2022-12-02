@@ -1,4 +1,4 @@
-var lighting = "true";
+// var lighting = "true";
 
 var mat4 = glMatrix.mat4;
 var mat3 = glMatrix.mat3;
