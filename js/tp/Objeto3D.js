@@ -115,12 +115,13 @@ class Objeto3D {
             
             try {
                 this.setMatrixUniforms(transform);
-                // esto afecta la performance
-                // if (this.image && this.image.loaded)
-                //     this.bindImage(level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
+                
+                if (this.image && this.image.loaded)
+                    gl.bindTexture(gl.TEXTURE_2D, this.texture);
                 this.drawFromBuffers();
             } catch (error) {
                 this.handleError(error);
+                return;
             }
         }
 
