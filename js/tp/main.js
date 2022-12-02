@@ -1,5 +1,5 @@
 
-var shaderProgram;
+var globalShaderProgram;
 var time = 0;
 var normalsMode = false;
 var noHasError = true;
@@ -50,6 +50,8 @@ window.onkeypress = (e) => {
         camera.target = catapultTarget;
     } else if (e.key === '3') {
         camera.target = firstPersonTarget;
+    } else if (e.key === 'l') {
+        menu.directionalLight = !menu.directionalLight;
     }
 };
 
@@ -129,7 +131,7 @@ function tick() {
         requestAnimationFrame(tick);
         time += 0.1 * 1 / 60;
         camera.update();
-        drawScene($canvas.width(), $canvas.height(), camera);
+        drawScene($canvas.width(), $canvas.height(), camera, menu);
     }
 }
 

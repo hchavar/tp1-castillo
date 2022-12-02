@@ -54,47 +54,56 @@ function initShaders() {
     var fragmentShader= getShader(gl, vertexShaderSource,"vertex");
     var vertexShader= getShader(gl, fragmentShaderSource,"fragment");
 
-    shaderProgram = gl.createProgram();
-    gl.attachShader(shaderProgram, vertexShader);
-    gl.attachShader(shaderProgram, fragmentShader);
-    gl.linkProgram(shaderProgram);
+    globalShaderProgram = gl.createProgram();
+    gl.attachShader(globalShaderProgram, vertexShader);
+    gl.attachShader(globalShaderProgram, fragmentShader);
+    gl.linkProgram(globalShaderProgram);
 
-    if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+    if (!gl.getProgramParameter(globalShaderProgram, gl.LINK_STATUS)) {
         alert("Could not initialise shaders");
     }
 
-    gl.useProgram(shaderProgram);
+    gl.useProgram(globalShaderProgram);
 
-    shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aPosition");
-    gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+    globalShaderProgram.vertexPositionAttribute = gl.getAttribLocation(globalShaderProgram, "aPosition");
+    gl.enableVertexAttribArray(globalShaderProgram.vertexPositionAttribute);
 
-    // shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aUv");
-    // gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
+    globalShaderProgram.textureCoordAttribute = gl.getAttribLocation(globalShaderProgram, "aUv");
+    gl.enableVertexAttribArray(globalShaderProgram.textureCoordAttribute);
 
-    shaderProgram.vertexNormalAttribute = gl.getAttribLocation(shaderProgram, "aNormal");
-    gl.enableVertexAttribArray(shaderProgram.vertexNormalAttribute);
+    globalShaderProgram.vertexNormalAttribute = gl.getAttribLocation(globalShaderProgram, "aNormal");
+    gl.enableVertexAttribArray(globalShaderProgram.vertexNormalAttribute);
 
-    // shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aColor");
-    // gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+    // globalShaderProgram.vertexColorAttribute = gl.getAttribLocation(globalShaderProgram, "aColor");
+    // gl.enableVertexAttribArray(globalShaderProgram.vertexColorAttribute);
 
-    shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "projMatrix");
-    shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "modelMatrix");
-    shaderProgram.vMatrixUniform = gl.getUniformLocation(shaderProgram, "viewMatrix");
-    shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "normalMatrix");
-    // shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
-    // shaderProgram.useLightingUniform = gl.getUniformLocation(shaderProgram, "uUseLighting");
-    shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
-    // shaderProgram.frameUniform = gl.getUniformLocation(shaderProgram, "time");
-    shaderProgram.lightingDirectionUniform = gl.getUniformLocation(shaderProgram, "uDirLightNormal");
-    shaderProgram.directionalColorUniform = gl.getUniformLocation(shaderProgram, "uDirLightColor");
-    shaderProgram.viewPositionUniform = gl.getUniformLocation(shaderProgram, "uViewPosition");
-    shaderProgram.glossinessFactorUniform = gl.getUniformLocation(shaderProgram, "shininessVal");
-    shaderProgram.kaFactorUniform = gl.getUniformLocation(shaderProgram, "Ka");
-    shaderProgram.kdFactorUniform = gl.getUniformLocation(shaderProgram, "Kd");
-    shaderProgram.ksFactorUniform = gl.getUniformLocation(shaderProgram, "Ks");
-    shaderProgram.light1PositionUniform = gl.getUniformLocation(shaderProgram, "uPosLight1");
+    globalShaderProgram.pMatrixUniform = gl.getUniformLocation(globalShaderProgram, "projMatrix");
+    globalShaderProgram.mMatrixUniform = gl.getUniformLocation(globalShaderProgram, "modelMatrix");
+    globalShaderProgram.vMatrixUniform = gl.getUniformLocation(globalShaderProgram, "viewMatrix");
+    globalShaderProgram.nMatrixUniform = gl.getUniformLocation(globalShaderProgram, "normalMatrix");
+    // globalShaderProgram.samplerUniform = gl.getUniformLocation(globalShaderProgram, "uSampler");
+    // globalShaderProgram.useLightingUniform = gl.getUniformLocation(globalShaderProgram, "uUseLighting");
+    globalShaderProgram.ambientColorUniform = gl.getUniformLocation(globalShaderProgram, "uAmbientColor");
+    // globalShaderProgram.frameUniform = gl.getUniformLocation(globalShaderProgram, "time");
+    globalShaderProgram.lightingDirectionUniform = gl.getUniformLocation(globalShaderProgram, "uDirLightNormal");
+    globalShaderProgram.directionalColorUniform = gl.getUniformLocation(globalShaderProgram, "uDirLightColor");
+    globalShaderProgram.viewPositionUniform = gl.getUniformLocation(globalShaderProgram, "uViewPosition");
+    globalShaderProgram.glossinessFactorUniform = gl.getUniformLocation(globalShaderProgram, "shininessVal");
+    globalShaderProgram.kaFactorUniform = gl.getUniformLocation(globalShaderProgram, "Ka");
+    globalShaderProgram.kdFactorUniform = gl.getUniformLocation(globalShaderProgram, "Kd");
+    globalShaderProgram.ksFactorUniform = gl.getUniformLocation(globalShaderProgram, "Ks");
+    globalShaderProgram.lights = [];
+    for (let i = 0; i < 4; i++) {
+        const light = {
+            position: gl.getUniformLocation(globalShaderProgram, "lights["+ i + "].position"),
+            color: gl.getUniformLocation(globalShaderProgram, "lights["+ i + "].ambient")
+        };
+        globalShaderProgram.lights.push(light);
+    }
 
-    shaderProgram.uColorUniform = gl.getUniformLocation(shaderProgram, "uColor");
+    globalShaderProgram.uColorUniform = gl.getUniformLocation(globalShaderProgram, "uColor");
 
-    shaderProgram.uColorNormals = gl.getUniformLocation(shaderProgram, "uColorNormals");
+    globalShaderProgram.uColorNormals = gl.getUniformLocation(globalShaderProgram, "uColorNormals");
+    globalShaderProgram.uDirectionalActivated = gl.getUniformLocation(globalShaderProgram, "uDirLight");
+    globalShaderProgram.uHasTexture = gl.getUniformLocation(globalShaderProgram, "uHasTexture");
 }

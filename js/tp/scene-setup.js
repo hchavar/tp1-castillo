@@ -6,7 +6,7 @@ var entrance;
 var perimeter, ps, pe, platform;
 var sphere;
 var tb;
-var fr;
+var fr, lamp;
 var axle, chasis, cw, arm, fs;
 var vp, vp2, catapult;
 
@@ -142,6 +142,15 @@ function createConfiguration(menu){
 
     // fs.build();
 
+    // lamp = new Lamp(menu);
+    // lamp.setPosition([14.0, 2.0, 7.4]);
+    // lamp.updateLocalMatrix();
+    // // lamp.ambientColor = [1, 1, 1];
+    // // lamp.color = [1, 1, 1];
+    // // lamp.ka = 1.0;
+    // lamp.build();
+
+
     catapult = new Catapult(menu);
     catapult.build();
     catapult.setScale(0.6);
@@ -166,6 +175,8 @@ function drawConfiguration() {
     // c.setPosition([4,0,0]);
     // c.updatePosition();
     // c.draw();
+    // lamp.update();
+    // lamp.draw();
     // d.setPosition([0,0,-3]);
     // d.animate();
     // d.updateLocalMatrix();
@@ -200,7 +211,7 @@ function drawConfiguration() {
 
     // col2.draw();
     // f.draw();
-    sphere.draw();
+    // sphere.draw();
     //tb.draw();
     // fr.setRotation([Math.PI*time, [0, 0, 1]]);
     // fr.updateLocalMatrix();

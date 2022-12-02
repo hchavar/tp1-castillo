@@ -75,6 +75,8 @@ class Arm extends Objeto3D {
         this.load.build();
         this.addChild(this.load);
 
+        this.menu.lights.push(this.load);
+
         let arm = new TrapezoidBox(4, 8);
         arm.scale = armConfig.arm.scale;
         arm.reduction = armConfig.arm.reduction;

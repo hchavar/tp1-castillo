@@ -2,6 +2,7 @@ class Menu {
 
     // modo = "edges";
     _mode = "Default";
+    directionalLight = true;
 
     set wallScale(newScale) {
         if (this._wallScale != newScale) {
@@ -90,9 +91,35 @@ class Menu {
         return this._mode;
     }
 
+    set lightColor(value) {
+        if (this._lightColor != value) {
+            this._lightColor = value;
+            
+            let colorVector = this.lightColorToVector();
+            for (const l of this.lights) {
+                l.color = colorVector;
+                l.ambientColor = colorVector;
+            }
+        }
+    }
+
+    get lightColor() {
+        return this._lightColor;
+    }
+
+    lightColorToVector() {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this._lightColor);
+        return result ? [
+          parseInt(result[1], 16) / 255.0,
+          parseInt(result[2], 16) / 255.0,
+          parseInt(result[3], 16) / 255.0
+        ] : null;
+      }
+
     constructor() {
         this.gui = new dat.GUI();
         this.walls = [];
+        this.lights = [];
         this.gates = [];
         this.castleParts = [];
         this.perimeters = [];
@@ -106,6 +133,8 @@ class Menu {
         this._castleWidth = 4;
         this._castleHeight = 4;
         this._catapultRotation = 180;
+        this._lightColor = "#ffffff";
+        this.gui.addColor(this,'lightColor').name("Color luz");
 
         this.gui.add(this, "mode", ["Default", "Normales"]);
 

@@ -3,7 +3,7 @@ var MAX_CURVE_POINTS = 20;
 const defaultConfig = {
     position: vec3.create(),
     rotation: [0, vec3.create()],
-    ambientColor: [0.35, 0.35, 0.5],
+    ambientColor: [0.75, 0.75, 0.85],
     reflection: {
         ka: 0.4, // Ambient reflection coefficient
         kd: 0.6, // Diffuse reflection coefficient
@@ -13,6 +13,14 @@ const defaultConfig = {
 }
 
 const buffersDict = {};
+const texturesDict = {};
+
+const level = 0;
+const width = 1;
+const height = 1;
+const border = 0;
+const pixel = new Uint8Array([0, 0, 255, 255]); // opaque blue
+
 
 class Objeto3D {
     buffers = null;
@@ -22,6 +30,11 @@ class Objeto3D {
     localMatrix = mat4.create();
     children = [];
     ambientColor = defaultConfig.ambientColor;
+    worldPosition = vec3.create();
+    shaderProgram = globalShaderProgram;
+    srcImage = null;
+    texture = null;
+    image = null;
 
     // Phong model coefficients
     ka = defaultConfig.reflection.ka;
@@ -42,12 +55,11 @@ class Objeto3D {
         try {
             this.init();
             if (!this.empty) {
+                this.loadTexture();
                 this.updateSurface();
             }
         } catch (error) {
-            console.log('Hubo un error: ' + error);
-            console.error(error);
-            noHasError = false;
+            this.handleError(error);
         }
     }
 
@@ -95,19 +107,31 @@ class Objeto3D {
 
         mat4.multiply(transform, transform, this.localMatrix);
 
+        this.worldPosition = vec3.create();
+
+        vec3.transformMat4(this.worldPosition, this.worldPosition, transform);
+
         if (!this.empty) {
             
             try {
                 this.setMatrixUniforms(transform);
+                // esto afecta la performance
+                // if (this.image && this.image.loaded)
+                //     this.bindImage(level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
                 this.drawFromBuffers();
             } catch (error) {
-                console.log('Hubo un error: ' + error);
-                console.error(error);
-                noHasError = false;
+                this.handleError(error);
             }
         }
 
         this.children.forEach((child) => child.draw(transform));
+    }
+
+    handleError(error) {
+        const objectName = this.name ? this.name : this.constructor.name;
+        console.log(objectName + '. Error: ' + error);
+        console.error(error);
+        noHasError = false;
     }
 
     setPosition(position) {
@@ -162,11 +186,11 @@ class Objeto3D {
 
     setMatrixUniforms(modelMatrix) {
 
-        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
-        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
-        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
-        gl.uniform3f(shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
-        gl.uniform3f(shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
+        gl.uniformMatrix4fv(this.shaderProgram.mMatrixUniform, false, modelMatrix);
+        gl.uniformMatrix4fv(this.shaderProgram.vMatrixUniform, false, viewMatrix);
+        gl.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, projMatrix);
+        gl.uniform3f(this.shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
+        gl.uniform3f(this.shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
 
     
         let normalMatrix = mat3.create();
@@ -175,41 +199,42 @@ class Objeto3D {
         mat3.invert(normalMatrix, normalMatrix);
         mat3.transpose(normalMatrix, normalMatrix);
     
-        gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
+        gl.uniformMatrix3fv(this.shaderProgram.nMatrixUniform, false, normalMatrix);
     }
 
     drawFromBuffers() {
     
         // Se configuran los buffers que alimentaron el pipeline
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.positionBuffer);
-        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
-        // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
-        // gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
+        gl.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.normalBuffer);
-        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(this.shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.colorBuffer);
-        // gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        // gl.vertexAttribPointer(this.shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
            
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
 
-        gl.uniform1i(shaderProgram.uColorNormals, normalsMode);
-        gl.uniform1f(shaderProgram.kaFactorUniform, this.ka );
-        gl.uniform1f(shaderProgram.kdFactorUniform, this.kd );
-        gl.uniform1f(shaderProgram.ksFactorUniform, this.ks );
-        gl.uniform1f(shaderProgram.glossinessFactorUniform, this.glossiness );
+        gl.uniform1i(this.shaderProgram.uColorNormals, normalsMode);
+        gl.uniform1f(this.shaderProgram.kaFactorUniform, this.ka );
+        gl.uniform1f(this.shaderProgram.kdFactorUniform, this.kd );
+        gl.uniform1f(this.shaderProgram.ksFactorUniform, this.ks );
+        gl.uniform1f(this.shaderProgram.glossinessFactorUniform, this.glossiness );
+        gl.uniform1i(this.shaderProgram.uHasTexture, this.image ? this.image.loaded : false);
     
         gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     
         // if (menu.modo != "wireframe"){
-        //     // gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));
+        //     // gl.uniform1i(this.shaderProgram.useLightingUniform,(lighting=="true"));
         //     gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         // }
         
         // if (menu.modo != "smooth") {
-        //     // gl.uniform1i(shaderProgram.useLightingUniform,false);
+        //     // gl.uniform1i(this.shaderProgram.useLightingUniform,false);
         //     gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         // }
      
@@ -379,5 +404,70 @@ class Objeto3D {
 
     set visible(value) {
         this._visible = value;
+    }
+
+    loadTexture() {
+        
+        if (!this.srcImage) return;
+        
+        
+
+        if (texturesDict[this.name]) {
+            this.texture = texturesDict[this.name];
+            return;
+        }
+        
+        this.texture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, this.texture);
+        texturesDict[this.name] = this.texture;
+
+        
+        gl.texImage2D(
+            gl.TEXTURE_2D,
+            level,
+            gl.RGBA,
+            width,
+            height,
+            border,
+            gl.RGBA,
+            gl.UNSIGNED_BYTE,
+            pixel
+        );
+
+        this.image = new Image();
+        this.image.onload = () => {
+            this.bindImage(level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
+            this.image.loaded = true;
+
+        };
+        this.image.src = this.srcImage;
+
+    }
+
+
+
+    bindImage(level, internalFormat, srcFormat, srcType, image) {
+        
+        function isPowerOf2(value) {
+            return (value & (value - 1)) === 0;
+        }
+        
+        gl.bindTexture(gl.TEXTURE_2D, this.texture);
+        gl.texImage2D(
+            gl.TEXTURE_2D,
+            level,
+            internalFormat,
+            srcFormat,
+            srcType,
+            image
+        );
+
+        if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
+            gl.generateMipmap(gl.TEXTURE_2D);
+        } else {
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        }
     }
 }

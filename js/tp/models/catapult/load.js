@@ -1,5 +1,5 @@
 const loadConfig = {
-    color: [0.5, 0.5, 0.5]
+    color: [1, 1, 0.4]
 }
 
 class Load extends Sphere {
@@ -7,6 +7,16 @@ class Load extends Sphere {
         super(10, 10);
         this.color = loadConfig.color;
         this.visible = false;
+    }
+
+    init() {
+        this.name = this.constructor.name;
+        this.ambientColor = [1, 1, 1];
+        this.ka = 1.0;
+        this.kd = 0.0;
+        this.ks = 0.0;
+        this.empty = false;
+
     }
 
     
