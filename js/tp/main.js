@@ -6,6 +6,7 @@ var noHasError = true;
 
 var gl;
 const menu = new Menu();
+var defaultMaterial;
 
 var $canvas = $("#myCanvas");
 var aspect;
@@ -106,6 +107,8 @@ function webGLStart() {
 
     initGL(viewCanvas);
     initShaders();
+
+    defaultMaterial  = new Default();
 
     initScene(menu);
 
