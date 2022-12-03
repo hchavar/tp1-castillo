@@ -62,7 +62,9 @@ class RevolutionSurface extends BezierSurface {
     }
 
     getTextureCoordinates(u, v) {
-        return [u, v];
+        let pos = Math.round(u * (this.curve.points.length - 1));
+        let cumulativeDistance = this.curve.cumulative[pos];
+        return [cumulativeDistance, v];
     }
 
     animate() {
