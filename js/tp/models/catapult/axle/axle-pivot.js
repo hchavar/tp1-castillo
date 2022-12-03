@@ -14,6 +14,7 @@ class AxlePivot extends Cylinder {
     }
 
     init() {
+        this.material = materials['brick'];
         this.empty = false;
         this.scale = axlePivotConfig.scale;
         this.color = axlePivotConfig.color;

@@ -14,6 +14,7 @@ class Wheel extends Cylinder {
     }
 
     init() {
+        this.material = materials['wood'];
         this.empty = false;
         this.scale = wheelConfig.scale;
         this.color = wheelConfig.color;

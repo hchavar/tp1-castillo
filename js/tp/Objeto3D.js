@@ -29,7 +29,6 @@ class Objeto3D {
     kd = defaultConfig.reflection.kd;
     ks = defaultConfig.reflection.ks;
     glossiness = defaultConfig.reflection.glossiness;
-    material = defaultMaterial;
 
     constructor(width, height, menu) {
         this.width = width;
@@ -38,6 +37,7 @@ class Objeto3D {
         this.empty = true;
         this.reuseBuffer = false;
         this.visible = true;
+        this.material = materials['default'];
     }
 
     build() {

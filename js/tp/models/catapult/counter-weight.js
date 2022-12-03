@@ -27,6 +27,7 @@ class CounterWeight extends Objeto3D {
         let load = new Box();
         load.scale = counterWeightConfig.load.scale;
         load.color = counterWeightConfig.load.color;
+        load.material = materials['stone'];
         load.setPosition(counterWeightConfig.load.position);
         load.updateLocalMatrix();
         load.build();

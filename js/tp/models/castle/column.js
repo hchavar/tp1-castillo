@@ -23,6 +23,7 @@ class Column extends RevolutionSurface {
     }
 
     init() {
+        this.material = materials['plaster'];
         this.updateName();
         this.empty = false;
         this.color = [0.99, 0.85, 0.35];

@@ -14,6 +14,7 @@ class Tower extends RevolutionSurface {
     init() {
         this.updateName();
         this.color = wallColor;
+        this.material = materials['brick'];
 
         this.empty = false;
         super.init();

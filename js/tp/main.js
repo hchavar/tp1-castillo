@@ -6,7 +6,8 @@ var noHasError = true;
 
 var gl;
 const menu = new Menu();
-var defaultMaterial;
+
+const materials = {};
 
 var $canvas = $("#myCanvas");
 var aspect;
@@ -108,7 +109,14 @@ function webGLStart() {
     initGL(viewCanvas);
     initShaders();
 
-    defaultMaterial  = new Default();
+    materials['default']  = new Default();
+    materials['grass']  = new Grass();
+    materials['brick']  = new Brick();
+    materials['water']  = new Water();
+    materials['plaster']  = new Plaster();
+    materials['roofTile']  = new RoofTile();
+    materials['wood']  = new Wood();
+    materials['stone']  = new Stone();
 
     initScene(menu);
 
