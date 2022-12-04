@@ -16,6 +16,7 @@ class Gate extends Box {
             y: 2.0,
             z: 0.1
         };
+        this.calculateFactor();
         this.setPosition([0.0, 1, 0.0]);
         this.updateLocalMatrix();
         this.update();
