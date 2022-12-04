@@ -28,7 +28,6 @@ function createConfiguration(menu){
         y: 1.0,
         z: 1.5
     };
-    water.glossiness = 100;
     water.ks = 1.0;
     water.build();
     water.setPosition([0, -0.4, 0]);

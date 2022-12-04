@@ -10,11 +10,13 @@ class Material {
         this.srcImage = null;
         this.texture = null;
         this.program = globalShaderProgram;
+        this.glossiness = 8.0;
     }
 
     activate() {
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
         gl.uniform1i(this.program.uHasTexture, this.hasTexture);
+        gl.uniform1f(this.program.glossinessFactorUniform, this.glossiness );
     }
     
     loadTexture() {

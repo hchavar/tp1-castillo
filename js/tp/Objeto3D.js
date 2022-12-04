@@ -7,8 +7,7 @@ const defaultConfig = {
     reflection: {
         ka: 0.4, // Ambient reflection coefficient
         kd: 0.6, // Diffuse reflection coefficient
-        ks: 0.2, // Specular reflection coefficient
-        glossiness: 8.0
+        ks: 0.2 // Specular reflection coefficient
     }
 }
 
@@ -28,7 +27,6 @@ class Objeto3D {
     ka = defaultConfig.reflection.ka;
     kd = defaultConfig.reflection.kd;
     ks = defaultConfig.reflection.ks;
-    glossiness = defaultConfig.reflection.glossiness;
 
     constructor(width, height, menu) {
         this.width = width;
@@ -213,7 +211,6 @@ class Objeto3D {
         gl.uniform1f(shaderProgram.kaFactorUniform, this.ka );
         gl.uniform1f(shaderProgram.kdFactorUniform, this.kd );
         gl.uniform1f(shaderProgram.ksFactorUniform, this.ks );
-        gl.uniform1f(shaderProgram.glossinessFactorUniform, this.glossiness );
     
         gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     
