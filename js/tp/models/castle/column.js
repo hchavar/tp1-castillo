@@ -64,4 +64,12 @@ class Column extends RevolutionSurface {
         ];
 
     }
+
+    getHeightFactor() {
+        return 2 +  this.menu.castleFloors;
+    }
+
+    getWidthFactor() {
+        return 4;
+    }
 }
