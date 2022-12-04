@@ -21,17 +21,8 @@ class Material {
         
         if (!this.srcImage) return;
         
-        
-
-        // if (texturesDict[this.name]) {
-        //     this.texture = texturesDict[this.name];
-        //     return;
-        // }
-        
         this.texture = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        // texturesDict[this.name] = this.texture;
-
         
         gl.texImage2D(
             gl.TEXTURE_2D,

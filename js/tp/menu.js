@@ -1,6 +1,5 @@
 class Menu {
 
-    // modo = "edges";
     _mode = "Default";
     directionalLight = true;
 
@@ -147,13 +146,11 @@ class Menu {
         f3.add(this, 'wallScale', 2, 5).name("Altura Muralla").step(0.5);
         f3.add(this, 'angleGateOpen', 0, Math.PI / 2).name("Apertura Puerta").step(0.15);
         f3.add(this, 'towers', 4, 8).name("Torres").step(1);
-        //f3.open();
 
         var f4 = this.gui.addFolder('Castillo');
         f4.add(this, 'castleFloors', 1, 4).name("Pisos").step(1);
         f4.add(this, 'castleWidth', 2, 10).name("Ancho").step(2);
         f4.add(this, 'castleHeight', 2, 10).name("Profundidad").step(2);
-        // f4.open();
 
 
     }

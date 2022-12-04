@@ -10,7 +10,6 @@
         uniform bool uDirLight;
         uniform bool uHasTexture;
 
-        // uniform int mode;   // Rendering mode
         uniform float Ka;   // Ambient reflection coefficient
         uniform float Kd;   // Diffuse reflection coefficient
         uniform float Ks;   // Specular reflection coefficient
