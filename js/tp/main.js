@@ -116,6 +116,7 @@ function webGLStart() {
     materials['plaster']  = new Plaster();
     materials['roofTile']  = new RoofTile();
     materials['wood']  = new Wood();
+    materials['oldWood']  = new OldWood();
     materials['stone']  = new Stone();
 
     initScene(menu);

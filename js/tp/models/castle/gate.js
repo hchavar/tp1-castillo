@@ -7,7 +7,7 @@ class Gate extends Box {
 
     init() {
         this.empty = false;
-        this.material = materials['wood'];
+        this.material = materials['oldWood'];
 
         this.color = [0.8, 0.3, 0.4];
 
