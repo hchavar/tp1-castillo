@@ -37,9 +37,9 @@ class Perimeter extends Objeto3D {
 
             let section;
             if (i > 1) {
-                section = new PerimeterSection(menu, n);
+                section = new PerimeterSection(menu);
             } else {
-                section = new PerimeterEntrance(menu, n);
+                section = new PerimeterEntrance(menu);
             }
 
             section.scale = wallScale;

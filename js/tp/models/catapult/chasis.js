@@ -41,6 +41,7 @@ class Chasis extends Objeto3D {
         let base = new Box();
         base.scale = chasisConfig.base.scale;
         base.color = chasisConfig.base.color;
+        base.material = materials['wood'];
         base.setPosition(chasisConfig.base.position);
         base.updateLocalMatrix();
         base.build();

@@ -22,12 +22,12 @@ function createConfiguration(menu){
     // vp2.build();
     water =  new Plane(25, 25);
     water.color = [0, 0.55, 0.8];
+    water.material = materials['water'];
     water.scale = {
         x: 2.0,
         y: 1.0,
         z: 1.5
     };
-    water.glossiness = 100;
     water.ks = 1.0;
     water.build();
     water.setPosition([0, -0.4, 0]);

@@ -20,7 +20,7 @@ class Casement extends Objeto3D {
             z: 0.4
         };
         this.color = [0.2, 0.1, 0.01];
-        this.glossiness = 500;
+        this.material.glossiness = 500;
         this.ks = 1.0;
         this.empty = false;
         this.reuseBuffer = true;

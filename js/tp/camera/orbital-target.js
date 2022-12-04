@@ -1,9 +1,9 @@
 class OrbitalTarget extends Target {
     constructor() {
         super();
-        this.eye = [-3.5, 5, 22];
-        this._alfa = -0.16;
-        this._beta = 1.35;
+        this.eye = [-25.5, 4, -5];
+        this._alfa = -1.79;
+        this._beta = 1.53;
     }
 
     update(camera) {

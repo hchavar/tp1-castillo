@@ -1,5 +1,7 @@
 class TranslationSurface extends BezierSurface {
 
+    widthFactor = 1;
+
     constructor(rows, cols, menu) {
         super(rows, cols, menu);
 
@@ -54,10 +56,10 @@ class TranslationSurface extends BezierSurface {
         return [x, y, z];
     }
 
-
-
     getTextureCoordinates(u, v) {
-        return [u, v];
+        let pos = Math.round(u * (this.curve.points.length - 1));
+        let cumulativeDistance = this.curve.cumulative[pos];
+        return [cumulativeDistance * 1.8, v * this.widthFactor];
     }
 
 }

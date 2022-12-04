@@ -15,6 +15,7 @@ class AbstractWall extends TranslationSurface {
     }
     
     init() {
+        this.material = materials['brick'];
         this.updateName();
         this.color = wallColor;
         this.reuseBuffer = true;

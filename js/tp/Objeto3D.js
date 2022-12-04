@@ -7,20 +7,11 @@ const defaultConfig = {
     reflection: {
         ka: 0.4, // Ambient reflection coefficient
         kd: 0.6, // Diffuse reflection coefficient
-        ks: 0.2, // Specular reflection coefficient
-        glossiness: 8.0
+        ks: 0.2 // Specular reflection coefficient
     }
 }
 
 const buffersDict = {};
-const texturesDict = {};
-
-const level = 0;
-const width = 1;
-const height = 1;
-const border = 0;
-const pixel = new Uint8Array([0, 0, 255, 255]); // opaque blue
-
 
 class Objeto3D {
     buffers = null;
@@ -31,16 +22,11 @@ class Objeto3D {
     children = [];
     ambientColor = defaultConfig.ambientColor;
     worldPosition = vec3.create();
-    shaderProgram = globalShaderProgram;
-    srcImage = null;
-    texture = null;
-    image = null;
 
     // Phong model coefficients
     ka = defaultConfig.reflection.ka;
     kd = defaultConfig.reflection.kd;
     ks = defaultConfig.reflection.ks;
-    glossiness = defaultConfig.reflection.glossiness;
 
     constructor(width, height, menu) {
         this.width = width;
@@ -49,13 +35,13 @@ class Objeto3D {
         this.empty = true;
         this.reuseBuffer = false;
         this.visible = true;
+        this.material = materials['default'];
     }
 
     build() {
         try {
             this.init();
             if (!this.empty) {
-                this.loadTexture();
                 this.updateSurface();
             }
         } catch (error) {
@@ -115,12 +101,12 @@ class Objeto3D {
             
             try {
                 this.setMatrixUniforms(transform);
-                // esto afecta la performance
-                // if (this.image && this.image.loaded)
-                //     this.bindImage(level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
+                this.material.activate();
+
                 this.drawFromBuffers();
             } catch (error) {
                 this.handleError(error);
+                return;
             }
         }
 
@@ -185,12 +171,13 @@ class Objeto3D {
     }
 
     setMatrixUniforms(modelMatrix) {
+        let shaderProgram = this.material.program;
 
-        gl.uniformMatrix4fv(this.shaderProgram.mMatrixUniform, false, modelMatrix);
-        gl.uniformMatrix4fv(this.shaderProgram.vMatrixUniform, false, viewMatrix);
-        gl.uniformMatrix4fv(this.shaderProgram.pMatrixUniform, false, projMatrix);
-        gl.uniform3f(this.shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
-        gl.uniform3f(this.shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
+        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
+        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
+        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projMatrix);
+        gl.uniform3f(shaderProgram.uColorUniform, this.color[0], this.color[1], this.color[2]);
+        gl.uniform3f(shaderProgram.ambientColorUniform, this.ambientColor[0], this.ambientColor[1], this.ambientColor[2]);
 
     
         let normalMatrix = mat3.create();
@@ -199,42 +186,41 @@ class Objeto3D {
         mat3.invert(normalMatrix, normalMatrix);
         mat3.transpose(normalMatrix, normalMatrix);
     
-        gl.uniformMatrix3fv(this.shaderProgram.nMatrixUniform, false, normalMatrix);
+        gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
     }
 
     drawFromBuffers() {
     
+        let shaderProgram = this.material.program;
         // Se configuran los buffers que alimentaron el pipeline
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.positionBuffer);
-        gl.vertexAttribPointer(this.shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, this.buffers.positionBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.uvBuffer);
-        gl.vertexAttribPointer(this.shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, this.buffers.uvBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.normalBuffer);
-        gl.vertexAttribPointer(this.shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, this.buffers.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
     
         // gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers.colorBuffer);
-        // gl.vertexAttribPointer(this.shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        // gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, this.buffers.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
            
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.buffers.indexBuffer);
 
-        gl.uniform1i(this.shaderProgram.uColorNormals, normalsMode);
-        gl.uniform1f(this.shaderProgram.kaFactorUniform, this.ka );
-        gl.uniform1f(this.shaderProgram.kdFactorUniform, this.kd );
-        gl.uniform1f(this.shaderProgram.ksFactorUniform, this.ks );
-        gl.uniform1f(this.shaderProgram.glossinessFactorUniform, this.glossiness );
-        gl.uniform1i(this.shaderProgram.uHasTexture, this.image ? this.image.loaded : false);
+        gl.uniform1i(shaderProgram.uColorNormals, normalsMode);
+        gl.uniform1f(shaderProgram.kaFactorUniform, this.ka );
+        gl.uniform1f(shaderProgram.kdFactorUniform, this.kd );
+        gl.uniform1f(shaderProgram.ksFactorUniform, this.ks );
     
         gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     
         // if (menu.modo != "wireframe"){
-        //     // gl.uniform1i(this.shaderProgram.useLightingUniform,(lighting=="true"));
+        //     // gl.uniform1i(shaderProgram.useLightingUniform,(lighting=="true"));
         //     gl.drawElements(gl.TRIANGLE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         // }
         
         // if (menu.modo != "smooth") {
-        //     // gl.uniform1i(this.shaderProgram.useLightingUniform,false);
+        //     // gl.uniform1i(shaderProgram.useLightingUniform,false);
         //     gl.drawElements(gl.LINE_STRIP, this.buffers.indexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         // }
      
@@ -406,68 +392,4 @@ class Objeto3D {
         this._visible = value;
     }
 
-    loadTexture() {
-        
-        if (!this.srcImage) return;
-        
-        
-
-        if (texturesDict[this.name]) {
-            this.texture = texturesDict[this.name];
-            return;
-        }
-        
-        this.texture = gl.createTexture();
-        gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        texturesDict[this.name] = this.texture;
-
-        
-        gl.texImage2D(
-            gl.TEXTURE_2D,
-            level,
-            gl.RGBA,
-            width,
-            height,
-            border,
-            gl.RGBA,
-            gl.UNSIGNED_BYTE,
-            pixel
-        );
-
-        this.image = new Image();
-        this.image.onload = () => {
-            this.bindImage(level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image);
-            this.image.loaded = true;
-
-        };
-        this.image.src = this.srcImage;
-
-    }
-
-
-
-    bindImage(level, internalFormat, srcFormat, srcType, image) {
-        
-        function isPowerOf2(value) {
-            return (value & (value - 1)) === 0;
-        }
-        
-        gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        gl.texImage2D(
-            gl.TEXTURE_2D,
-            level,
-            internalFormat,
-            srcFormat,
-            srcType,
-            image
-        );
-
-        if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
-            gl.generateMipmap(gl.TEXTURE_2D);
-        } else {
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        }
-    }
 }

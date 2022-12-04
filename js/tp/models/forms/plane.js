@@ -27,7 +27,7 @@ class Plane extends Objeto3D {
     }
 
     getTextureCoordinates(u, v) {
-        return [u, v];
+        return [u*8, v*8];
     }
 
 }

@@ -97,11 +97,11 @@ function getBezierCurve(ctrlPoints) {
 function getConcatenatedBezierCurve(controlPointsArray) {
     
     let concatenatedCurve = {
-        points : [], 
+        points : [],
+        cumulative : [],
         tangents: [],
         normals: []
     };
-
     
     controlPointsArray.forEach(controlPoints => { 
         let bezierCurve = getBezierCurve(controlPoints);
@@ -109,6 +109,23 @@ function getConcatenatedBezierCurve(controlPointsArray) {
         concatenatedCurve.tangents = concatenatedCurve.tangents.concat(bezierCurve.tangents);
         concatenatedCurve.normals = concatenatedCurve.normals.concat(bezierCurve.normals);
     });
+
+    let cumulativeDistance = [];
+    cumulativeDistance.push(0.0);
+
+    let c = 0.0;
+
+    for (let i = 1; i < concatenatedCurve.points.length; i++) {
+        let a = concatenatedCurve.points[i - 1];
+        let b = concatenatedCurve.points[i];
+        c += vec3.distance(a, b);
+        cumulativeDistance.push(c)
+        
+    }
+
+    for (let i = 0; i < concatenatedCurve.points.length; i++) {
+        concatenatedCurve.cumulative.push(cumulativeDistance[i]/c);
+    }
 
     return concatenatedCurve;
 }

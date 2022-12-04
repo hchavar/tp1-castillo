@@ -23,6 +23,7 @@ class Column extends RevolutionSurface {
     }
 
     init() {
+        this.material = materials['plaster'];
         this.updateName();
         this.empty = false;
         this.color = [0.99, 0.85, 0.35];
@@ -62,5 +63,13 @@ class Column extends RevolutionSurface {
             [[x0, b + ch, z0], [x0, b + ch + sh / 3, z0], [x0, b + ch + 2 * sh / 3, z0], [x0, b + ch + sh, z0]]
         ];
 
+    }
+
+    getHeightFactor() {
+        return 2 +  this.menu.castleFloors;
+    }
+
+    getWidthFactor() {
+        return 4;
     }
 }

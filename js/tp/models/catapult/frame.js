@@ -41,6 +41,7 @@ class Frame extends Objeto3D {
             box.updateLocalMatrix();
     
             box.color = frameConfig.color;
+            box.material = materials['wood'];
     
             box.reduction = frameConfig.reduction;
     
@@ -51,6 +52,7 @@ class Frame extends Objeto3D {
         let pivot = new Cylinder(1, 10);
         pivot.scale = frameConfig.pivot.scale;
         pivot.color = frameConfig.pivot.color;
+        pivot.material = materials['wood'];
         pivot.setRotation(frameConfig.pivot.rotation);
         pivot.updateLocalMatrix();
         pivot.build();

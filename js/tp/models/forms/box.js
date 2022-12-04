@@ -20,6 +20,8 @@ class Box extends Objeto3D {
         this.scale = defaultScale;
         this.color = [0.2, 0.6, 0.9];
         this.empty = false;
+        this.calculateFactor();
+
     }
 
     getPosition(u, v) {
@@ -106,14 +108,36 @@ class Box extends Objeto3D {
         return v >= (this.width - 1) / this.width;
     }
 
+    calculateFactor() {
+
+        const result = [this.scale.x, this.scale.y, this.scale.z].sort((x, y) => y - x).slice(0, 2);
+        this.textureFactor = result[1] / result[0];
+
+    }
+
     getTextureCoordinates(u, v) {
-        return [u, v];
+        let pos = this.getPosition(u, v);
+
+        if (this.isTopFace(v) || this.isBottomFace(v)) {
+            return [pos[0] * this.textureFactor, pos[2] * this.textureFactor];
+        } else {
+
+            if (u <= 0.25) {
+                return [pos[1] * this.textureFactor, pos[2] * this.textureFactor];
+            } else if (u <= 0.5) {
+                return [pos[0] * this.textureFactor, pos[1] * this.textureFactor];
+            } else if (u <= 0.75) {
+                return [pos[1] * this.textureFactor, pos[2] * this.textureFactor];
+            } else {
+                return [pos[0] * this.textureFactor, pos[1] * this.textureFactor];
+            }
+
+        }
     }
 
     animate() {
 
         this.rotateAngle = Math.PI / 360;
-        //box.setPosition([-0.01, 0, 0]);
         this.setPosition([0.00, 0.004, 0.004]);
         this.setRotation([this.rotateAngle, [1, 0, 0]]);
         this.updateLocalMatrix();

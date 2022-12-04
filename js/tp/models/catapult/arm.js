@@ -59,6 +59,7 @@ class Arm extends Objeto3D {
         let hand = new Box();
         hand.scale = armConfig.hand.scale;
         hand.color = armConfig.hand.color;
+        hand.material = materials['wood'];
 
         let m1 = mat4.create();
         mat4.rotate(m1, m1, Math.PI / 180, [0, 0, 1]);
@@ -81,6 +82,7 @@ class Arm extends Objeto3D {
         arm.scale = armConfig.arm.scale;
         arm.reduction = armConfig.arm.reduction;
         arm.color = armConfig.arm.color;
+        arm.material = materials['wood'];
         arm.setRotation(armConfig.arm.rotation);
         arm.setPosition(armConfig.arm.position);
         arm.updateLocalMatrix();

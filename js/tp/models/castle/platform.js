@@ -6,9 +6,9 @@ class Platform extends RevolutionSurface {
     init() {
         this.color = [0.14, 0.55, 0.14];
         this.name = this.constructor.name;
-        this.glossiness = 5;
+
         this.ks = 0.01;
-        this.srcImage = "img/seamless_grass2.jpg";
+        this.material = materials['grass'];
 
         super.init();
         this.empty = false;

@@ -67,9 +67,14 @@ class Entrance extends Objeto3D {
             z: (this.scale.z - HEIGHT - 0.5) / 2
         };
 
+        // texture width scale factor
+        let a = (this.menu.towers - 4.0) / 4.0 + 2.0;
+        let sf = 8.0 / (this.menu.towers*a)
+        
         let wall1 = new FrontWall(this.menu);
         wall1.scale = we;
 
+        wall1.widthFactor = sf;
         wall1.build();
         wall1.setRotation([-Math.PI / 2, [0, 1, 0]]);
         wall1.setPosition([0, 0, -(wall1.scale.z + HEIGHT / 2)]);
@@ -80,6 +85,7 @@ class Entrance extends Objeto3D {
         let wall2 = new FrontWall(this.menu);
         wall2.scale = we;
 
+        wall2.widthFactor = sf;
         wall2.build();
         wall2.setRotation([-Math.PI / 2, [0, 1, 0]]);
 

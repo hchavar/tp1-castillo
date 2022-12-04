@@ -39,6 +39,7 @@ class Floor extends Objeto3D {
         floor.scale = this.scale;
         floor.name = "Floor_" + config;
         floor.reuseBuffer = true;
+        floor.material = materials['plaster'];
         floor.build();
 
         this.addChild(floor);
